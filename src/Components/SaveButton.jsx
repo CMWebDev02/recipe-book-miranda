@@ -1,10 +1,10 @@
 import React from "react";
-import { SavedRecipes } from "./JavaScript/localStorage";
+import { SavedRecipes } from "../JavaScript/localStorage";
 
 function handleClick(item) {
     console.log(item)
     let result = SavedRecipes.storeRecipe(item);
-    console.log(result)
+    
     if (result) {
         alert('Item Added');
     } else {

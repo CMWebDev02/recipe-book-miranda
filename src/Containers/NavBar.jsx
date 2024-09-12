@@ -11,7 +11,7 @@ export function NavBar() {
             </div>
 
             <div className="recipe-search">
-                <SearchBox />
+                {/* <SearchBox /> */}
             </div>
         </>
     )

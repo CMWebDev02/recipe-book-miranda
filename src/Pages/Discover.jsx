@@ -32,13 +32,13 @@ const tempRecipes = [
   
 
 export function Discover() {
-    const [ hasSearched, setHasSearched ] = useState(true);
+    const [ hasSearched, setHasSearched ] = useState(false);
     const [ userSearch, setUserSearch ] = useState('');
     const [ recipeList, setRecipeList ] = useState(tempRecipes);
 
     return (
         <>
-            {!hasSearched && <InitialSearch />}
+            {!hasSearched && <InitialSearch searchResult={userSearch} updateSearch={setUserSearch} hasSearched={setHasSearched} />}
             {hasSearched && <h1>Showing Results for {userSearch}</h1>}
             <div>
                 {hasSearched && recipeList.map(recipe => <DisplayRecipe recipe={recipe} key={"ingredient-" + Math.random()} />)}
