@@ -1,7 +1,7 @@
 import React from "react";
-import { SaveButton } from "./SaveButton";
+import { InteractButton } from "./InteractButton";
 
-export function DisplayRecipe({recipe}) {
+export function DisplayRecipe({recipe, localRecipe}) {
     const { title, ingredients, servings, instructions } = recipe;
 
     return (
@@ -16,7 +16,7 @@ export function DisplayRecipe({recipe}) {
             <h3>Instructions:</h3>
             <p>{instructions}</p>
             <hr />
-            <SaveButton toSave={recipe}/>
+            <InteractButton recipe={recipe} localRecipe={localRecipe} />
         </div>
     )
 }

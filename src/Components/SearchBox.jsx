@@ -4,7 +4,7 @@ import React from "react";
 export function SearchBox({ searchResult, updateSearch, redirectToList }) {
     function searchRecipe() {
         if (searchResult != '') {
-            handleSearch();
+            redirectToList();
         } else {
             alert('Enter a valid recipe name before searching...')
         }

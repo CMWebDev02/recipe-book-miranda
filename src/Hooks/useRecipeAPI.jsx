@@ -32,13 +32,13 @@ const uriHeaders = new Headers({
     'x-api-key': 'test'
 });
 
-export function useRecipeAPI({ searchParameter }) {
+export function useRecipeAPI(searchParameter) {
     const [ errorOccurred, setErrorOccurred ] = useState('');
     const [ allRecipes, setAllRecipes ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(true);
 
     useEffect(() => {
-        let search = uriAPI + 'searchParameter';
+        let search = uriAPI + searchParameter;
     
         const request = new Request(search, {
             method: 'GET',
@@ -63,5 +63,5 @@ export function useRecipeAPI({ searchParameter }) {
         })        
     }, [searchParameter])
 
-    return { errorOccurred, allRecipes, isLoading }
+    return { errorOccurred, allRecipes, isLoading };
 }
