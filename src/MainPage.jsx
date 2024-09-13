@@ -1,13 +1,13 @@
 import React from "react";
 import { NavBar } from "./Containers/NavBar";
 import { Discover } from "./Pages/Discover";
+import { RecipeList } from "./Pages/RecipeList";
 
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
 
 // TODO: 
-// - Implement API
-// - Create user recipe search via query parameters
+// - Implement React Routing and query Parameters for RecipeList Page.
 // - Create and add .env file to hide api key.
 // - Design RecipeBook Page
 // - Display the recipes from localStorage to the RecipeBook page
@@ -19,7 +19,8 @@ export function MainPage() {
     <>
       <NavBar />
       <hr />
-      <Discover />
+      {/* <Discover /> */}
+      <RecipeList />
     </>
   )
 }

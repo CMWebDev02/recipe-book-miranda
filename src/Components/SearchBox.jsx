@@ -1,22 +1,25 @@
 import React from "react";
 
 
-export function SearchBox({ searchResult, updateSearch, hasSearched }) {
-    function handleClick() {
+export function SearchBox({ searchResult, updateSearch, redirectToList }) {
+    function searchRecipe() {
         if (searchResult != '') {
-            console.log('Change Page to discover if needed');
-            console.log(searchResult);
-    
-            hasSearched(true);
+            handleSearch();
         } else {
             alert('Enter a valid recipe name before searching...')
         }
     }
 
+    function checkKey(key) {
+        if (key == 'Enter') {
+            searchRecipe();
+        }
+    }
+
     return (
         <>
-            <button onClick={handleClick}>🔎</button>
-            <input onChange={(e) => updateSearch(e.target.value)} value={searchResult} id="user-search-box" placeholder="Enter a recipe name..."/>
+            <button onClick={searchRecipe}>🔎</button>
+            <input onChange={(e) => updateSearch(e.target.value)} onKeyUp={(e) => checkKey(e.code)} value={searchResult} id="user-search-box" placeholder="Enter a recipe name..."/>
         </>
     )
 }
