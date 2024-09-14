@@ -1,7 +1,7 @@
 import React from "react";
 import { InteractButton } from "./InteractButton";
 
-export function DisplayRecipe({recipe, localRecipe}) {
+export function DisplayRecipe({recipe, localRecipe, id}) {
     const { title, ingredients, servings, instructions } = recipe;
 
     return (
@@ -16,7 +16,7 @@ export function DisplayRecipe({recipe, localRecipe}) {
             <h3>Instructions:</h3>
             <p>{instructions}</p>
             <hr />
-            <InteractButton recipe={recipe} localRecipe={localRecipe} />
+            <InteractButton recipe={recipe} localRecipe={localRecipe} id={id} />
         </div>
     )
 }

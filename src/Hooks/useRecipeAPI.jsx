@@ -34,34 +34,34 @@ const uriHeaders = new Headers({
 
 export function useRecipeAPI(searchParameter) {
     const [ errorOccurred, setErrorOccurred ] = useState('');
-    const [ allRecipes, setAllRecipes ] = useState([]);
+    const [ allRecipes, setAllRecipes ] = useState(tempRecipes);
     const [ isLoading, setIsLoading ] = useState(true);
 
-    useEffect(() => {
-        let search = uriAPI + searchParameter;
+    // useEffect(() => {
+    //     let search = uriAPI + searchParameter;
     
-        const request = new Request(search, {
-            method: 'GET',
-            headers: uriHeaders,
-        })
+    //     const request = new Request(search, {
+    //         method: 'GET',
+    //         headers: uriHeaders,
+    //     })
         
-        fetch(request)
-        .then(response => {
-            if (!response.ok) throw new Error(`Fetch request failed with a status code of ${response.status}`);
-            return response.json();
-        })
-        .then(recipes => {
-            setAllRecipes(recipes);
-            setErrorOccurred(null);
-        })
-        .catch(error => {
-            setErrorOccurred(error.message);
-            console.log(errorOccurred)
-        })
-        .finally(() => {
-            setIsLoading(false);
-        })        
-    }, [searchParameter])
+    //     fetch(request)
+    //     .then(response => {
+    //         if (!response.ok) throw new Error(`Fetch request failed with a status code of ${response.status}`);
+    //         return response.json();
+    //     })
+    //     .then(recipes => {
+    //         setAllRecipes(recipes);
+    //         setErrorOccurred(null);
+    //     })
+    //     .catch(error => {
+    //         setErrorOccurred(error.message);
+    //         console.log(errorOccurred)
+    //     })
+    //     .finally(() => {
+    //         setIsLoading(false);
+    //     })        
+    // }, [searchParameter])
 
     return { errorOccurred, allRecipes, isLoading };
 }

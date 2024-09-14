@@ -7,7 +7,7 @@ import { SavedRecipes } from "../JavaScript/localStorage";
 export function RecipeList() {
     const { searchParameter } = useParams();
     const showLocalStorage = searchParameter == "booklet";
-    const { errorOccurred, allRecipes, isLoading } = !showLocalStorage ? useRecipeAPI(searchParameter) : {errorOccurred: null, isLoading: false, allRecipes: SavedRecipes.getRecipeBook()}; 
+    const { errorOccurred, allRecipes, isLoading } = !showLocalStorage ? useRecipeAPI(searchParameter) : {errorOccurred: null, isLoading: false, allRecipes: SavedRecipes.getRecipeBook()};
 
     return (
         <div className="recipes-display">

@@ -14,6 +14,7 @@ export function InteractButton({ recipe, localRecipe }) {
             }
         } else {
             console.log("Add item removing from localStorage")
+            console.log(id)
         }
         
     }
