@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NavBar } from "./Containers/NavBar";
 import { Home } from "./Pages/Home";
@@ -10,9 +10,11 @@ import { Error } from "./Pages/Error";
 // saved in localStorage.
 
 // TODO: 
-// - Create and add .env file to hide api key.
 // - Add ability to remove recipes from localStorage
 // - Add ability to retrieve more than 10 search results via query parameters.
+// - Create Home Page
+// - Add button or search box to toggle new search on recipe list page
+// - Add heading to display if no recipes are saved locally.
 
 export function MainPage() {
   return (

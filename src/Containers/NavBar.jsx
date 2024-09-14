@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { SearchBox } from "../Components/SearchBox";
+import { changeKey } from "../JavaScript/userKeyChange";
 
 export function NavBar() {
+    const [ userAPIKey, setUserAPIKey ] = useState('');
+
+    useEffect(() => {
+        changeKey(userAPIKey)
+    }, [userAPIKey])
+
     return (
         <>
             <div className="page-links">
@@ -11,9 +17,10 @@ export function NavBar() {
                 <Link to="/discover">Discover</Link>
                 <Link to="/recipelist/booklet">Recipe Book</Link>                
             </div>
-            {/* <div className="recipe-search">
-                <SearchBox />
-            </div> */}
+            <div className="user-key">
+                <input type="password" placeholder="Enter API Key for service..." value={userAPIKey} 
+                    onChange={(e) => setUserAPIKey(e.target.value)}/>
+            </div>
         </>
     )
 }
