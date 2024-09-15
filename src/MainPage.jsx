@@ -10,7 +10,9 @@ import { Error } from "./Pages/Error";
 // saved in localStorage.
 
 // TODO: 
-// - Add ability to remove recipes from localStorage
+// - Change Hooks into containers and depending on the value of the searchParameter trigger either the LocalRecipes element or
+//    the SearchedRecipes element.
+// - Add error sign saying to include your api key
 // - Add ability to retrieve more than 10 search results via query parameters.
 // - Create Home Page
 // - Add button or search box to toggle new search on recipe list page

@@ -33,36 +33,42 @@ const uriAPI = 'https://api.api-ninjas.com/v1/recipe?query=';
 
 export function useRecipeAPI(searchParameter) {
     const [ errorOccurred, setErrorOccurred ] = useState('');
-    const [ allRecipes, setAllRecipes ] = useState([]);
+    const [ allRecipes, setAllRecipes ] = useState(tempRecipes);
     const [ isLoading, setIsLoading ] = useState(true);
-    const uriHeaders = new Headers({
-      'x-api-key': apiKey
-    });
-
-    useEffect(() => {
-        let search = uriAPI + searchParameter;
     
-        const request = new Request(search, {
-            method: 'GET',
-            headers: uriHeaders,
-        })
+    useEffect(() => {
+        const uriHeaders = new Headers({
+          'x-api-key': apiKey
+        });
         
-        fetch(request)
-        .then(response => {
-            if (!response.ok) throw new Error(`Fetch request failed with a status code of ${response.status}`);
-            return response.json();
+        let search = uriAPI + searchParameter;
+        
+        const request = new Request(search, {
+          method: 'GET',
+          headers: uriHeaders,
         })
-        .then(recipes => {
-            setAllRecipes(recipes);
-            setErrorOccurred(null);
-        })
-        .catch(error => {
-            setErrorOccurred(error.message);
-            console.log(errorOccurred)
-        })
-        .finally(() => {
-            setIsLoading(false);
-        })        
+
+        if (apiKey == '') {
+          setErrorOccurred('API Key not valid... Request Canceled');
+          setIsLoading(false);
+        } else {
+          fetch(request)
+          .then(response => {
+                if (!response.ok) throw new Error(`Fetch request failed with a status code of ${response.status}`);
+                return response.json();
+            })
+            .then(recipes => {
+                setAllRecipes(recipes);
+                setErrorOccurred(null);
+            })
+            .catch(error => {
+                setErrorOccurred(error.message);
+                console.log(error.message)
+            })
+            .finally(() => {
+                setIsLoading(false);
+            })
+        };
     }, [searchParameter])
 
     return { errorOccurred, allRecipes, isLoading };
