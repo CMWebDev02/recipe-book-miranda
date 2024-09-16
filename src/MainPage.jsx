@@ -10,12 +10,8 @@ import { Error } from "./Pages/Error";
 // saved in localStorage.
 
 // TODO: 
-// - Change Hooks into containers and depending on the value of the searchParameter trigger either the LocalRecipes element or
-//    the SearchedRecipes element.
-// - Add error sign saying to include your api key
 // - Add ability to retrieve more than 10 search results via query parameters.
 // - Create Home Page
-// - Add button or search box to toggle new search on recipe list page
 // - Add heading to display if no recipes are saved locally.
 
 export function MainPage() {
@@ -27,9 +23,11 @@ export function MainPage() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/discover" element={<Discover />} />
-          <Route path="/recipelist/" element={<Error />} />
-          <Route path="/recipelist/:searchParameter" element={<RecipeList />} />
-          <Route path="/recipelist/:searchParameter/*" element={<Error />} />
+          <Route path="/recipelist" element={<Error />} />
+          <Route path="/recipelist/:recipe" element={<Error />} />
+          <Route path="/recipelist/:recipe/:page" element={<RecipeList />} />
+          {/* <Route path="/recipelist/:searchParameter" element={<RecipeList />} />
+          <Route path="/recipelist/:searchParameter/*" element={<Error />} /> */}
         </Routes>
       </BrowserRouter>
     </div>

@@ -7,7 +7,7 @@ export function Discover() {
     const navigate = useNavigate();
 
     function redirectToList() {
-        navigate('/recipelist/' + userSearch)
+        navigate('/recipelist/' + userSearch + '/1')
     }   
 
     return (
