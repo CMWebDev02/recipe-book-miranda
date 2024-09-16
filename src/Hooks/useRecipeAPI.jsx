@@ -31,18 +31,19 @@ const tempRecipes = [
 const uriAPI = 'https://api.api-ninjas.com/v1/recipe?query=';
 
 
-export function useRecipeAPI(searchParameter) {
+export function useRecipeAPI({recipeParam, pageParam}) {
     const [ errorOccurred, setErrorOccurred ] = useState('');
     const [ allRecipes, setAllRecipes ] = useState(tempRecipes);
     const [ isLoading, setIsLoading ] = useState(true);
+
+    // Add Abort Controller and in the effect's return statement.
     
     useEffect(() => {
         const uriHeaders = new Headers({
           'x-api-key': apiKey
         });
-        
-        let search = uriAPI + searchParameter;
-        
+        let search = uriAPI + recipeParam + '&offset=' + (pageParam * 10);
+
         const request = new Request(search, {
           method: 'GET',
           headers: uriHeaders,
@@ -69,7 +70,7 @@ export function useRecipeAPI(searchParameter) {
                 setIsLoading(false);
             })
         };
-    }, [searchParameter])
+    }, [recipeParam, pageParam])
 
     return { errorOccurred, allRecipes, isLoading };
 }

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 
-export function SearchBox({ searchResult, updateSearch, redirectToList }) {
+export function SearchBox({updateSearch}) {
+    const [ currentText, setCurrentText ] = useState('')
+
     function searchRecipe() {
-        if (searchResult != '') {
-            redirectToList();
+        if (currentText != '') {
+            updateSearch(currentText)
         } else {
             alert('Enter a valid recipe name before searching...')
         }
@@ -19,7 +21,7 @@ export function SearchBox({ searchResult, updateSearch, redirectToList }) {
     return (
         <>
             <button onClick={searchRecipe}>🔎</button>
-            <input onChange={(e) => updateSearch(e.target.value)} onKeyUp={(e) => checkKey(e.code)} value={searchResult} id="user-search-box" placeholder="Enter a recipe name..."/>
+            <input onChange={(e) => setCurrentText(e.target.value)} onKeyUp={(e) => checkKey(e.code)} value={currentText} id="user-search-box" placeholder="Enter a recipe name..."/>
         </>
     )
 }

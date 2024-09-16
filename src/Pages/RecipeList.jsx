@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { SearchedRecipes } from "../Containers/SearchedRecipes";
 import { LocalRecipes } from "../Containers/LocalRecipes";
 
@@ -10,29 +10,37 @@ function alterPage(state, action) {
         }
     } else if (action.type == 'previousPage') {
         return {
-            pageNum: (state.pageNum - 1 < 0 ? 0 : state.pageNum - 1)
+            pageNum: (state.pageNum - 1 < 1 || state.pageNum <= 0 ? 1 : state.pageNum - 1)
         }
     } 
     throw new Error('Unknown Action')
 }
 
 export function RecipeList() {
-    const { recipe, page } = useParams();
-    const [currentPage, setCurrentPage ] = useReducer(alterPage, {pageNum: page})
-    const displayLocal = recipe == 'booklet';
+    const [ queryParameters, setQueryParameters ] = useSearchParams();
+    const [ recipeQuery, setRecipeQuery ] = useState(
+        queryParameters.get('recipe')
+    )
+    const [ pageQuery, setPageQuery ] = useReducer(alterPage,
+        {pageNum: +queryParameters.get('page') <= 0 ? 1 : +queryParameters.get('page')}
+    )
+    const displayLocal = recipeQuery == 'booklet';
 
-    function handleClick(action) {
-            setCurrentPage({type: action})
-            console.log(currentPage)
+    useEffect(() => {
+        setQueryParameters({recipe: recipeQuery, page: pageQuery.pageNum});
+    }, [recipeQuery, pageQuery]);
+
+    function changePage(action) {
+        setPageQuery({type: action})
     }
 
     return (
         <>
-            {displayLocal && <LocalRecipes currentPage={currentPage} />}
-            {!displayLocal && <SearchedRecipes recipeParam={recipe} currentPage={currentPage} />}
+            {displayLocal && <LocalRecipes currentPage={pageQuery.pageNum} />}
+            {!displayLocal && <SearchedRecipes recipeParam={recipeQuery} pageParam={pageQuery.pageNum} newSearch={setRecipeQuery} />}
 
-            <button onClick={() => handleClick('previousPage')}>Previous Page</button>
-            <button onClick={() => handleClick('nextPage')}>Next Page</button>
+            <button onClick={() => changePage('previousPage')}>Previous Page</button>
+            <button onClick={() => changePage('nextPage')}>Next Page</button>
         </>
     )
 }

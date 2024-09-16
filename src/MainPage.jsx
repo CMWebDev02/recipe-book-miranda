@@ -10,7 +10,6 @@ import { Error } from "./Pages/Error";
 // saved in localStorage.
 
 // TODO: 
-// - Add ability to retrieve more than 10 search results via query parameters.
 // - Create Home Page
 // - Add heading to display if no recipes are saved locally.
 
@@ -23,11 +22,8 @@ export function MainPage() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/discover" element={<Discover />} />
-          <Route path="/recipelist" element={<Error />} />
-          <Route path="/recipelist/:recipe" element={<Error />} />
-          <Route path="/recipelist/:recipe/:page" element={<RecipeList />} />
-          {/* <Route path="/recipelist/:searchParameter" element={<RecipeList />} />
-          <Route path="/recipelist/:searchParameter/*" element={<Error />} /> */}
+          <Route path="/recipelist" element={<RecipeList />} />
+          <Route path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </div>
