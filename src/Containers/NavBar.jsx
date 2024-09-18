@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { changeKey } from "../JavaScript/userKeyChange";
+import { changeKey } from '../JavaScript/userAPIKey.js'
 
 export function NavBar() {
     const [ userAPIKey, setUserAPIKey ] = useState('');
