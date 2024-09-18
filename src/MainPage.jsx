@@ -32,6 +32,7 @@ import { Error } from "./Pages/Error";
 // //- A function that uses the fetch() API
 
 export function MainPage() {
+
   return (
     <div className="main-container">
       <BrowserRouter>

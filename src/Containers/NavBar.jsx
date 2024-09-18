@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { changeKey } from '../JavaScript/userAPIKey.js'
 
-export function NavBar() {
+export function NavBar({apiWorker}) {
     const [ userAPIKey, setUserAPIKey ] = useState('');
 
     useEffect(() => {
-        changeKey(userAPIKey)
+        changeKey(userAPIKey);
     }, [userAPIKey])
 
     return (

@@ -39,37 +39,38 @@ export function useRecipeAPI({recipeParam, pageParam}) {
     // Add Abort Controller and in the effect's return statement.
     
     useEffect(() => {
-        const uriHeaders = new Headers({
-          'x-api-key': apiKey
-        });
-        let search = uriAPI + recipeParam + '&offset=' + (pageParam * 10);
+      const uriHeaders = new Headers({
+        'x-api-key': apiKey
+      });
+      let search = uriAPI + recipeParam + '&offset=' + (pageParam * 10);
+      console.log(apiKey)
 
-        const request = new Request(search, {
-          method: 'GET',
-          headers: uriHeaders,
-        })
+      const request = new Request(search, {
+        method: 'GET',
+        headers: uriHeaders,
+      })
 
-        if (apiKey == '') {
-          setErrorOccurred('API Key not valid... Request Canceled');
-          setIsLoading(false);
-        } else {
-          fetch(request)
-          .then(response => {
-                if (!response.ok) throw new Error(`Fetch request failed with a status code of ${response.status}`);
-                return response.json();
-            })
-            .then(recipes => {
-                setAllRecipes(recipes);
-                setErrorOccurred(null);
-            })
-            .catch(error => {
-                setErrorOccurred(error.message);
-                console.log(error.message)
-            })
-            .finally(() => {
-                setIsLoading(false);
-            })
-        };
+      if (apiKey == '') {
+        setErrorOccurred('API Key not valid... Request Canceled');
+        setIsLoading(false);
+      } else {
+        fetch(request)
+        .then(response => {
+              if (!response.ok) throw new Error(`Fetch request failed with a status code of ${response.status}`);
+              return response.json();
+          })
+          .then(recipes => {
+              setAllRecipes(recipes);
+              setErrorOccurred(null);
+          })
+          .catch(error => {
+              setErrorOccurred(error.message);
+              console.log(error.message)
+          })
+          .finally(() => {
+              setIsLoading(false);
+          })
+      };
     }, [recipeParam, pageParam])
 
     return { errorOccurred, allRecipes, isLoading };
