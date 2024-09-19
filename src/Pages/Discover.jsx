@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { SearchBox } from "../Components/SearchBox";
-import { useNavigate, useSearchParams } from "react-router-dom";
-  
-export function Discover() {
+import { useNavigate } from "react-router-dom";
+
+export function Discover({ APIKey }) {
     const [ userSearch, setUserSearch ] = useState('');
     const navigate = useNavigate();
 

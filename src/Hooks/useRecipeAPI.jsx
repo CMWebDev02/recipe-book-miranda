@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { apiKey } from '../JavaScript/userAPIKey.js'
 
 const tempRecipes = [
     {
@@ -31,7 +30,7 @@ const tempRecipes = [
 const uriAPI = 'https://api.api-ninjas.com/v1/recipe?query=';
 
 
-export function useRecipeAPI({recipeParam, pageParam}) {
+export function useRecipeAPI({recipeParam, pageParam, APIKey}) {
     const [ errorOccurred, setErrorOccurred ] = useState('');
     const [ allRecipes, setAllRecipes ] = useState(tempRecipes);
     const [ isLoading, setIsLoading ] = useState(true);
@@ -40,17 +39,16 @@ export function useRecipeAPI({recipeParam, pageParam}) {
     
     useEffect(() => {
       const uriHeaders = new Headers({
-        'x-api-key': apiKey
+        'x-api-key': APIKey
       });
       let search = uriAPI + recipeParam + '&offset=' + (pageParam * 10);
-      console.log(apiKey)
 
       const request = new Request(search, {
         method: 'GET',
         headers: uriHeaders,
       })
 
-      if (apiKey == '') {
+      if (APIKey == '') {
         setErrorOccurred('API Key not valid... Request Canceled');
         setIsLoading(false);
       } else {
@@ -71,7 +69,7 @@ export function useRecipeAPI({recipeParam, pageParam}) {
               setIsLoading(false);
           })
       };
-    }, [recipeParam, pageParam])
+    }, [recipeParam, pageParam, APIKey])
 
     return { errorOccurred, allRecipes, isLoading };
 }

@@ -3,8 +3,8 @@ import {useRecipeAPI} from '../Hooks/useRecipeAPI'
 import { DisplayRecipe } from "../Components/DisplayRecipe";
 import { SearchBox } from "../Components/SearchBox";
 
-export function SearchedRecipes({ recipeParam, pageParam, newSearch }) {
-    const { errorOccurred, allRecipes, isLoading } = useRecipeAPI({recipeParam, pageParam});
+export function SearchedRecipes({ recipeParam, pageParam, APIKey, newSearch }) {
+    const { errorOccurred, allRecipes, isLoading } = useRecipeAPI({recipeParam, pageParam, APIKey});
 
     return (
         <div className="recipes-display">

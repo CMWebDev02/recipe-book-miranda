@@ -1,4 +1,4 @@
-export class SavedRecipes {
+class localStorageAccess {
     static checkIfSaved(recipe) {
         let newRecipeString = JSON.stringify(recipe);
 
@@ -65,10 +65,18 @@ export class SavedRecipes {
     }
 
     static getRecipeBook() {
-        return JSON.parse(localStorage.getItem('recipe-book')) || [];
+        return JSON.parse(localStorage.getItem(this.itemKey)) || [];
     }
 
     static setRecipeBook(allRecipes) {
-        localStorage.setItem('recipe-book', JSON.stringify(allRecipes))
+        localStorage.setItem(this.itemKey, JSON.stringify(allRecipes))
     }
+}
+
+export class SavedRecipes extends localStorageAccess {
+    static itemKey = 'recipe-book';
+}
+
+export class MealPlan extends localStorageAccess {
+    static itemKey = 'meal-plan';
 }

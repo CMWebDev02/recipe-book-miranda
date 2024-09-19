@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NavBar } from "./Containers/NavBar";
 import { Home } from "./Pages/Home";
@@ -10,15 +10,13 @@ import { Error } from "./Pages/Error";
 // saved in localStorage.
 
 // TODO: 
-// - Create Home Page
-// - Add heading to display if no recipes are saved locally.
 // - Create a weekly meal plan page that allows the user to select what meals will be made on set days of the week.
 // - Add worker to take list of ingredients from the various recipes and convert them to an array of items. 
 // - Have webworker create a shopping list of all collected ingredients and have them return an array of shoppingList Items.
 // - Utilize await and async or promises to implement the various web workers when they are to parse or gather the needed shopping list items.
 // - Utilize promise.all or promise.any to get nutritional info for all ingredients in a recipe using the food-data-central-api
-
-// - If needed, have the web workers be used to run the userKeyChange.js file.
+// - Create Home Page
+// - Add heading to display if no recipes are saved locally.
 
 // Requirements
 // Please write functions that contain the following syntax that you learned in the MDN Asynchronous JavaScript Tutorial assignments, note you can have a function that contains multiple syntaxes that are required
@@ -32,16 +30,18 @@ import { Error } from "./Pages/Error";
 // //- A function that uses the fetch() API
 
 export function MainPage() {
+  const [apiKey, setAPIKey ] = useState('');
 
   return (
     <div className="main-container">
       <BrowserRouter>
-        <NavBar />
+        <NavBar APIKey={apiKey} setKey={setAPIKey} />
         <hr />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/discover" element={<Discover />} />
-          <Route path="/recipelist" element={<RecipeList />} />
+          <Route path="/discover" element={<Discover APIKey={apiKey} />} />
+          <Route path="/recipelist" element={<RecipeList APIKey={apiKey} displayLocal={false} />} />
+          <Route exact path="/booklet" element={<RecipeList APIKey={apiKey} displayLocal={true}/>} />
           <Route path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>
