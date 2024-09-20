@@ -14,7 +14,7 @@ export function LocalRecipes() {
     return (
         <>
             {allRecipes.map(recipe => <DisplayRecipe key={"local-recipe-" + Math.random()}
-                                        recipe={recipe} localRecipe={true} 
+                                        recipe={recipe} viewLocation={'stored'} 
                                         update={setUpdateOccurred} />)}
         </>
     )

@@ -50,7 +50,7 @@ class localStorageAccess {
     }
 
     static removeRecipe(recipeID) {
-        let currentRecipeBook = this.getRecipeBook();
+        let currentRecipeBook = this.getList();
 
         for (const index in currentRecipeBook) {
             if (currentRecipeBook[index].id == recipeID) {
@@ -79,4 +79,7 @@ export class SavedRecipes extends localStorageAccess {
 
 export class MealPlan extends localStorageAccess {
     static itemKey = 'meal-plan';
+
+    // Add a method strictly for the meal planner that will duplicate a recipe from the list in case a user wants to have it on multiple days of the week,
+    // use checkIfSaved to verify that the meal is already saved and over right the id after duplicating the item.
 }

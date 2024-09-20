@@ -18,7 +18,7 @@ export function SearchedRecipes({ recipeParam, pageParam, APIKey, newSearch }) {
                 {errorOccurred && <h1>{errorOccurred}</h1>}
                 {isLoading && <h1>Loading...</h1>}
                 {allRecipes && allRecipes.map(recipe => <DisplayRecipe key={"recipe-" + Math.random()} 
-                                                            recipe={recipe} localRecipe={false} />)}
+                                                            recipe={recipe} viewLocation={'searched'} />)}
             </div>
         </div>
     )
