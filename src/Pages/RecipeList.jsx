@@ -12,13 +12,15 @@ function alterPage(state, action) {
         return {
             pageNum: (state.pageNum - 1 < 1 || state.pageNum <= 0 ? 1 : state.pageNum - 1)
         }
-    } 
+    } else if (action.type == 'reset') {
+        return {
+            pageNum: 1
+        }
+    }
     throw new Error('Unknown Action')
 }
 
 export function RecipeList({ APIKey, displayLocal }) {
-    // As of now, I cannot get it to update the page to take in the new search parameters when they are changed via the navigation link to display the local recipes.
-    // I really don't want to have two separate recipe lists but at the moment it is looking like I will need to do it this way.
     const [ queryParameters, setQueryParameters ] = useSearchParams();
     const [ recipeQuery, setRecipeQuery ] = useState(
         queryParameters.get('recipe')
@@ -32,9 +34,19 @@ export function RecipeList({ APIKey, displayLocal }) {
         setQueryParameters({recipe: recipeQuery, page: pageQuery.pageNum});
     }, [recipeQuery, pageQuery]);
 
+    useEffect(() => {
+        if (displayLocal) {
+            setRecipeQuery('booklet')
+            setPageQuery({type: 'reset'});
+            setShowLocal(true);
+        } else {
+            setShowLocal(false)
+        }
+    }, [displayLocal])
+
     function changePage(action) {
-        window.scrollTo({top: 100})
-        setPageQuery({type: action})
+        window.scrollTo({top: 100});
+        setPageQuery({type: action});
     }
 
 

@@ -3,11 +3,11 @@ import { SavedRecipes } from "../JavaScript/localStorage";
 import { DisplayRecipe } from "../Components/DisplayRecipe";
 
 export function LocalRecipes() {
-    const [ allRecipes, setAllRecipes ] = useState(SavedRecipes.getRecipeBook());
+    const [ allRecipes, setAllRecipes ] = useState(SavedRecipes.getList());
     const [ updateOccurred, setUpdateOccurred ] = useState(false);
 
     useEffect(() => {
-        setAllRecipes(SavedRecipes.getRecipeBook());
+        setAllRecipes(SavedRecipes.getList());
         setUpdateOccurred(false);
     }, [updateOccurred])
 

@@ -41,7 +41,7 @@ export function MainPage() {
           <Route path="/" element={<Home />} />
           <Route path="/discover" element={<Discover APIKey={apiKey} />} />
           <Route path="/recipelist" element={<RecipeList APIKey={apiKey} displayLocal={false} />} />
-          <Route exact path="/booklet" element={<RecipeList APIKey={apiKey} displayLocal={true}/>} />
+          <Route exact path="/booklet" element={<RecipeList APIKey={apiKey} displayLocal={true} />} />
           <Route path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>

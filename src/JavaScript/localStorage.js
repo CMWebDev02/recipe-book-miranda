@@ -2,7 +2,7 @@ class localStorageAccess {
     static checkIfSaved(recipe) {
         let newRecipeString = JSON.stringify(recipe);
 
-        let tempRecipeBook = this.getRecipeBook();
+        let tempRecipeBook = this.getList();
         
         for (let savedRecipe of tempRecipeBook) {
             delete savedRecipe.id;
@@ -26,7 +26,7 @@ class localStorageAccess {
             // If true, the item is not in the list and it needs to be added,
 
             // The recipe book is again pulled from store to preserve the id for each recipe, since the above method removes the ones last pulled from storage.
-            let currentRecipeBook = this.getRecipeBook();
+            let currentRecipeBook = this.getList();
             // A shallow copy of the passed in newRecipe object is declared in a new variable.
             // // The passed in object is persistent through the whole project, by adding the id property the object will contain it until the page reloads, so when attempting to add it again,
             // // the id property was remaining and allowing the item to be added multiple times. Shallow copying allows the id property to be added to a recipeObj without having it persist
@@ -40,7 +40,7 @@ class localStorageAccess {
             recipeToAdd.id = newID;
             // Pushes the recipeToAdd object to the recipe book array and then calls the method to store the array in localStorage
             currentRecipeBook.push(recipeToAdd);
-            this.setRecipeBook(currentRecipeBook);
+            this.setList(currentRecipeBook);
             // Alert the user the item was added successfully
             alert('Item Added')
         } else {
@@ -55,7 +55,7 @@ class localStorageAccess {
         for (const index in currentRecipeBook) {
             if (currentRecipeBook[index].id == recipeID) {
                 currentRecipeBook.splice(index, 1);
-                this.setRecipeBook(currentRecipeBook);
+                this.setList(currentRecipeBook);
                 alert('Recipe Removed')
                 return;
             }
@@ -64,11 +64,11 @@ class localStorageAccess {
         alert('Recipe Removal Failed...')
     }
 
-    static getRecipeBook() {
+    static getList() {
         return JSON.parse(localStorage.getItem(this.itemKey)) || [];
     }
 
-    static setRecipeBook(allRecipes) {
+    static setList(allRecipes) {
         localStorage.setItem(this.itemKey, JSON.stringify(allRecipes))
     }
 }
