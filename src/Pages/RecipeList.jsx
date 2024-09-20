@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { useSearchParams, useLocation } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { SearchedRecipes } from "../Containers/SearchedRecipes";
 import { LocalRecipes } from "../Containers/LocalRecipes";
 

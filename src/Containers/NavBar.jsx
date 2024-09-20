@@ -21,7 +21,8 @@ export function NavBar({APIKey, setKey}) {
                 <h1>Recipe Book Project</h1>
                 <Link to="/">Home</Link>
                 <Link to="/discover">Discover</Link>
-                <Link to="/booklet">Recipe Book</Link>     
+                <Link to="/booklet">Recipe Book</Link> 
+                <Link to="/planner">Meal Plan</Link> 
             </div>
             <div className="user-key">
                 <button onClick={updateKey}>Update</button>

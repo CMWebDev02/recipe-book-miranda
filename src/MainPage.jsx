@@ -5,15 +5,17 @@ import { Home } from "./Pages/Home";
 import { Discover } from "./Pages/Discover";
 import { RecipeList } from "./Pages/RecipeList";
 import { Error } from "./Pages/Error";
+import { MealPlanner } from "./Containers/MealPlanner";
 
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
 
 // TODO: 
 // - Create a weekly meal plan page that allows the user to select what meals will be made on set days of the week.
-// - Add worker to take list of ingredients from the various recipes and convert them to an array of items. 
+// - Add worker to take list of ingredients from the various recipes and convert them to an array of items.
 // - Have webworker create a shopping list of all collected ingredients and have them return an array of shoppingList Items.
-// - Utilize await and async or promises to implement the various web workers when they are to parse or gather the needed shopping list items.
+// - Utilize await and async or promises to implement the various web workers when they are to gather nutritional info for all items and have them add it up to a total,
+//    to utilize the workers the way they are intended, making calculations.
 // - Utilize promise.all or promise.any to get nutritional info for all ingredients in a recipe using the food-data-central-api
 // - Create Home Page
 // - Add heading to display if no recipes are saved locally.
@@ -41,7 +43,8 @@ export function MainPage() {
           <Route path="/" element={<Home />} />
           <Route path="/discover" element={<Discover APIKey={apiKey} />} />
           <Route path="/recipelist" element={<RecipeList APIKey={apiKey} displayLocal={false} />} />
-          <Route exact path="/booklet" element={<RecipeList APIKey={apiKey} displayLocal={true} />} />
+          <Route path="/booklet" element={<RecipeList APIKey={apiKey} displayLocal={true} />} />
+          <Route path="/planner" element={<MealPlanner />} />
           <Route path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>

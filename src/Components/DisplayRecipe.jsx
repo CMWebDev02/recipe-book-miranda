@@ -1,6 +1,10 @@
 import React from "react";
 import { InteractButton } from "./InteractButton";
 
+// Change the localRecipe variable to something like viewLocation to better denote if the recipe is being shown from the apiSearch, localStorage, or from the meal plan.
+// If it is from the api search, only one interaction button should be present to save the recipe.
+// if it is the localStorage recipe book, two buttons should be present, one to remove the recipe and one to add it to the meal plan.
+// If it is the meal plan, there should be two buttons one to remove the recipe from the meal plan and one to get nutritional info.
 export function DisplayRecipe({ recipe, localRecipe, update }) {
     const { title, ingredients, servings, instructions } = recipe;
 
