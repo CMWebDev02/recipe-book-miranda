@@ -82,4 +82,30 @@ export class MealPlan extends localStorageAccess {
 
     // Add a method strictly for the meal planner that will duplicate a recipe from the list in case a user wants to have it on multiple days of the week,
     // use checkIfSaved to verify that the meal is already saved and over right the id after duplicating the item.
+    static storeRecipe(newRecipe) {
+        let newID = 'id-' + (Math.random() * Date.now()).toString(16).substring(0, 16);
+
+        let currentRecipeBook = this.getList();
+        let recipeToAdd = {...newRecipe};
+        recipeToAdd.id = newID;
+        currentRecipeBook.push(recipeToAdd);
+        this.setList(currentRecipeBook);
+        alert('Item Added To Meal Planner');
+    }
+
+    static updateRecipe(weekday, recipeID) {
+        let currentRecipeBook = this.getList();
+
+        for (const recipe of currentRecipeBook) {
+            console.log(recipeID, recipe.id)
+            if (recipe.id == recipeID) {
+                recipe['weekday'] = weekday;
+                this.setList(currentRecipeBook)
+                alert('Recipe Updated')
+                return;
+            }
+        }
+        
+        alert('Recipe Not Found')
+    }
 }

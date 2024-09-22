@@ -5,7 +5,7 @@ import { Home } from "./Pages/Home";
 import { Discover } from "./Pages/Discover";
 import { RecipeList } from "./Pages/RecipeList";
 import { Error } from "./Pages/Error";
-import { MealPlanner } from "./Containers/MealPlanner";
+import { MealPlanner } from "./Pages/MealPlanner";
 
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
