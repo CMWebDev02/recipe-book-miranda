@@ -6,6 +6,7 @@ import { Discover } from "./Pages/Discover";
 import { RecipeList } from "./Pages/RecipeList";
 import { Error } from "./Pages/Error";
 import { MealPlanner } from "./Pages/MealPlanner";
+import './Styles/NutritionalInfo.module.css'
 
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
@@ -44,7 +45,7 @@ export function MainPage() {
           <Route path="/discover" element={<Discover APIKey={apiKey} />} />
           <Route path="/recipelist" element={<RecipeList APIKey={apiKey} displayLocal={false} />} />
           <Route path="/booklet" element={<RecipeList APIKey={apiKey} displayLocal={true} />} />
-          <Route path="/planner" element={<MealPlanner />} />
+          <Route path="/planner/*" element={<MealPlanner />} />
           <Route path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>

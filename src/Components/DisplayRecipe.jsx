@@ -18,7 +18,7 @@ export function DisplayRecipe({ recipe, viewLocation, update }) {
             <p>{instructions}</p>
             <hr />
             <InteractButton recipe={recipe} viewLocation={viewLocation} update={update} />
-            {!recipe.weekday && <WeekDaySelector recipe={recipe} update={update} />}
+            {viewLocation == 'planner' && <WeekDaySelector recipe={recipe} update={update} />}
         </div>
     )
 }

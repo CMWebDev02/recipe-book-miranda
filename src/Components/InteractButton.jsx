@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { MealPlan, SavedRecipes } from "../JavaScript/localStorage";
+import { useNavigate } from "react-router-dom";
 
 export function InteractButton({ recipe, viewLocation, update }) {
+    const navigate = useNavigate();
 
     function storedActions(action) {
         if (action == 'remove') {
@@ -17,7 +19,7 @@ export function InteractButton({ recipe, viewLocation, update }) {
             MealPlan.removeRecipe(recipe.id)
             update(true);
         } else if (action == 'nutrition') {
-            console.log('get nutritional info')
+            navigate(`/planner/${recipe.id}`)
         }
     }
 

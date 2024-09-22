@@ -93,19 +93,42 @@ export class MealPlan extends localStorageAccess {
         alert('Item Added To Meal Planner');
     }
 
-    static updateRecipe(weekday, recipeID) {
+    static updateRecipe(action, weekday, recipeID) {
         let currentRecipeBook = this.getList();
+        let foundRecipe;
 
         for (const recipe of currentRecipeBook) {
-            console.log(recipeID, recipe.id)
             if (recipe.id == recipeID) {
-                recipe['weekday'] = weekday;
-                this.setList(currentRecipeBook)
-                alert('Recipe Updated')
-                return;
+                foundRecipe = recipe;
+                break;
             }
+        }
+
+        if (action == 'add') {
+            foundRecipe['weekday'] = weekday;
+            this.setList(currentRecipeBook)
+            alert(`Recipe Added to ${weekday}`)
+            return;
+        } else if (action == 'remove') {
+            delete foundRecipe.weekday;
+            delete foundRecipe['weekday'];
+            this.setList(currentRecipeBook)
+            alert('Recipe Moved Back')
+            return;
         }
         
         alert('Recipe Not Found')
+    }
+
+    static findRecipe(recipeID) {
+        let currentRecipeBook = this.getList();
+
+        for (const recipe of currentRecipeBook) {
+            if (recipe.id == recipeID) {
+                return recipe;
+            }
+        }
+
+        alert('Warning... Recipe Not Found')
     }
 }

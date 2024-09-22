@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Route, Routes } from 'react-router-dom'
 import { MealPlan } from "../JavaScript/localStorage";
 import { DisplayRecipe } from "../Components/DisplayRecipe";
+import { NutritionalInfo } from "../Containers/NutritionalInfo";
 
-
-// Current plan, have the two separate lists, on the left will be the list showing what meals will be made on certain days and on the left will be all recipes saved for the meal plan that currently don't have a
-// weekday property, and add a way to assign a weekday property id via a dropdown list and a add button.
 export function MealPlanner() {
     const [ plannedMeals, setPlannedMeals ] = useState(MealPlan.getList())
     const [ updateOccurred, setUpdateOccurred ] = useState(false);
@@ -19,11 +18,11 @@ export function MealPlanner() {
         <div className="meal-planner">
             <div className="planned-meals">
                 {/* Displays meals that have the weekday property and shows the meal under their appropriate day. */}
-                {weekdays.map(day => <>
-                                    <h1>{day}</h1>
+                {weekdays.map(day => <div key={"day-" + Math.random()}>
+                                    <h1 >{day}</h1>
                                     {plannedMeals.filter(meal => meal.weekday == day).map(meal => <DisplayRecipe key={'weekday-meal-' + Math.random()} recipe={meal} viewLocation={'planner'} update={setUpdateOccurred} /> )}
                                     <hr />
-                                    </>)}
+                                    </div>)}
                 
             </div>
             <hr />
@@ -31,6 +30,10 @@ export function MealPlanner() {
                 {/* Displays all meals that do not have the weekday property */}
                 {plannedMeals.filter(meal => !meal.weekday).map(meal => <DisplayRecipe key={'weekday-meal-' + Math.random()} recipe={meal} viewLocation={'planner'} update={setUpdateOccurred} />)}
             </div>
+
+            <Routes>
+                <Route path="/:id" element={<NutritionalInfo recipes={plannedMeals} />}/>
+            </Routes>
         </div>
     )
 }
