@@ -12,7 +12,6 @@ import './Styles/NutritionalInfo.module.css'
 // saved in localStorage.
 
 // TODO: 
-// - Create a weekly meal plan page that allows the user to select what meals will be made on set days of the week.
 // - Add worker to take list of ingredients from the various recipes and convert them to an array of items.
 // - Have webworker create a shopping list of all collected ingredients and have them return an array of shoppingList Items.
 // - Utilize await and async or promises to implement the various web workers when they are to gather nutritional info for all items and have them add it up to a total,
