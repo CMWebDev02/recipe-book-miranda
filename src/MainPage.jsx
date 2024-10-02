@@ -6,12 +6,12 @@ import { Discover } from "./Pages/Discover";
 import { RecipeList } from "./Pages/RecipeList";
 import { Error } from "./Pages/Error";
 import { MealPlanner } from "./Pages/MealPlanner";
-import './Styles/NutritionalInfo.module.css'
 
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
 
 // TODO: 
+// Add a page that will generate random recipe ideas to make use of Promise.any()
 // - Add worker to take list of ingredients from the various recipes and convert them to an array of items.
 // - Have webworker create a shopping list of all collected ingredients and have them return an array of shoppingList Items.
 // - Utilize await and async or promises to implement the various web workers when they are to gather nutritional info for all items and have them add it up to a total,

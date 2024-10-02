@@ -35,7 +35,7 @@ export function useRecipeAPI({recipeParam, pageParam, APIKey}) {
     const [ allRecipes, setAllRecipes ] = useState(tempRecipes);
     const [ isLoading, setIsLoading ] = useState(true);
 
-    // Add Abort Controller and in the effect's return statement.
+    // Add Abort Controller and include it in the effect's return statement.
     
     useEffect(() => {
       const uriHeaders = new Headers({

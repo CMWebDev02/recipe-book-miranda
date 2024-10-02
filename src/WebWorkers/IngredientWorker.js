@@ -1,6 +1,6 @@
 const APIKey = 'DEMO_KEY'
 
-const uriAPI = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${APIKey}&query=`
+const uriAPI = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${APIKey}&dataType=Foundation&pageSize=1&pageNumber=1&query=`
 
 // TODO: 
 // - Limit the results per page to just 1 since I am after only one result and limit pages returned to 1.
@@ -19,8 +19,11 @@ addEventListener('message', ({data}) => {
 function getAllIngredients(list) {
     let ingredientsArray = list.split('|');
 
-    // generateRequests(ingredientsArray)
+    // multipleFetchTest()
 
+    let requestArray = generateRequests(ingredientsArray);
+    
+    
 
     // postMessage(ingredientsArray);
 }
@@ -31,7 +34,7 @@ function convertIngredientString(ingredient) {
 }
 
 function generateRequests(ingredients) {
-    let allPromises = [];
+    let allRequests = [];
 
     ingredients.forEach(ingredient => {
         let ingredientString = convertIngredientString(ingredient);
@@ -39,22 +42,26 @@ function generateRequests(ingredients) {
         let newRequest = new Request(ingredientSearch, {
             method: 'GET',
         })
-        allPromises.push(newRequest); 
+        allRequests.push(newRequest); 
     })
 
-    console.log(allPromises)
-
-    fetch(allPromises[0])
-    .then(response => {
-        if (!response.ok) throw new Error(`Fetch Failed for Ingredient: ${response.status}`);
-        console.log(response);
-        return response.json();
-    })
-    .then(data => {
-        console.log(data);
-    })
-    .catch(console.error);
-
-    // return ingredient
+    return allRequests;
 }
 
+async function multipleFetchTest() {
+    let multipleFetches = [];
+
+    multipleFetches.push(new Request(uriAPI + "Cheese", {
+        method: 'GET',
+    }))
+
+    multipleFetches.push(new Request(uriAPI + "Crackers", {
+        method: 'GET',
+    }))
+
+    let allPromises = multipleFetches.map((request) => fetch(request))
+
+    let resolvePromises = await Promise.all(allPromises);
+
+    console.log(resolvePromises)
+}
