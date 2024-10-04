@@ -11,7 +11,8 @@ import { MealPlanner } from "./Pages/MealPlanner";
 // saved in localStorage.
 
 // TODO: 
-// Add a page that will generate random recipe ideas to make use of Promise.any()
+// Add a page that will generate random recipe ideas or show pictures of random dishes to make use of Promise.any()
+//  Have it be a race case since that is the main purpose or use of Promise.any()
 // - Add worker to take list of ingredients from the various recipes and convert them to an array of items.
 // - Have webworker create a shopping list of all collected ingredients and have them return an array of shoppingList Items.
 // - Utilize await and async or promises to implement the various web workers when they are to gather nutritional info for all items and have them add it up to a total,
