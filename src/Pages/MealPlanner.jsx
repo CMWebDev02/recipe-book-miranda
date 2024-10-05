@@ -4,7 +4,7 @@ import { MealPlan } from "../JavaScript/localStorage";
 import { DisplayRecipe } from "../Components/DisplayRecipe";
 import { NutritionalInfo } from "../Containers/NutritionalInfo";
 
-export function MealPlanner() {
+export function MealPlanner({ nutritionalAPIKey }) {
     const [ plannedMeals, setPlannedMeals ] = useState(MealPlan.getList())
     const [ updateOccurred, setUpdateOccurred ] = useState(false);
     const weekdays = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -32,7 +32,7 @@ export function MealPlanner() {
             </div>
 
             <Routes>
-                <Route path="/:id" element={<NutritionalInfo recipes={plannedMeals} />}/>
+                <Route path="/:id" element={<NutritionalInfo nutritionalAPIKey={nutritionalAPIKey} recipes={plannedMeals} />}/>
             </Routes>
         </div>
     )

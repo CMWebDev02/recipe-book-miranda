@@ -30,7 +30,7 @@ const tempRecipes = [
 const uriAPI = 'https://api.api-ninjas.com/v1/recipe?query=';
 
 
-export function useRecipeAPI({recipeParam, pageParam, APIKey}) {
+export function UseRecipeAPI({recipeParam, pageParam, APIKey}) {
     const [ errorOccurred, setErrorOccurred ] = useState('');
     const [ allRecipes, setAllRecipes ] = useState(tempRecipes);
     const [ isLoading, setIsLoading ] = useState(true);

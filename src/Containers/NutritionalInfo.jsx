@@ -4,7 +4,7 @@ import { MealPlan } from "../JavaScript/localStorage";
 import styles from '../Styles/NutritionalInfo.module.css'
 import { NutritionalDisplay } from "./NutritionalDisplay";
 
-export function NutritionalInfo({ recipes }) {
+export function NutritionalInfo({ recipes, nutritionalAPIKey }) {
     const {id: recipeID} = useParams();
     const [ selectedRecipe, setSelectedRecipe ] = useState({})
     const [ recipeIngredients, setRecipeIngredients ] = useState([]);
@@ -43,7 +43,7 @@ export function NutritionalInfo({ recipes }) {
     return (
         <div className={styles.nutritionalDialog}>
             <h1>All Ingredients</h1>
-            <NutritionalDisplay ingredients={recipeIngredients} ingredientQueries={ingredientQueries} />
+            <NutritionalDisplay nutritionalAPIKey={nutritionalAPIKey} ingredients={recipeIngredients} ingredientQueries={ingredientQueries} />
             <button onClick={returnToPlanner} className={styles.closeNutrition}>Close</button>
         </div>
     )

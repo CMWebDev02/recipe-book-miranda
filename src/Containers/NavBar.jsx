@@ -1,19 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { APIKeyTextBox } from "../Components/APIKeyTextBox";
 
-export function NavBar({APIKey, setKey}) {
-    const [ userKey, setUserKey ] = useState('');
-
-    function updateKey() {
-        if (userKey == '') {
-            alert('Enter a valid API Key...');
-        } else if (APIKey == userKey) {
-            alert('Update Failed, Key Unchanged...');
-        } else {
-            alert('Key Updated');
-            setKey(userKey);
-        }
-    }
+export function NavBar({RecipesAPI, nutritionalAPI}) {
 
     return (
         <>
@@ -25,9 +14,9 @@ export function NavBar({APIKey, setKey}) {
                 <Link to="/planner">Meal Plan</Link> 
             </div>
             <div className="user-key">
-                <button onClick={updateKey}>Update</button>
-                <input type="password" placeholder="Enter API Key for service..." value={userKey} 
-                    onChange={(e) => setUserKey(e.target.value)} />
+                <APIKeyTextBox api={RecipesAPI} title={'Recipes API'} />
+                <APIKeyTextBox api={nutritionalAPI} title={'Nutritional API'} />
+
             </div>
         </>
     )

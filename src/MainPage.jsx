@@ -33,19 +33,21 @@ import { MealPlanner } from "./Pages/MealPlanner";
 // //- A function that uses the fetch() API
 
 export function MainPage() {
-  const [apiKey, setAPIKey ] = useState('');
+  const [RecipesAPIKey, setRecipesAPIKey ] = useState('');
+  const [nutritionalAPIKey, setNutritionalAPIKey] = useState('');
 
   return (
     <div className="main-container">
       <BrowserRouter>
-        <NavBar APIKey={apiKey} setKey={setAPIKey} />
+        <NavBar RecipesAPI={[RecipesAPIKey, setRecipesAPIKey]}
+          nutritionalAPI={[nutritionalAPIKey, setNutritionalAPIKey]} />
         <hr />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/discover" element={<Discover APIKey={apiKey} />} />
-          <Route path="/recipelist" element={<RecipeList APIKey={apiKey} displayLocal={false} />} />
-          <Route path="/booklet" element={<RecipeList APIKey={apiKey} displayLocal={true} />} />
-          <Route path="/planner/*" element={<MealPlanner />} />
+          <Route path="/discover" element={<Discover APIKey={RecipesAPIKey} />} />
+          <Route path="/recipelist" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={false} />} />
+          <Route path="/booklet" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={true} />} />
+          <Route path="/planner/*" element={<MealPlanner nutritionalAPIKey={nutritionalAPIKey} />} />
           <Route path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>
