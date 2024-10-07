@@ -1,5 +1,6 @@
 import React from "react";
 import { PageLinks } from "../Components/PageLinks";
+import { MealInspiration } from "../Containers/MealInspiration";
 
 export function Home() {
     return (
@@ -10,7 +11,8 @@ export function Home() {
                 plan out your meals for the week with the build in <strong>meal planner</strong>.
             </p>
             <PageLinks />
-            
+            <hr />
+            <MealInspiration />
         </div>
     )
 }
