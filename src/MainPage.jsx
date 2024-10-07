@@ -13,11 +13,12 @@ import { MealPlanner } from "./Pages/MealPlanner";
 // TODO: 
 // Create a web worker to take in a string and convert it to title from a sentence or pascal case.
 // // Also have the worker take in a image src and convert the last bit to a usable recipe title.
+// - Create Home Page
 // - Have webWorker gather all nutrient totals from nutritional info and add them together.
 // - Have webworker create a shopping list of all collected ingredients and have them return an array of shoppingList Items.
 // - Utilize await and async or promises to implement the various web workers when they are to gather nutritional info for all items and have them add it up to a total,
 //    to utilize the workers the way they are intended, making calculations.
-// - Create Home Page
+// Implement JSON Server to store previous nutritional searches and potentially previous recipe searches.
 // - Add heading to display if no recipes are saved locally.
 
 // Requirements
