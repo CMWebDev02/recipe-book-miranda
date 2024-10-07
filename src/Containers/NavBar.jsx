@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { APIKeyTextBox } from "../Components/APIKeyTextBox";
+import { PageLinks } from "../Components/PageLinks";
 
 export function NavBar({RecipesAPI, nutritionalAPI}) {
 
@@ -8,10 +8,7 @@ export function NavBar({RecipesAPI, nutritionalAPI}) {
         <>
             <div className="page-links">
                 <h1>Recipe Book Project</h1>
-                <Link to="/">Home</Link>
-                <Link to="/discover">Discover</Link>
-                <Link to="/booklet">Recipe Book</Link> 
-                <Link to="/planner">Meal Plan</Link> 
+                <PageLinks />
             </div>
             <div className="user-key">
                 <APIKeyTextBox api={RecipesAPI} title={'Recipes API'} />
