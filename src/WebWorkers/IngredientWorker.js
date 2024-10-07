@@ -1,9 +1,6 @@
-
-// TODO: 
-// - Only take the food nutritional info from the result and log only a couple of them to screen
-    // Likely only the most important like macro nutrients and maybe sodium.
-// - Set it up to have promise.all() or promise.any() post the final message
-// Change from .then() statements to async and await method.
+// TODO:
+// Take all Ingredients from and format them as a shopping list.
+// // Have the worker take in multiple arrays from each recipe using a reducer callback and pass it to the worker for it to be formatted into a printable or page structure.
 
 addEventListener('message', ({data}) => {
     if (data.command == 'collectAll') {

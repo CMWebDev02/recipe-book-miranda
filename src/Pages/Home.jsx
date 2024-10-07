@@ -12,6 +12,7 @@ export function Home() {
             </p>
             <PageLinks />
             <hr />
+            <h1>Maybe Try...</h1>
             <MealInspiration />
         </div>
     )
