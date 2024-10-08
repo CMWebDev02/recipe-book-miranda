@@ -2,6 +2,28 @@ import React, { useEffect, useState } from "react";
 
 export function FoodNutrients({ food, foodTitle }) {
     const [ nutrients, setNutrients ] = useState([]);
+    const [ totalNutrients, setTotalNutrients ] = useState([]);
+    const [ nutritionWorker, setNutritionalWorker ] = ('');
+
+    useEffect(() => {
+        const worker = new Worker(new URL('../WebWorkers/NutritionWorker.js', import.meta.url));
+
+        worker.addEventListener('message', ({data}) => {
+            setTotalNutrients(data.nutritionalTotal);
+        });
+
+        setNutritionalWorker(worker);
+
+        return () => {
+            worker.terminate();
+        }
+    }, [])
+
+    useEffect(() => {
+        if (nutritionWorker) {
+            nutritionWorker.postMessage({message: 'collectTotal', nutrientsArray: nutrients});
+        }
+    }, [nutrients])
 
     useEffect(() => {
         setNutrients(food.foodNutrients.filter(nutrientObj => {
@@ -19,9 +41,13 @@ export function FoodNutrients({ food, foodTitle }) {
 
     return (
         <>
-            <p>{foodTitle}</p>
+            <h3>{foodTitle}</h3>
             <ul>
-                {nutrients.length > 1 && nutrients.map(nutrientObj => <li key={'nutrient-' + Math.random()} >{`${nutrientObj.nutrientName}: ${nutrientObj.value}${nutrientObj.unitName}`}</li>)}
+                {nutrients && nutrients.map(nutrientObj => <li key={'nutrient-' + Math.random()} >{`${nutrientObj.nutrientName}: ${nutrientObj.value}${nutrientObj.unitName}`}</li>)}
+            </ul>
+            <h3>Total Nutrients:</h3>
+            <ul>
+
             </ul>
         </>
     )
