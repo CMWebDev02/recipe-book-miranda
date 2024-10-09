@@ -19,6 +19,7 @@ import { MealPlanner } from "./Pages/MealPlanner";
 // - Remove the temporary searched recipes
 // - Implement JSON Server to store previous nutritional searches and potentially previous recipe searches.
 // // This is likely to be the best way to do this or I could do API integration with FireBase 
+// Find a way to improve total nutrient calculations.
 
 
 // Style the project
