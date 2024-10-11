@@ -52,8 +52,6 @@ function filterNutrientArray(arr) {
     arr.forEach(ingredient => {
         let title = ingredient.foodSearchCriteria.generalSearchInput;
         let filteredNutrients = ingredient.foods[0].foodNutrients.filter(nutrient => filterAndTally(nutrient));
-        console.log(filteredNutrients)
-        console.log(totalNutrients)
 
         let allNutrients = filteredNutrients.map(({nutrientName, value, unitName, nutrientId}) => {
             return {nutrientName, value, unitName, nutrientId}

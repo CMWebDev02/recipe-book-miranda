@@ -16,7 +16,6 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
         worker.addEventListener('message', ({data}) => {
             if (data.message == 'collectNutrients') {
                 setNutrients(data.allNutrients);
-                console.log(data.totalNutritionalInfo)
                 setTotalNutrients(data.totalNutritionalInfo);
             }
         });

@@ -20,6 +20,7 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
         }
     }
     
+    // Change this to async and await for simplicity sake
     useEffect(() => {
         if (apiKey == '') {
             setIsLoading(false);
