@@ -3,6 +3,7 @@
     top: 10%;
     left: 10vw;
 
+    overflow-y: scroll;
     background-color: black;
     color: wheat;
     width: 75%;

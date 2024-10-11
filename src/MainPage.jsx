@@ -11,7 +11,6 @@ import { MealPlanner } from "./Pages/MealPlanner";
 // saved in localStorage.
 
 // TODO: 
-// - Have webWorker gather all nutrient totals from nutritional info and add them together.
 // - Have webworker create a shopping list of all collected ingredients and have them return an array of shoppingList Items.
 // - Add a .env file to git ignore and give the users options to store their API key in there.
 // - Have only ten local recipes Display per Page;

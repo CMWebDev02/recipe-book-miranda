@@ -14,11 +14,10 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
         const worker = new Worker(new URL('../WebWorkers/NutritionWorker.js', import.meta.url));
 
         worker.addEventListener('message', ({data}) => {
-            if (data.message == 'collectTotal') {
-                console.log(data.nutritionalTotal)
-                setTotalNutrients(data.nutritionalTotal);
-            } else if (data.message == 'filterNutrients') {
+            if (data.message == 'collectNutrients') {
                 setNutrients(data.allNutrients);
+                console.log(data.totalNutritionalInfo)
+                setTotalNutrients(data.totalNutritionalInfo);
             }
         });
 
@@ -31,17 +30,12 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
         }
     }, [])
 
-    useEffect(() => {
-        if (nutritionWorker) {
-            nutritionWorker.postMessage({message: 'collectTotal', nutrientsArray: nutrients});
-        }
-    }, [nutrients])
 
     useEffect(() => {
         if (nutritionWorker) {
-            nutritionWorker.postMessage({message: 'filterNutrients', nutrientsArray: [tempOBJ]});
+            nutritionWorker.postMessage({message: 'collectNutrients', nutrientsArray: [tempOBJ, tempOBJ]});
         }
-    }, [tempVar])
+    }, [tempVar]) // Replace with nutritionalInfo
 
     return (
         <>
