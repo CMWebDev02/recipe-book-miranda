@@ -10,7 +10,7 @@ function newNutrientsArray() {
             1079: {value: 0, nutrientName: 'Fiber, total dietary', unitName: 'G'},
             1003: {value: 0, nutrientName: 'Protein', unitName: 'G'},
             2048: {value: 0, nutrientName: 'Energy (Atwater Specific Factors)', unitName: 'KCAL'},
-            1050: {value: 0, nutrientName: 'Carbohydrate, by summation:', unitName: 'G'}};
+            1050: {value: 0, nutrientName: 'Carbohydrate, by summation', unitName: 'G'}};
 }
 
 function filterNutrientArray(arr) {

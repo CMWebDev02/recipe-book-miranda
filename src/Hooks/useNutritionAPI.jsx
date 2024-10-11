@@ -8,15 +8,26 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
     async function fetchNutritionalInfo(ingredient) {
         const uriAPI = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}&dataType=Foundation&pageSize=1&pageNumber=1&query=`;
         let ingredientSearch = uriAPI + ingredient;
-        return await fetch(ingredientSearch);
+        return fetch(ingredientSearch);
     }
 
-    async function collectAllData(dataArray) {
+    async function collectAllData(ingredients) {
         try {
-            let allData = await Promise.all(dataArray);
+            let allFetches = ingredients.map(ingredient => fetchNutritionalInfo(ingredient))
+
+            let allResponses = await Promise.all(allFetches);
+
+            let allResults = allResponses.map(response => {
+                if (!response.ok) throw new Error(`Failed to Fetch nutrients for query - ${response.url}`);
+                return response.json();
+            })
+
+            let allData = await Promise.all(allResults);
             setNutritionalInfo(allData)
         } catch (error) {
             setErrorOccurred(error.message)
+        } finally {
+            setIsLoading(false);
         }
     }
     
@@ -26,21 +37,7 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
             setIsLoading(false);
             setErrorOccurred('Invalid API Key');
         } else {
-            Promise.all(ingredientsArray.map(ingredient => fetchNutritionalInfo(ingredient)))
-            .then(responses => {
-                let jsonData = [];
-                responses.forEach((response) => {
-                    if (!response.ok) throw new Error('Failed to fetch nutritional info.')
-                    jsonData.push(response.json());
-                })
-                collectAllData(jsonData);
-            })
-            .catch(error => {
-                setErrorOccurred(error.message);  
-            })
-            .finally(() => {
-                setIsLoading(false);
-            })
+            collectAllData(ingredientsArray)
         }
     }, [ingredientsArray])
 
