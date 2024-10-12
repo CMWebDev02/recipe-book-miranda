@@ -2,8 +2,13 @@ addEventListener('message', ({data}) => {
     switch (data.command) {
         // Ingredient Related Cases
         case 'splitIngredientString': {
-            let [ ingredientsArray, ingredientQueries ] = getAllIngredients(data.ingredientsList);
+            let [ ingredientsArray, ingredientQueries ] = getAllIngredients(data.ingredientsString);
             postMessage({command: 'splitIngredientString', ingredientsArray, ingredientQueries});
+            break;
+        }
+        case 'generateShoppingList' : {
+            let groceryList = gatherIngredients(data.mealList);
+            postMessage({command: 'generateShoppingList', groceryList})
             break;
         }
         // Nutrient Related Cases
@@ -28,10 +33,18 @@ function convertIngredientString(ingredient) {
     return ingredient.replace(regexPattern, '%20')
 }
 
-function getAllIngredients(list) {
-    let ingredientsArray = list.split('|');
+function getAllIngredients(string) {
+    let ingredientsArray = string.split('|');
     let ingredientQueries = ingredientsArray.map(ingredient => convertIngredientString(ingredient));
     return [ingredientsArray, ingredientQueries]
+}
+
+function gatherIngredients(list) {
+    let allIngredients = list.map(({ingredients}, index) => {
+        return [`Meal #${index + 1}`, ingredients.split('|')]
+    })
+
+    return allIngredients;
 }
 
 // Nutrient Related Functions
@@ -112,5 +125,5 @@ function convertToTitle(string, srcFlag) {
         return word[0].toUpperCase() + word.substring(1);
     }).join(' ');
 
-    postMessage({imageTitle: finalTitle});
+    return finalTitle;
 }

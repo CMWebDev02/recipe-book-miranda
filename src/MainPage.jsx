@@ -11,13 +11,13 @@ import { MealPlanner } from "./Pages/MealPlanner";
 // saved in localStorage.
 
 // TODO: 
-// - Have webworker create a shopping list of all collected ingredients and have them return an array of shoppingList Items.
 // - Add a .env file to git ignore and give the users options to store their API key in there.
-// - Have only ten local recipes Display per Page.
-// - Add heading to display if no recipes are saved locally.
 // - Remove the temporary searched recipes
 // - Implement JSON Server to store previous nutritional searches and potentially previous recipe searches.
 // // This is likely to be the best way to do this or I could do API integration with FireBase 
+
+// - Have only ten local recipes Display per Page.
+// - Add heading to display if no recipes are saved locally.
 
 // Style the project
 

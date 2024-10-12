@@ -29,6 +29,7 @@ export function DisplayImage({ recipeObject }) {
 
         worker.addEventListener('message', ({data}) => {
             if (data.command == 'convertToTitle')
+                console.log(data.imageTitle)
             setRecipeTitle(data.imageTitle);
         })
 

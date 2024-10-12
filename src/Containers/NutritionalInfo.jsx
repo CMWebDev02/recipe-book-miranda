@@ -33,7 +33,7 @@ export function NutritionalInfo({ recipes, nutritionalAPIKey }) {
 
     useEffect(() => {
         if (ingredientHandler) {
-            ingredientHandler.postMessage({command: 'splitIngredientString', ingredientsList: selectedRecipe.ingredients})
+            ingredientHandler.postMessage({command: 'splitIngredientString', ingredientsString: selectedRecipe.ingredients})
         }
     }, [selectedRecipe])
 
