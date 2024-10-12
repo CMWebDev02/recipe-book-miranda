@@ -13,9 +13,10 @@ export function NutritionalInfo({ recipes, nutritionalAPIKey }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const worker = new Worker(new URL('../WebWorkers/IngredientWorker.js', import.meta.url));
+        const worker = new Worker(new URL('../JavaScript/WebWorker.js', import.meta.url));
 
         worker.addEventListener('message', ({data}) => {
+            if (data.command == 'splitIngredientString')
             setRecipeIngredients([...data.ingredientsArray]);
             setIngredientQueries([...data.ingredientQueries]);
         })
@@ -32,7 +33,7 @@ export function NutritionalInfo({ recipes, nutritionalAPIKey }) {
 
     useEffect(() => {
         if (ingredientHandler) {
-            ingredientHandler.postMessage({command: 'collectAll', ingredientsList: selectedRecipe.ingredients})
+            ingredientHandler.postMessage({command: 'splitIngredientString', ingredientsList: selectedRecipe.ingredients})
         }
     }, [selectedRecipe])
 

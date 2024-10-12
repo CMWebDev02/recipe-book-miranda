@@ -10,11 +10,11 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
     const [ totalTallied, setTotalTallied ] = useState(false);
 
     useEffect(() => {
-        const worker = new Worker(new URL('../WebWorkers/NutritionWorker.js', import.meta.url));
+        const worker = new Worker(new URL('../JavaScript/WebWorker.js', import.meta.url));
 
         worker.addEventListener('message', ({data}) => {
-            if (data.message == 'collectNutrients') {
-                setNutrients(data.allNutrients);
+            if (data.command == 'collectNutrients') {
+                setNutrients(data.ingredientNutrients);
                 setTotalNutrients(data.totalNutritionalInfo);
                 setTotalTallied(true);
             }
@@ -30,7 +30,7 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
 
     useEffect(() => {
         if (nutritionWorker) {
-            nutritionWorker.postMessage({message: 'collectNutrients', nutrientsArray: nutritionalInfo});
+            nutritionWorker.postMessage({command: 'collectNutrients', nutrientsArray: nutritionalInfo});
         }
     }, [nutritionalInfo])
 

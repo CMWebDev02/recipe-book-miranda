@@ -1,9 +1,40 @@
-addEventListener('message', (({data}) => {
-    if (data.message == 'collectNutrients') {
-        filterNutrientArray(data.nutrientsArray);
+addEventListener('message', ({data}) => {
+    switch (data.command) {
+        // Ingredient Related Cases
+        case 'splitIngredientString': {
+            let [ ingredientsArray, ingredientQueries ] = getAllIngredients(data.ingredientsList);
+            postMessage({command: 'splitIngredientString', ingredientsArray, ingredientQueries});
+            break;
+        }
+        // Nutrient Related Cases
+        case 'collectNutrients': {
+            let [ingredientNutrients, totalNutritionalInfo] = filterNutrientArray(data.nutrientsArray);
+            postMessage({command: 'collectNutrients', ingredientNutrients, totalNutritionalInfo});
+            break;
+        }
+        // Miscellaneous  
+        case 'convertToTitle': {
+            let imageTitle = convertToTitle(data.imageString, data.srcBool)
+            postMessage({command: 'convertTitle', imageTitle});
+            break;
+        }
     }
-}))
+})
 
+// Ingredient Related Worker Functions
+
+function convertIngredientString(ingredient) {
+    let regexPattern = /\W+/g;
+    return ingredient.replace(regexPattern, '%20')
+}
+
+function getAllIngredients(list) {
+    let ingredientsArray = list.split('|');
+    let ingredientQueries = ingredientsArray.map(ingredient => convertIngredientString(ingredient));
+    return [ingredientsArray, ingredientQueries]
+}
+
+// Nutrient Related Functions
 function newNutrientsArray() {
     return {1093: {value: 0, nutrientName: 'Sodium, Na', unitName: 'MG'}, 
             1004: {value: 0, nutrientName: 'Total lipid (fat)', unitName: 'G'},
@@ -59,6 +90,27 @@ function filterNutrientArray(arr) {
         allIngredients.push({searchQuery: title, nutritionalInfo: allNutrients})
     });
 
+    return [allIngredients, Object.values(totalNutrients)]
+}
 
-    postMessage({message: 'collectNutrients', allNutrients: allIngredients, totalNutritionalInfo: Object.values(totalNutrients)})
+// Miscellaneous Functions
+function convertFromSRC(src) {
+    let titleString = src.substring(src.lastIndexOf('/') + 1, src.lastIndexOf('.'))
+    titleString = titleString.match(/[\D|-]+/gi)
+    titleString = titleString[0].replace(/[-]/gi, ' ')
+    return titleString;
+}
+
+function convertToTitle(string, srcFlag) {
+    let titleString = string;
+    if (srcFlag) {
+        titleString = convertFromSRC(titleString);
+    }
+    let titleStrings = titleString.split(' ')
+    
+    let finalTitle = titleStrings.map((word) => {
+        return word[0].toUpperCase() + word.substring(1);
+    }).join(' ');
+
+    postMessage({imageTitle: finalTitle});
 }

@@ -9,12 +9,12 @@ export function DisplayImage({ recipeObject }) {
     function handleRecipeObject() {
         if (recipeObject.image) {
             setRecipeSRC(recipeObject.image);
-            titleWorker.postMessage({message: 'convertTitle', string: recipeObject.image, srcBool: true})
+            titleWorker.postMessage({command: 'convertToTitle', imageString: recipeObject.image, srcBool: true})
         } else {
             let data = recipeObject.data;
 
             setRecipeSRC(data.strMealThumb);
-            titleWorker.postMessage({message: 'convertTitle', string: data.strMeal, srcBool: false})
+            titleWorker.postMessage({command: 'convertToTitle', imageString: data.strMeal, srcBool: false})
         }
     }
 
@@ -25,9 +25,10 @@ export function DisplayImage({ recipeObject }) {
     }, [recipeObject])
 
     useEffect(() => {
-        const worker = new Worker(new URL('../WebWorkers/TitleWorker.js', import.meta.url));
+        const worker = new Worker(new URL('../JavaScript/WebWorker.js', import.meta.url));
 
         worker.addEventListener('message', ({data}) => {
+            if (data.command == 'convertToTitle')
             setRecipeTitle(data.imageTitle);
         })
 
