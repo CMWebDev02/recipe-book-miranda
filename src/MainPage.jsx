@@ -12,13 +12,13 @@ import { MealPlanner } from "./Pages/MealPlanner";
 
 // TODO: 
 // - Add a .env file to git ignore and give the users options to store their API key in there.
-// - Remove the temporary searched recipes
 // - Implement JSON Server to store previous nutritional searches and potentially previous recipe searches.
 // // This is likely to be the best way to do this or I could do API integration with FireBase 
 
 // - Have only ten local recipes Display per Page.
 // - Add heading to display if no recipes are saved locally.
 
+// Fix shopping list displaying below the view window, make it like a modal.
 // Style the project
 
 // Requirements
