@@ -14,27 +14,13 @@ import { config } from "./JavaScript/private-config.js";
 // saved in localStorage.
 
 // TODO: 
-// - Implement JSON Server to store previous nutritional searches and potentially previous recipe searches.
-// // This is likely to be the best way to do this or I could do API integration with FireBase 
+// - Implement indexDb database to store searches
 
 // - Have only ten local recipes Display per Page.
 // - Add heading to display if no recipes are saved locally.
 
 // Fix shopping list displaying below the view window, make it like a modal.
 // Style the project
-
-// Requirements
-// // All Requirements Completed!!!
-
-// Please write functions that contain the following syntax that you learned in the MDN Asynchronous JavaScript Tutorial assignments, note you can have a function that contains multiple syntaxes that are required
-// // - A function that uses web-workers
-// // - Use of async and await keywords
-// // - Use of Promise.any()
-// // - Use of Promise.all() 
-// // - Use of the .json() method
-// // - Use of .then() method
-// // - A function that is using promises and interacting with promises
-// //- A function that uses the fetch() API
 
 export function MainPage() {
   const [RecipesAPIKey, setRecipesAPIKey ] = useState(config.recipeAPIKey || '');

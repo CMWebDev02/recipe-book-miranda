@@ -1,2 +1,3 @@
 # recipe-book-miranda
-This project was created using a Recipe API that allows you to find recipes by entering a recipe name and save any favorites you find.
+First Draft of the final product. All pages and api calls functions as they should but the project still has some tasks left to complete and simple quality fixes are still needed to improve the project.
+Also, the project is currently unstyled and has display bugs.
