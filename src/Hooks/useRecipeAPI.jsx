@@ -39,16 +39,17 @@ export function UseRecipeAPI({recipeParam, pageParam, APIKey}) {
               setErrorOccurred(null);
           })
           .catch(error => {
+            if (error.name != 'AbortError') {
               setErrorOccurred(error.message);
-              console.log(error.message)
-          })
+            }
+          }) 
           .finally(() => {
               setIsLoading(false);
           })
       };
 
       return () => {
-        controller.abort()
+        controller.abort();
       }
     }, [recipeParam, pageParam, APIKey])
 

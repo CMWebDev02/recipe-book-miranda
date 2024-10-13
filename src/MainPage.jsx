@@ -14,7 +14,6 @@ import { config } from "./JavaScript/private-config.js";
 // saved in localStorage.
 
 // TODO: 
-// - Add a .env file to git ignore and give the users options to store their API key in there.
 // - Implement JSON Server to store previous nutritional searches and potentially previous recipe searches.
 // // This is likely to be the best way to do this or I could do API integration with FireBase 
 
