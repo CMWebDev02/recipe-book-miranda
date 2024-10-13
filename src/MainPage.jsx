@@ -7,6 +7,9 @@ import { RecipeList } from "./Pages/RecipeList";
 import { Error } from "./Pages/Error";
 import { MealPlanner } from "./Pages/MealPlanner";
 
+// Only for demo purposes, will not be in the final production deployment.
+import { config } from "./JavaScript/private-config.js";
+
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
 
@@ -35,8 +38,8 @@ import { MealPlanner } from "./Pages/MealPlanner";
 // //- A function that uses the fetch() API
 
 export function MainPage() {
-  const [RecipesAPIKey, setRecipesAPIKey ] = useState('');
-  const [nutritionalAPIKey, setNutritionalAPIKey] = useState('');
+  const [RecipesAPIKey, setRecipesAPIKey ] = useState(config.recipeAPIKey || '');
+  const [nutritionalAPIKey, setNutritionalAPIKey] = useState(config.nutritionalAPIKey || '');
 
   return (
     <div className="main-container">

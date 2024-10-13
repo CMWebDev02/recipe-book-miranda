@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 export function APIKeyTextBox({ api: [apiKey, setAPIKey], title }) {
-    const [ userKey, setUserKey ] = useState('');
+    const [ userKey, setUserKey ] = useState(apiKey);
 
     function updateKey() {
         if (userKey == '') {
