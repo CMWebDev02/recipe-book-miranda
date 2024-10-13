@@ -14,9 +14,7 @@ import { config } from "./JavaScript/private-config.js";
 // saved in localStorage.
 
 // TODO: 
-// - Implement JSON Server to store previous nutritional searches and potentially previous recipe searches.
-// // This is likely to be the best way to do this or I could do API integration with FireBase 
-
+// - Implement indexDB database to store previous searches.
 // - Have only ten local recipes Display per Page.
 // - Add heading to display if no recipes are saved locally.
 
