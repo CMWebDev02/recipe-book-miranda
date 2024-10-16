@@ -1,0 +1,23 @@
+.shoppingList {
+    position: fixed;
+    top: 10%;
+    left: 10vw;
+
+    overflow-y: scroll;
+    background-color: black;
+    color: wheat;
+    width: 75%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+
+    border: red solid 5px;
+    border-radius: 20px;
+    padding: 50px; 
+}
+
+.closeList {
+    margin-top: 50px;
+    width: 30%;
+    align-self: center;
+}

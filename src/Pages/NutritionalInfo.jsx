@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MealPlan } from "../JavaScript/localStorage";
 import styles from '../Styles/NutritionalInfo.module.css'
-import { NutritionalDisplay } from "./NutritionalDisplay";
+import { NutritionalDisplay } from "../Containers/NutritionalDisplay";
 
 export function NutritionalInfo({ recipes, nutritionalAPIKey }) {
     const {id: recipeID} = useParams();

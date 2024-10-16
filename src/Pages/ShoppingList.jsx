@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { MealPlan } from "../JavaScript/localStorage";
-import { DisplayIngredients } from "../Components/DisplayIngredients";
+import { useNavigate } from "react-router-dom";
+import styles from '../Styles/ShoppingList.module.css'
+import { ShoppingListDisplay } from "../Containers/ShoppingListDisplay";
 
 export function ShoppingList({ meals }) {
     const [ shoppingList, setShoppingList ] = useState([])
     const [ listWorker, setListWorker ] = useState(null)
+    const navigate = useNavigate();
 
     useEffect(() => {
         const worker = new Worker(new URL('../JavaScript/WebWorker.js', import.meta.url));
 
         worker.addEventListener('message', ({data}) => {
             if (data.command == 'generateShoppingList') {
+                console.log(data.groceryList)
                 setShoppingList(data.groceryList)
             }
         })
@@ -25,10 +28,19 @@ export function ShoppingList({ meals }) {
     useEffect(() => {
         if (listWorker) {
             listWorker.postMessage({command: 'generateShoppingList', mealList: meals})
+            console.log(meals)
         }
-    }, [meals])
+    }, [meals, listWorker])
+
+    function returnToPlanner() {
+        navigate('/planner')
+    }
 
     return (
-        shoppingList.map(meal => <DisplayIngredients key={'shopping-list' + Math.random()} meal={meal} />)
+        <div className={styles.shoppingList}>
+            <h1>Shopping List</h1>
+            <ShoppingListDisplay list={shoppingList} />
+            <button onClick={returnToPlanner} className={styles.closeList}>Close</button>
+        </div>
     )
 }

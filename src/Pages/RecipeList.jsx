@@ -49,7 +49,7 @@ export function RecipeList({ APIKey, displayLocal }) {
         setPageQuery({type: action});
     }
 
-    // Try utilizing the key property to trigger an update once DisplayLocal changes instead of relying on the current effect, and cahnge the current set Query parameter to check if display local is true
+    // Try utilizing the key property to trigger an update once DisplayLocal changes instead of relying on the current effect, and change the current set Query parameter to check if display local is true
     // if so then it should set the recipe Query to booklet, https://react.dev/learn/managing-state
 
     return (

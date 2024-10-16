@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Route, Routes } from 'react-router-dom'
 import { MealPlan } from "../JavaScript/localStorage";
 import { DisplayRecipe } from "../Components/DisplayRecipe";
-import { NutritionalInfo } from "../Containers/NutritionalInfo";
+import { NutritionalInfo } from "./NutritionalInfo";
 import { GenerateButton } from '../Components/GenerateButton.jsx'
-import { ShoppingList } from "../Containers/ShoppingList.jsx";
+import { ShoppingList } from "./ShoppingList.jsx";
 
 export function MealPlanner({ nutritionalAPIKey }) {
     const [ plannedMeals, setPlannedMeals ] = useState([])

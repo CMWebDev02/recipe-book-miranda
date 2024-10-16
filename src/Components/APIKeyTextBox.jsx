@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export function APIKeyTextBox({ api: [apiKey, setAPIKey], title }) {
+export function APIKeyTextBox({ api: [apiKey, setAPIKey], title, APISource }) {
     const [ userKey, setUserKey ] = useState(apiKey);
 
     function updateKey() {
@@ -16,7 +16,7 @@ export function APIKeyTextBox({ api: [apiKey, setAPIKey], title }) {
 
     return (
         <>
-            <h2>{title}</h2>
+            <h2><a href={APISource}>{title}</a></h2>
             <button onClick={updateKey}>Update</button>
             <input type="password" placeholder={`Enter ${title} Key...`} value={userKey} 
                     onChange={(e) => setUserKey(e.target.value)} />

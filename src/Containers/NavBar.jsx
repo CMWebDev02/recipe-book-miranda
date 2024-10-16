@@ -11,8 +11,8 @@ export function NavBar({RecipesAPI, nutritionalAPI}) {
                 <PageLinks />
             </div>
             <div className="user-key">
-                <APIKeyTextBox api={RecipesAPI} title={'Recipes API'} />
-                <APIKeyTextBox api={nutritionalAPI} title={'Nutritional API'} />
+                <APIKeyTextBox api={RecipesAPI} title={'Recipes API'} APISource={'https://api-ninjas.com/'} />
+                <APIKeyTextBox api={nutritionalAPI} title={'Nutritional API'} APISource={'https://fdc.nal.usda.gov/api-guide.html'} />
 
             </div>
         </>

@@ -6,6 +6,7 @@ import { Discover } from "./Pages/Discover";
 import { RecipeList } from "./Pages/RecipeList";
 import { Error } from "./Pages/Error";
 import { MealPlanner } from "./Pages/MealPlanner";
+import { APIAttributions } from "./Components/APIAttribution.jsx";
 
 // Only for demo purposes, will not be in the final production deployment.
 import { config } from "./JavaScript/private-config.js";
@@ -14,12 +15,10 @@ import { config } from "./JavaScript/private-config.js";
 // saved in localStorage.
 
 // TODO: 
+// - Fix Nutrient API issue and handle if no results come back from the api call
 // - Fix nutrient api potential database issue.
-// - Implement Attributions for the various APIs
-// - Have only ten local recipes Display per Page.
-// - Add heading to display if no recipes are saved locally.
+// - Add a check to see if any excess recipes are available then prevent the user from changing to the next page by alerting them that no excess pages are available.
 
-// Fix shopping list displaying below the view window, make it like a modal.
 // Style the project
 
 // Requirements
@@ -53,6 +52,7 @@ export function MainPage() {
           <Route path="/planner/*" element={<MealPlanner nutritionalAPIKey={nutritionalAPIKey} />} />
           <Route path="/*" element={<Error />} />
         </Routes>
+        <APIAttributions />
       </BrowserRouter>
     </div>
   )
