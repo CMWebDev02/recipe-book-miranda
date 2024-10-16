@@ -14,6 +14,7 @@ import { config } from "./JavaScript/private-config.js";
 // saved in localStorage.
 
 // TODO: 
+// - Fix nutrient api potential database issue.
 // - Implement Attributions for the various APIs
 // - Have only ten local recipes Display per Page.
 // - Add heading to display if no recipes are saved locally.

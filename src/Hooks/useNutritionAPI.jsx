@@ -3,8 +3,6 @@ import { IngredientDB, NutritionalInfoDB } from '../JavaScript/NutrientDataBase.
 
 
 // TODO:
-// Then have the worker convert the search query to a title and have it filter the necessary nutrients out.
-
 // Potential Issue, if only the query search database stores information and the nutrition api fails to, then it will result in a failed pull of the information every time. Add a backup function
 // that will remake the api call to get the fdcID associated nutrient values to restore in the database.
 
@@ -27,7 +25,7 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
 
             return null;
         } catch (error) {
-            return error
+            return error;
         }
     }
 
