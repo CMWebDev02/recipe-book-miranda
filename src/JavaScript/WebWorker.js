@@ -48,6 +48,11 @@ function gatherIngredients(list) {
 }
 
 // Nutrient Related Functions
+function convertToNutrientTitle(string) {
+    string = string.replaceAll(/%20+/g, ' ')
+    return string.replace(/(^\d )?(\d) (\d)/, '$1$2/$3')
+}
+
 function newNutrientsArray() {
     return {1093: {value: 0, nutrientName: 'Sodium, Na', unitName: 'MG'}, 
             1004: {value: 0, nutrientName: 'Total lipid (fat)', unitName: 'G'},
@@ -94,8 +99,8 @@ function filterNutrientArray(arr) {
     }
 
     arr.forEach(ingredient => {
-        let title = ingredient.foodSearchCriteria.generalSearchInput;
-        let filteredNutrients = ingredient.foods[0].foodNutrients.filter(nutrient => filterAndTally(nutrient));
+        let title = convertToNutrientTitle(ingredient.searchQuery);
+        let filteredNutrients = ingredient.nutrientsArray.filter(nutrient => filterAndTally(nutrient));
 
         let allNutrients = filteredNutrients.map(({nutrientName, value, unitName, nutrientId}) => {
             return {nutrientName, value, unitName, nutrientId}

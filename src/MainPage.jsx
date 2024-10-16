@@ -14,7 +14,6 @@ import { config } from "./JavaScript/private-config.js";
 // saved in localStorage.
 
 // TODO: 
-// - Implement indexDB database to store previous searches.
 // - Implement Attributions for the various APIs
 // - Have only ten local recipes Display per Page.
 // - Add heading to display if no recipes are saved locally.

@@ -25,7 +25,6 @@ class DataBase {
                 let db = request.result;
     
                 if (!db.objectStoreNames.contains(this._dbObjectStore)) {
-                    console.log(this._dbObjectStore)
                     let recipeStorage = db.createObjectStore(this._dbObjectStore, {keyPath: this._dbKeyPath})
     
                     recipeStorage.createIndex(this._dbIndex, this._dbKeyPath, {unique: true});
@@ -116,10 +115,6 @@ export class NutritionalInfoDB extends DataBase {
             let objectStore = this.accessObjectStore('readwrite');
 
             let newItem = objectStore.add({fdcId, nutrientsArray: nutrients});
-
-            newItem.onerror = () => {
-                reject('Failed To Add Ingredient Query')
-            }
 
             newItem.success = () => {
                 resolve(true);
