@@ -4,16 +4,12 @@ import { APIAttributions } from "../Components/APIAttribution";
 
 export function Footer() {
 
-    async function clearDataBase() {
+    function clearDataBase() {
         let choice = confirm('Warning! This action is not reversible and will remove all locally saved nutritional info.')
         if (!choice) return;
         try {
             let database = new NutritionalDB() 
-            let isConnected = await database.openDataBaseConnection()
-            if (!isConnected) throw new Error('Failed to clear cache!')
-            let response = await database.clearDataBase();
-            console.log(response)
-            if (!response.ok) throw new Error(response.error);
+            database.clearDataBase();
             window.location.reload()
         } catch (error) {
             console.error(error);

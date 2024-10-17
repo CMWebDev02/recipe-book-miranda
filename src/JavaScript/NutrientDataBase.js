@@ -23,14 +23,14 @@ export class NutritionalDB {
             let storedNutrients = objectStorage.get(fdcId);
 
             storedNutrients.onerror = () => {
-                reject('Failed To Get Specific Recipe');
+                reject('Failed To Get Specific Nutrients');
             }
 
             storedNutrients.onsuccess = () => {
                 if (storedNutrients.result) {
                     resolve({ok: true, result: storedNutrients.result})
                 } else {
-                    resolve({ok: false, result: fdcId})
+                    resolve({ok: false, error: {message: `Failed to obtain associated nutrients!`, errorType: 'DeSync'}})
                 }
             }
         })
@@ -131,12 +131,10 @@ export class NutritionalDB {
     }
 
     clearDataBase() {
-        return new Promise((resolve, reject) => {
-            if (!this._dbConnection) reject({ok: false, error: 'Database Not Connected!'});
-            this._dbConnection.close();
+        return new Promise((resolve) => {
+            indexedDB.deleteDatabase(this._dbName);
 
-            let deleteObj = indexedDB.deleteDatabase(this._dbName);
-            console.log(deleteObj)
+            resolve({ok: true});
         })
     }
 }

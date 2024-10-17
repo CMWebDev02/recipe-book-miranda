@@ -11,7 +11,7 @@ import { NutritionalDB } from '../JavaScript/NutrientDataBase.js';
 export function UseNutritionAPI(ingredientsArray, apiKey) {
     const [ nutritionalInfo, setNutritionalInfo ] = useState([]);
     const [ errorOccurred, setErrorOccurred ] = useState('');
-    const [ isLoading, setIsLoading ] = useState(true)
+    const [ isLoading, setIsLoading ] = useState(true);
 
     async function connectToDataBases(NutrientAPIStorage) {
         try {
@@ -63,7 +63,7 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
                     const uriAPI = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}&dataType=Foundation&pageSize=1&pageNumber=1&query=`;
                     let ingredientSearch = uriAPI + ingredient;
                     let response = await fetch(ingredientSearch, {signal});
-                    if (!response.ok) return [null, response.status];
+                    if (!response.ok) return {ok: false, error: {message: `Fetch Call Failed with a status of ${response.status}`}};
                     let data = await response.json();
                     return addToDataBases(NutrientAPIStorage, ingredient, data);
                 }
@@ -78,15 +78,17 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
                     let allResults = await Promise.all(allResponses);
                     let allData = allResults.map((response, index) => {
                         if (!response.ok) {
-                            alert('Warning! If this error persists clear your cache!');
-                            throw new Error('Failed To Gather Nutrient Data');
+                            if (response.error.errorType == 'DeSync') {
+                                NutrientAPIStorage.clearDataBase();
+                                window.location.reload();
+                            }
+                            throw new Error(response.error.message);
                         }    
-                        console.log(ingredients[index], response.result)
                         return {searchQuery: ingredients[index], ...response.result}
                     })
                     setNutritionalInfo(allData)
                 } catch (error) {
-                    setErrorOccurred(error.message)
+                    setErrorOccurred(error.message);
                 } finally {
                     setIsLoading(false);
                 }
