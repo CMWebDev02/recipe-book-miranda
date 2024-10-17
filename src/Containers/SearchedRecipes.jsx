@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { UseRecipeAPI } from "../Hooks/useRecipeAPI";
 import { DisplayRecipe } from "../Components/DisplayRecipe";
 import { SearchBox } from "../Components/SearchBox";

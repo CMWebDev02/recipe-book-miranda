@@ -35,8 +35,9 @@ export function UseRecipeAPI({recipeParam, pageParam, APIKey}) {
               return response.json();
           })
           .then(recipes => {
-              setAllRecipes(recipes);
-              setErrorOccurred(null);
+            if (recipes.length == 0) throw new Error(`No Recipes Found!`);
+            setAllRecipes(recipes);
+            setErrorOccurred(null);
           })
           .catch(error => {
             if (error.name != 'AbortError') {

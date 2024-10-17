@@ -29,6 +29,12 @@ export function RecipeList({ APIKey, displayLocal }) {
         {pageNum: (+queryParameters.get('page') <= 0 ? 1 : +queryParameters.get('page'))}
     )
     const [ showLocal, setShowLocal ] = useState(displayLocal);
+    const [ isButtonDisabled, setIsButtonDisabled ] = useState(false);
+
+    function newSearch(userSearch) {
+        setPageQuery({type: 'reset'});
+        setRecipeQuery(userSearch);
+    }
 
     useEffect(() => {
         setQueryParameters({recipe: recipeQuery, page: pageQuery.pageNum});
@@ -49,16 +55,14 @@ export function RecipeList({ APIKey, displayLocal }) {
         setPageQuery({type: action});
     }
 
-    // Try utilizing the key property to trigger an update once DisplayLocal changes instead of relying on the current effect, and change the current set Query parameter to check if display local is true
-    // if so then it should set the recipe Query to booklet, https://react.dev/learn/managing-state
-
     return (
         <>
-            {showLocal && <LocalRecipes key={pageQuery.pageNum + Math.random()} currentPage={pageQuery.pageNum} />}
-            {!showLocal && <SearchedRecipes key={pageQuery.pageNum + Math.random()} recipeParam={recipeQuery} pageParam={pageQuery.pageNum} newSearch={setRecipeQuery} APIKey={APIKey} />}
+            {showLocal && <LocalRecipes key={pageQuery.pageNum + Math.random()} currentPage={pageQuery.pageNum} disableNextPage={setIsButtonDisabled} />}
+            {!showLocal && <SearchedRecipes key={pageQuery.pageNum + Math.random()} disableNextPage={setIsButtonDisabled} 
+                                    recipeParam={recipeQuery} pageParam={pageQuery.pageNum} newSearch={newSearch} APIKey={APIKey} />}
 
-            <button onClick={() => changePage('previousPage')}>Previous Page</button>
-            <button onClick={() => changePage('nextPage')}>Next Page</button>
+            <button disabled={pageQuery.pageNum == 1 ? true : false} onClick={() => changePage('previousPage')}>Previous Page</button>
+            <button disabled={isButtonDisabled} onClick={() => changePage('nextPage')}>Next Page</button>
         </>
     )
 }
