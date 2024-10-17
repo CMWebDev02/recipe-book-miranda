@@ -11,7 +11,7 @@ export function MealInspiration() {
         if (!isLoading && errorsOccurred == '') {
             setRecipeObject(firstResponse);
         }
-    }, [firstResponse])
+    }, [firstResponse, isLoading, errorsOccurred])
 
     return (
         <>

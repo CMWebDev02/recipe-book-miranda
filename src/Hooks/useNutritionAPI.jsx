@@ -32,15 +32,23 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
     async function addToDataBases(ingredientDB, nutrientDB, ingredient, data) {
         return new Promise((resolve, reject) =>  {
             try {
-                let fdcId = data.foods[0].fdcId;
-                let nutrientsArray = data.foods[0].foodNutrients;
+                let fdcId;
+                let nutrientsArray;
+                if (data.foods[0]) {
+                    fdcId = data.foods[0].fdcId;
+                    nutrientsArray = data.foods[0].foodNutrients;
+                } else {
+                    fdcId = 0;
+                    nutrientsArray = [];
+                }
     
                 ingredientDB.addIngredientQuery(ingredient, fdcId);
                 nutrientDB.addFoodNutrients(fdcId, nutrientsArray);
     
                 resolve({fdcId, nutrientsArray})
             } catch (error) {
-                reject(false)
+                console.error(error);
+                reject(false);
             }
         })
     }
