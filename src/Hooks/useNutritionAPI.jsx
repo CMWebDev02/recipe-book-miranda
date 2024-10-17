@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IngredientDB, NutritionalInfoDB } from '../JavaScript/NutrientDataBase.js';
+import { NutritionalDB } from '../JavaScript/NutrientDataBase.js';
 
 
 // TODO:
@@ -13,23 +13,17 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
     const [ errorOccurred, setErrorOccurred ] = useState('');
     const [ isLoading, setIsLoading ] = useState(true)
 
-    async function connectToDataBases(ingredientsDB, nutritionDB) {
+    async function connectToDataBases(NutrientAPIStorage) {
         try {
-            let connectionOne = ingredientsDB.openDataBaseConnection();
-            let connectionTwo = nutritionDB.openDataBaseConnection();
-
-            let connectionResults = await Promise.all([connectionOne, connectionTwo]);
-            connectionResults.forEach((isConnect) => {
-                if (!isConnect) throw new Error('Failed to connect to DataBases')}
-            );
-
+            let isConnect = await NutrientAPIStorage.openDataBaseConnection();
+            if (!isConnect) throw new Error('Failed to connect to DataBases')
             return null;
         } catch (error) {
             return error;
         }
     }
 
-    async function addToDataBases(ingredientDB, nutrientDB, ingredient, data) {
+    async function addToDataBases(NutrientAPIStorage, ingredient, data) {
         return new Promise((resolve, reject) =>  {
             try {
                 let fdcId;
@@ -42,8 +36,8 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
                     nutrientsArray = [];
                 }
     
-                ingredientDB.addIngredientQuery(ingredient, fdcId);
-                nutrientDB.addFoodNutrients(fdcId, nutrientsArray);
+                NutrientAPIStorage.addIngredientQuery(ingredient, fdcId);
+                NutrientAPIStorage.addFoodNutrients(fdcId, nutrientsArray);
     
                 resolve({fdcId, nutrientsArray})
             } catch (error) {
@@ -60,26 +54,25 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
         } else {
             const controller = new AbortController();
             const signal = controller.signal;
-            let IngredientStorage = new IngredientDB();
-            let NutrientStorage = new NutritionalInfoDB();
+            let NutrientAPIStorage = new NutritionalDB();
 
             const fetchNutritionalInfo = async (ingredient) => {
-                let result = await IngredientStorage.getIngredientQuery(ingredient);
+                let result = await NutrientAPIStorage.getIngredientQuery(ingredient);
                 if (result) {
-                    return NutrientStorage.getNutrients(result);
+                    return NutrientAPIStorage.getNutrients(result);
                 } else {
                     const uriAPI = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}&dataType=Foundation&pageSize=1&pageNumber=1&query=`;
                     let ingredientSearch = uriAPI + ingredient;
                     let response = await fetch(ingredientSearch, {signal});
                     if (!response.ok) return [null, response.status];
                     let data = await response.json();
-                    return addToDataBases(IngredientStorage, NutrientStorage, ingredient, data);
+                    return addToDataBases(NutrientAPIStorage, ingredient, data);
                 }
             }
 
             const collectAllData = async (ingredients) => {
                 try {
-                    let error = await connectToDataBases(IngredientStorage, NutrientStorage)
+                    let error = await connectToDataBases(NutrientAPIStorage)
                     if (error) throw new Error(error);
                     let allResponses = ingredients.map(ingredient => fetchNutritionalInfo(ingredient));
                     

@@ -1,97 +1,22 @@
-class DataBase {
-    constructor(name, objectStore, keyPath, index) {
-        this._dbName = name;
-        this._dbObjectStore = objectStore;
-        this._dbKeyPath = keyPath;
-        this._dbIndex = index;
+export class NutritionalDB {
+    constructor() {
+        this._dbName = 'NutritionalAPI';
+
+        this._dbIngredientStore = 'Ingredients';
+        this._dbIngredientKeyPath = 'ingredientQuery';
+        this._dbIngredientIndex = 'Ingredient Queries';
+
+        this._dbNutritionStore = 'Nutrients';
+        this._dbNutrientsKeyPath = 'fdcId';
+        this._dbNutrientsIndex = 'FDC ID';
 
         this._dbConnection = null;
-    }
-
-    accessObjectStore(mode) {
-        let newTransaction = this._dbConnection.transaction(this._dbObjectStore, mode);
-        return newTransaction.objectStore(this._dbObjectStore);
-    }
-
-    openDataBaseConnection() {
-        return new Promise((resolve, reject) => {
-            let request = indexedDB.open(this._dbName);
-
-            request.onerror = () => {
-                reject('Failed To Open DataBase Connection');
-            }
-    
-            request.onupgradeneeded = () => {
-                let db = request.result;
-    
-                if (!db.objectStoreNames.contains(this._dbObjectStore)) {
-                    let recipeStorage = db.createObjectStore(this._dbObjectStore, {keyPath: this._dbKeyPath})
-    
-                    recipeStorage.createIndex(this._dbIndex, this._dbKeyPath, {unique: true});
-                }
-            }
-
-            request.onsuccess = () => {
-                this._dbConnection = request.result;
-                resolve(true);
-            }
-        })
-    }
-}
-
-export class IngredientDB extends DataBase {
-    constructor() {
-        super('Ingredients', 'Ingredient Search Queries', 'ingredientQuery', 'Ingredient Query');
-    }
-
-    getIngredientQuery(ingredient) {
-        return new Promise((resolve, reject) => {
-            if (!this._dbConnection) reject('DataBase Not Connected');
-            let objectStorage = this.accessObjectStore('readonly');
-
-            let storedIngredient = objectStorage.get(ingredient);
-
-            storedIngredient.onerror = () => {
-                reject('Failed To Get Specific Recipe');
-            }
-
-            storedIngredient.onsuccess = () => {
-                if (storedIngredient.result) {
-                    resolve(storedIngredient.result.fdcId)
-                } else {
-                    resolve(false)
-                }
-            }
-        })
-    }
-
-    addIngredientQuery(ingredient, fdcId) {
-        return new Promise((resolve, reject) => {
-            if (!this._dbConnection) reject('DataBase Not Connected');
-            let objectStore = this.accessObjectStore('readwrite');
-
-            let newItem = objectStore.add({ingredientQuery: ingredient, fdcId});
-
-            newItem.onerror = () => {
-                reject('Failed To Add Ingredient Query')
-            }
-
-            newItem.onsuccess = () => {
-                resolve(true);
-            }
-        })
-    }
-}
-
-export class NutritionalInfoDB extends DataBase {
-    constructor() {
-        super('Nutritional API', 'Nutrients', 'fdcId', 'FDC ID');
     }
 
     getNutrients(fdcId) {
         return new Promise((resolve, reject) => {
             if (!this._dbConnection) reject('DataBase Not Connected');
-            let objectStorage = this.accessObjectStore('readonly');
+            let objectStorage = this.newTransaction(this._dbNutritionStore, 'readonly');
 
             let storedNutrients = objectStorage.get(fdcId);
 
@@ -112,11 +37,92 @@ export class NutritionalInfoDB extends DataBase {
     addFoodNutrients(fdcId, nutrients) {
         return new Promise((resolve, reject) => {
             if (!this._dbConnection) reject('DataBase Not Connected');
-            let objectStore = this.accessObjectStore('readwrite');
+            let objectStorage = this.newTransaction(this._dbNutritionStore, 'readwrite');
 
-            let newItem = objectStore.add({fdcId, nutrientsArray: nutrients});
+            let newItem = objectStorage.add({fdcId, nutrientsArray: nutrients});
+
+            newItem.onerror = ({target}) => {
+                if (target.error.name == 'ConstraintError') return;
+                reject('Failed To Add Ingredient Nutrients');
+            }
+
 
             newItem.success = () => {
+                resolve(true);
+            }
+        })
+    }
+
+    getIngredientQuery(ingredient) {
+        return new Promise((resolve, reject) => {
+            if (!this._dbConnection) reject('DataBase Not Connected');
+            let objectStorage = this.newTransaction(this._dbIngredientStore, 'readonly');
+
+            let storedIngredient = objectStorage.get(ingredient);
+
+            storedIngredient.onerror = () => {
+                reject('Failed To Get Specific Recipe');
+            }
+
+            storedIngredient.onsuccess = () => {
+                if (storedIngredient.result) {
+                    resolve(storedIngredient.result.fdcId)
+                } else {
+                    resolve(false)
+                }
+            }
+        })
+    }
+
+    addIngredientQuery(ingredient, fdcId) {
+        return new Promise((resolve, reject) => {
+            if (!this._dbConnection) reject('DataBase Not Connected');
+            let objectStorage = this.newTransaction(this._dbIngredientStore, 'readwrite');
+
+            let newItem = objectStorage.add({ingredientQuery: ingredient, fdcId});
+
+            newItem.onerror = ({target}) => {
+                if (target.error.name == 'ConstraintError') return;
+                reject('Failed To Add Ingredient Query')
+            }
+
+            newItem.onsuccess = () => {
+                resolve(true);
+            }
+        })
+    }
+
+    newTransaction(objectStoreName, mode) {
+        let newTransaction = this._dbConnection.transaction([objectStoreName], mode);
+        return newTransaction.objectStore(objectStoreName);
+    }
+
+    openDataBaseConnection() {
+        return new Promise((resolve, reject) => {
+            let request = indexedDB.open(this._dbName);
+
+            request.onerror = () => {
+                reject('Failed To Open DataBase Connection');
+            }
+    
+            request.onupgradeneeded = () => {
+                let db = request.result;
+    
+                if (!db.objectStoreNames.contains(this._dbIngredientStore) ) {
+                    let ingredientStorage = db.createObjectStore(this._dbIngredientStore, {keyPath: this._dbIngredientKeyPath})
+    
+                    ingredientStorage.createIndex(this._dbIngredientIndex, this._dbIngredientKeyPath, {unique: true});
+                }
+
+                if (!db.objectStoreNames.contains(this._dbNutritionStore) ) {
+                    let nutritionStorage = db.createObjectStore(this._dbNutritionStore, {keyPath: this._dbNutrientsKeyPath})
+    
+                    nutritionStorage.createIndex(this._dbNutrientsIndex, this._dbNutrientsKeyPath, {unique: true});
+                }
+            }
+
+            request.onsuccess = () => {
+                this._dbConnection = request.result;
                 resolve(true);
             }
         })
