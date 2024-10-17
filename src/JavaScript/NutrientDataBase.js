@@ -4,7 +4,9 @@ export class NutritionalDB {
 
         this._dbIngredientStore = 'Ingredients';
         this._dbIngredientKeyPath = 'ingredientQuery';
-        this._dbIngredientIndex = 'Ingredient Queries';
+        this._dbIngredientMainIndex = 'Ingredient Queries';
+        this._dbIngredientSecondaryIndexName = 'FDC ID';
+        this._dbIngredientSecondaryIndex = 'fdcId';
 
         this._dbNutritionStore = 'Nutrients';
         this._dbNutrientsKeyPath = 'fdcId';
@@ -26,9 +28,9 @@ export class NutritionalDB {
 
             storedNutrients.onsuccess = () => {
                 if (storedNutrients.result) {
-                    resolve(storedNutrients.result)
+                    resolve({ok: true, result: storedNutrients.result})
                 } else {
-                    resolve(false)
+                    resolve({ok: false, result: fdcId})
                 }
             }
         })
@@ -46,9 +48,8 @@ export class NutritionalDB {
                 reject('Failed To Add Ingredient Nutrients');
             }
 
-
             newItem.success = () => {
-                resolve(true);
+                resolve({ok: true});
             }
         })
     }
@@ -66,9 +67,9 @@ export class NutritionalDB {
 
             storedIngredient.onsuccess = () => {
                 if (storedIngredient.result) {
-                    resolve(storedIngredient.result.fdcId)
+                    resolve({ok: true, result: storedIngredient.result.fdcId})
                 } else {
-                    resolve(false)
+                    resolve({ok: false, ingredient})
                 }
             }
         })
@@ -87,7 +88,7 @@ export class NutritionalDB {
             }
 
             newItem.onsuccess = () => {
-                resolve(true);
+                resolve({ok: true});
             }
         })
     }
@@ -111,7 +112,8 @@ export class NutritionalDB {
                 if (!db.objectStoreNames.contains(this._dbIngredientStore) ) {
                     let ingredientStorage = db.createObjectStore(this._dbIngredientStore, {keyPath: this._dbIngredientKeyPath})
     
-                    ingredientStorage.createIndex(this._dbIngredientIndex, this._dbIngredientKeyPath, {unique: true});
+                    ingredientStorage.createIndex(this._dbIngredientMainIndex, this._dbIngredientKeyPath, {unique: true});
+                    ingredientStorage.createIndex(this._dbIngredientSecondaryIndexName, this._dbIngredientSecondaryIndex, {unique: true});
                 }
 
                 if (!db.objectStoreNames.contains(this._dbNutritionStore) ) {
@@ -125,6 +127,16 @@ export class NutritionalDB {
                 this._dbConnection = request.result;
                 resolve(true);
             }
+        })
+    }
+
+    clearDataBase() {
+        return new Promise((resolve, reject) => {
+            if (!this._dbConnection) reject({ok: false, error: 'Database Not Connected!'});
+            this._dbConnection.close();
+
+            let deleteObj = indexedDB.deleteDatabase(this._dbName);
+            console.log(deleteObj)
         })
     }
 }

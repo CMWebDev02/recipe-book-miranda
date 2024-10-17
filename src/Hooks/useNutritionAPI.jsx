@@ -39,10 +39,9 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
                 NutrientAPIStorage.addIngredientQuery(ingredient, fdcId);
                 NutrientAPIStorage.addFoodNutrients(fdcId, nutrientsArray);
     
-                resolve({fdcId, nutrientsArray})
+                resolve({ok: true, result: {fdcId, nutrientsArray}})
             } catch (error) {
-                console.error(error);
-                reject(false);
+                reject({ok: false, error});
             }
         })
     }
@@ -57,9 +56,9 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
             let NutrientAPIStorage = new NutritionalDB();
 
             const fetchNutritionalInfo = async (ingredient) => {
-                let result = await NutrientAPIStorage.getIngredientQuery(ingredient);
-                if (result) {
-                    return NutrientAPIStorage.getNutrients(result);
+                let response = await NutrientAPIStorage.getIngredientQuery(ingredient);
+                if (response.ok) {
+                    return NutrientAPIStorage.getNutrients(response.result);
                 } else {
                     const uriAPI = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}&dataType=Foundation&pageSize=1&pageNumber=1&query=`;
                     let ingredientSearch = uriAPI + ingredient;
@@ -78,8 +77,12 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
                     
                     let allResults = await Promise.all(allResponses);
                     let allData = allResults.map((response, index) => {
-                        if (!response) throw new Error('Failed To Gather Nutrient Data');
-                        return {searchQuery: ingredients[index], ...response}
+                        if (!response.ok) {
+                            alert('Warning! If this error persists clear your cache!');
+                            throw new Error('Failed To Gather Nutrient Data');
+                        }    
+                        console.log(ingredients[index], response.result)
+                        return {searchQuery: ingredients[index], ...response.result}
                     })
                     setNutritionalInfo(allData)
                 } catch (error) {
@@ -95,7 +98,7 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
                 controller.abort();
             }
         }
-    }, [ingredientsArray])
+    }, [ingredientsArray, apiKey])
 
     return {errorOccurred, isLoading, nutritionalInfo};
 }
