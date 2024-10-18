@@ -3,8 +3,13 @@ import { UseRecipeAPI } from "../Hooks/useRecipeAPI";
 import { DisplayRecipe } from "../Components/DisplayRecipe";
 import { SearchBox } from "../Components/SearchBox";
 
-export function SearchedRecipes({ recipeParam, pageParam, APIKey, newSearch }) {
+export function SearchedRecipes({ recipeParam, pageParam, APIKey, newSearch, disableNextPage }) {
     const { errorOccurred, allRecipes, isLoading } = UseRecipeAPI({recipeParam, pageParam, APIKey});
+    // Somehow disable the next button based on the returned recipes
+
+    useEffect(() => {
+        if (errorOccurred == `No Recipes Found!`) disableNextPage(true);
+    }, [])
 
     return (
         <div className="recipes-display">

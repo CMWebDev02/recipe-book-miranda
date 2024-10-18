@@ -1,0 +1,21 @@
+:root {
+    --main-background-color: #C5EFCB;
+    --main-text-color: #020402;
+    --secondary-background-color: #A9C5A0;
+    --secondary-text-color: #C6DEC6;
+    --outline-color: #758173;
+
+    /* Around 16px */
+    --base-font-size: 1rem;
+}
+
+html {
+    background-color: var(--main-background-color);
+    color: var(--main-text-color);
+}
+
+.defaultColors {
+    background-color: var(--main-background-color);
+    color: var(--main-text-color);
+}
+

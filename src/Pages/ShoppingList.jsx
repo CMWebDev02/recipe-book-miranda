@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from '../Styles/ShoppingList.module.css'
 import { ShoppingListDisplay } from "../Containers/ShoppingListDisplay";
+import styles from '../Styles/ShoppingList.module.css'
 
 export function ShoppingList({ meals }) {
     const [ shoppingList, setShoppingList ] = useState([])

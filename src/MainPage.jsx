@@ -6,10 +6,10 @@ import { Discover } from "./Pages/Discover";
 import { RecipeList } from "./Pages/RecipeList";
 import { Error } from "./Pages/Error";
 import { MealPlanner } from "./Pages/MealPlanner";
+import { Footer } from "./Containers/Footer.jsx";
 
 // Only for demo purposes, will not be in the final production deployment.
 import { config } from "./JavaScript/private-config.js";
-import { Footer } from "./Containers/Footer.jsx";
 
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
@@ -37,7 +37,7 @@ export function MainPage() {
   const [nutritionalAPIKey, setNutritionalAPIKey] = useState(config.nutritionalAPIKey || '');
 
   return (
-    <div className="main-container">
+    <div className="main-container defaultColors">
       <BrowserRouter>
         <NavBar RecipesAPI={[RecipesAPIKey, setRecipesAPIKey]}
           nutritionalAPI={[nutritionalAPIKey, setNutritionalAPIKey]} />
