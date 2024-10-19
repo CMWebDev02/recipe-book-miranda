@@ -32,24 +32,35 @@ import { config } from "./JavaScript/private-config.js";
 // // - A function that is using promises and interacting with promises
 // //- A function that uses the fetch() API
 
+
+/**
+ * MainPage
+ * @component Main Container for all web page components.
+ */
 export function MainPage() {
+  // Declares state variables to store the two api keys.
   const [RecipesAPIKey, setRecipesAPIKey ] = useState(config.recipeAPIKey || '');
-  const [nutritionalAPIKey, setNutritionalAPIKey] = useState(config.nutritionalAPIKey || '');
+  const [NutritionalAPIKey, setNutritionalAPIKey] = useState(config.nutritionalAPIKey || '');
 
   return (
+    // Main Div Class
     <div className="main-container defaultColors">
+      {/* Initializes a browser router to change the component based on the current url. */}
       <BrowserRouter>
+      {/* Initializes the NavBar to always be at the top of the page. */}
         <NavBar RecipesAPI={[RecipesAPIKey, setRecipesAPIKey]}
-          nutritionalAPI={[nutritionalAPIKey, setNutritionalAPIKey]} />
+          NutritionalAPI={[NutritionalAPIKey, setNutritionalAPIKey]} />
         <hr />
+        {/* Initializes the various routes for each component. */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/discover" element={<Discover APIKey={RecipesAPIKey} />} />
           <Route path="/recipelist" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={false} />} />
           <Route path="/booklet" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={true} />} />
-          <Route path="/planner/*" element={<MealPlanner nutritionalAPIKey={nutritionalAPIKey} />} />
+          <Route path="/planner/*" element={<MealPlanner NutritionalAPIKey={NutritionalAPIKey} />} />
           <Route path="/*" element={<Error />} />
         </Routes>
+        {/* Initializes the Footer to appear at the bottom of the page. */}
         <Footer />
       </BrowserRouter>
     </div>

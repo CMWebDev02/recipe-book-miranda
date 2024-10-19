@@ -1,5 +1,12 @@
 import React, {useState} from "react";
 
+/**
+ * APIKeyTextBox
+ * @component Displays a textbox and a input button to update the current state for the passed in API key string.
+ * @param {Object} api - Object containing the API Key string and its setter for the API.
+ * @param {string} title - String containing the API's title.
+ * @param {string} APISource - URL string to the API's webpage.
+ */
 export function APIKeyTextBox({ api: [apiKey, setAPIKey], title, APISource }) {
     const [ userKey, setUserKey ] = useState(apiKey);
 

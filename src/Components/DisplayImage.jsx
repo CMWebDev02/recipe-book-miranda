@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * DisplayImage
+ * @component 
+ * @param {Object} recipeObject - Recipe Object containing a image of the recipe and the title of the recipe.
+ */
 export function DisplayImage({ recipeObject }) {
+    // Declares state to store,
+    // One to store the worker,
+    // Two the title of the recipe,
+    // Three the image link for the recipe's picture.
     const [ titleWorker, setTitleWorker ] = useState('');
     const [ recipeTitle, setRecipeTitle ] = useState('');
     const [ recipeSRC, setRecipeSRC ] = useState('')
 
+    // Left Off Here
     function handleRecipeObject() {
         if (recipeObject.image) {
             setRecipeSRC(recipeObject.image);

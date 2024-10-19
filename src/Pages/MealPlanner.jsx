@@ -6,7 +6,7 @@ import { NutritionalInfo } from "./NutritionalInfo";
 import { GenerateButton } from '../Components/GenerateButton.jsx'
 import { ShoppingList } from "./ShoppingList.jsx";
 
-export function MealPlanner({ nutritionalAPIKey }) {
+export function MealPlanner({ NutritionalAPIKey }) {
     const [ plannedMeals, setPlannedMeals ] = useState([])
     const [ unPlannedMeals, setUnPlannedMeals ] = useState([])
     const [ updateOccurred, setUpdateOccurred ] = useState(false);
@@ -44,7 +44,7 @@ export function MealPlanner({ nutritionalAPIKey }) {
 
             <Routes>
                 <Route path="/shoppinglist" element={<ShoppingList meals={plannedMeals} />}/>
-                <Route path="/:id" element={<NutritionalInfo nutritionalAPIKey={nutritionalAPIKey} recipes={plannedMeals} />}/>
+                <Route path="/:id" element={<NutritionalInfo NutritionalAPIKey={NutritionalAPIKey} recipes={plannedMeals} />}/>
             </Routes>
         </div>
     )
