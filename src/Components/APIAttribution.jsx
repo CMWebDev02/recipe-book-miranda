@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * APIAttributions
+ * @component Displays links to the various APIs used to create this project.
+ */
 export function APIAttributions() {
     return (
         <p>

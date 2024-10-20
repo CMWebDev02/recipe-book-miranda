@@ -16,10 +16,12 @@ export function Home() {
                 Find any recipe you can think of and save them to your <strong>Recipe Book</strong> and<br />
                 plan out your meals for the week with the build in <strong>Meal Planner</strong>.
             </p>
+            {/* Displays the PageLinks component. */}
             <PageLinks />
             <hr />
-            {/* Displays a random type of meal to give the user an idea of what to search for. */}
             <h1>Maybe Try...</h1>
+            {/* Displays a random type of meal to give the user an idea of what to search for
+                using the MealInspiration component. */}
             <MealInspiration />
         </div>
     )
