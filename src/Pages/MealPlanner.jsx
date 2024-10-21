@@ -51,7 +51,7 @@ export function MealPlanner({ NutritionalAPIKey }) {
                     or the nutritional info for the selected recipe whose id is injected into the url. */}
             <Routes>
                 <Route path="/shoppinglist" element={<ShoppingList meals={plannedMeals} />}/>
-                <Route path="/:id" element={<NutritionalInfo NutritionalAPIKey={NutritionalAPIKey} recipes={plannedMeals} />}/>
+                <Route path="/:id" element={<NutritionalInfo NutritionalAPIKey={NutritionalAPIKey} />}/>
             </Routes>
         </div>
     )

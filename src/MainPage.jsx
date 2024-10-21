@@ -19,6 +19,8 @@ import { config } from "./JavaScript/private-config.js";
 // - Double check that all workers trigger appropriate updates.
 // - Style the project
 
+// For find recipe of the MealPlanner class, have it return an undefined object if no recipe can be found that matches the recipeID passed in and use the undefined value to 
+// display an error or message alerting the user the recipe does not exist.
 // Condense down on the amount of components I use or use them in more places, display ingredients can be used in the display recipe component
 // Also, rather than generating the meal title for the shopping list in the worker, move that to the ShoppingListDisplayContainer
 
