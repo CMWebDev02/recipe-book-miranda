@@ -9,21 +9,18 @@ import { LocalRecipes } from "../Containers/LocalRecipes";
  * @param {string} APIKey - String variable of the user's APIKey to provide credentials when making a fetch call.
  * @param {boolean} displayLocal - Boolean value to represent if the user should be displaying the LocalRecipes Component or the SearchedRecipes Component.
  */
-export function RecipeList({ APIKey, displayLocal }) {
-    // Defines set state for several variables.
-    // First stores the query parameters that will be injected into the url.
-    // Second stores the recipe query entered by the user.
-    // Third stores the page query entered by the user.
-    // Fourth stores a showLocal boolean that determines if the LocalRecipes Component will be displayed or the SearchedRecipes Component.
-    // Fifth stores the isButtonDisabled boolean that determines if the next page button will be displayed.
+export function RecipeList({ APIKey, displayLocal }) {    
+    // Stores the query parameters that will be injected into the url.
     const [ queryParameters, setQueryParameters ] = useSearchParams();
+    // Stores the recipe query as a string.
     const [ recipeQuery, setRecipeQuery ] = useState(
         queryParameters.get('recipe')
     )
+    // Stores the page query as a number.
     const [ pageQuery, setPageQuery ] = useReducer(alterPage,
         {pageNum: (+queryParameters.get('page') <= 0 ? 1 : +queryParameters.get('page'))}
     )
-    const [ showLocal, setShowLocal ] = useState(displayLocal);
+    // Stores a boolean that determines if the next page button will be displayed.
     const [ isButtonDisabled, setIsButtonDisabled ] = useState(false);
 
     /**
@@ -43,22 +40,17 @@ export function RecipeList({ APIKey, displayLocal }) {
      * @param {object} action - Object containing the type of action that will be performed on the current state of the pageQuery variable.
      */
     function alterPage(state, action) {
-        // Checks the action's type property.
+        // For all return statements, a new object is returned that contains the pageNum variable.
+        // Depending on the action passed in, this variable is either incremented or decremented by one, oe set to zero.
         if (action.type == 'nextPage') {
-            // If the action is to change to the next page,
-            // return a new object with the pageNum's variable previous value incremented by one.
             return {
                 pageNum: state.pageNum + 1            
             }
         } else if (action.type == 'previousPage') {
-            // If the action is to change to the previous page,
-            // return a new object with the pageNum's variable previous value decremented by one.
             return {
                 pageNum: (state.pageNum - 1 < 1 || state.pageNum <= 0 ? 1 : state.pageNum - 1)
             }
         } else if (action.type == 'reset') {
-            // If the action is to change to the reset the page's value,
-            // return a new object with the pageNum's variable set equal to 1.
             return {
                 pageNum: 1
             }
@@ -69,36 +61,40 @@ export function RecipeList({ APIKey, displayLocal }) {
 
     /**
      * changePage
-     * @function Changes the page and scrolls to the top of the page.
+     * @function Alters the page based on the passed in argument and scrolls to the top of the page.    
      * @param {string} action - String value that will denote which action will occur to the pageQuery variable.
      */
     function changePage(action) {
-        // Scrolls the current window to the top of the page.
         window.scrollTo({top: 100});
-        // Calls the setPageQuery to update the current state value of the pageQuery state variable depending on the value of the action variable passed in.
         setPageQuery({type: action});
     }
 
     useEffect(() => {
+        // Updates the query parameters injected in the url of the webpage when a state change occurs for the recipeQuery or pageQuery variables.
         setQueryParameters({recipe: recipeQuery, page: pageQuery.pageNum});
     }, [recipeQuery, pageQuery]);
 
+
     useEffect(() => {
+        // Checks if the recipes to be displayed are locallySaved based on the value of the displayLocal boolean argument passed in.
         if (displayLocal) {
+            // Sets the recipeQuery state to 'booklet' to denote that local recipes are being displayed and resets the page count.
             setRecipeQuery('booklet')
             setPageQuery({type: 'reset'});
-            setShowLocal(true);
-        } else {
-            setShowLocal(false)
         }
     }, [displayLocal])
 
     return (
         <>
-            {showLocal && <LocalRecipes key={pageQuery.pageNum + Math.random()} currentPage={pageQuery.pageNum} disableNextPage={setIsButtonDisabled} />}
-            {!showLocal && <SearchedRecipes key={pageQuery.pageNum + Math.random()} disableNextPage={setIsButtonDisabled} 
-                                    recipeParam={recipeQuery} pageParam={pageQuery.pageNum} newSearch={newSearch} APIKey={APIKey} />}
+            {/* Displays the LocalRecipes Component and passes the state setter for the isButtonDisabled boolean and the value of the pageQuery variable. */}
+            {displayLocal && <LocalRecipes key={pageQuery.pageNum + Math.random()} currentPage={pageQuery.pageNum} disableNextPage={setIsButtonDisabled} />}
+            {/* Displays the SearchedRecipes Component and passes the state setter for the isButtonDisabled boolean,
+                    the value of the pageQuery, recipeQuery, and APIKey variable,
+                        and the function to update the search parameters. */}
+            {!displayLocal && <SearchedRecipes key={pageQuery.pageNum + Math.random()} disableNextPage={setIsButtonDisabled} 
+                                    recipeParam={recipeQuery} pageParam={pageQuery.pageNum} APIKey={APIKey} newSearch={newSearch} />}
 
+            {/* Updates the current pageQuery value depending on the button pressed. */}
             <button disabled={pageQuery.pageNum == 1 ? true : false} onClick={() => changePage('previousPage')}>Previous Page</button>
             <button disabled={isButtonDisabled} onClick={() => changePage('nextPage')}>Next Page</button>
         </>
