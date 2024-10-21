@@ -19,8 +19,11 @@ import { config } from "./JavaScript/private-config.js";
 // - Double check that all workers trigger appropriate updates.
 // - Style the project
 
+// Condense down on the amount of components I use or use them in more places, display ingredients can be used in the display recipe component
+// Also, rather than generating the meal title for the shopping list in the worker, move that to the ShoppingListDisplayContainer
+
 // Requirements
-// // All Requirements Completed!!!
+//? All Requirements Completed!!!
 
 // Please write functions that contain the following syntax that you learned in the MDN Asynchronous JavaScript Tutorial assignments, note you can have a function that contains multiple syntaxes that are required
 // // - A function that uses web-workers
