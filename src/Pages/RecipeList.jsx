@@ -4,7 +4,6 @@ import { SearchedRecipes } from "../Containers/SearchedRecipes";
 import { LocalRecipes } from "../Containers/LocalRecipes";
 
 /**
- * RecipeList
  * @component Renders a list of recipes, either the recipes resulting from the API fetch call or the recipes saved locally. 10 Recipes are displayed per page.
  * @param {string} APIKey - String variable of the user's APIKey to provide credentials when making a fetch call.
  * @param {boolean} displayLocal - Boolean value to represent if the user should be displaying the LocalRecipes Component or the SearchedRecipes Component.
@@ -24,8 +23,7 @@ export function RecipeList({ APIKey, displayLocal }) {
     const [ isButtonDisabled, setIsButtonDisabled ] = useState(false);
 
     /**
-     * newSearch
-     * @function Updates the query parameters of the recipeQuery and pageQuery state variables.
+     * @function Updates the query parameters of the recipeQuery state variable and resets the pageQuery state variable back to 1.
      * @param {string} userSearch - String value of the user's new search query.
      */
     function newSearch(userSearch) {
@@ -34,7 +32,6 @@ export function RecipeList({ APIKey, displayLocal }) {
     }
 
     /**
-     * alterPage
      * @function Updates the pageQuery depending on the action value passed in.
      * @param {object} state - Current state object containing the current values of the pageQuery variable.
      * @param {object} action - Object containing the type of action that will be performed on the current state of the pageQuery variable.
@@ -60,7 +57,6 @@ export function RecipeList({ APIKey, displayLocal }) {
     }
 
     /**
-     * changePage
      * @function Alters the page based on the passed in argument and scrolls to the top of the page.    
      * @param {string} action - String value that will denote which action will occur to the pageQuery variable.
      */
@@ -69,12 +65,13 @@ export function RecipeList({ APIKey, displayLocal }) {
         setPageQuery({type: action});
     }
 
+    // Rerenders each time the recipeQuery or pageQuery state changes.
     useEffect(() => {
         // Updates the query parameters injected in the url of the webpage when a state change occurs for the recipeQuery or pageQuery variables.
         setQueryParameters({recipe: recipeQuery, page: pageQuery.pageNum});
     }, [recipeQuery, pageQuery]);
 
-
+    // Rerenders if the passed in displayLocalArgument changes.
     useEffect(() => {
         // Checks if the recipes to be displayed are locallySaved based on the value of the displayLocal boolean argument passed in.
         if (displayLocal) {
@@ -86,9 +83,10 @@ export function RecipeList({ APIKey, displayLocal }) {
 
     return (
         <>
-            {/* Displays the LocalRecipes Component and passes the state setter for the isButtonDisabled boolean and the value of the pageQuery variable. */}
+            {/* Displays all locallySaved recipes via the LocalRecipes Component and passes the state setter for the isButtonDisabled boolean and the value of the pageQuery variable. */}
             {displayLocal && <LocalRecipes key={pageQuery.pageNum + Math.random()} currentPage={pageQuery.pageNum} disableNextPage={setIsButtonDisabled} />}
-            {/* Displays the SearchedRecipes Component and passes the state setter for the isButtonDisabled boolean,
+
+            {/* Displays all results from the Recipe API via the SearchedRecipes Component and passes the state setter for the isButtonDisabled boolean,
                     the value of the pageQuery, recipeQuery, and APIKey variable,
                         and the function to update the search parameters. */}
             {!displayLocal && <SearchedRecipes key={pageQuery.pageNum + Math.random()} disableNextPage={setIsButtonDisabled} 

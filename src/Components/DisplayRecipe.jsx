@@ -1,11 +1,9 @@
 import React from "react";
 import { InteractButton } from "./InteractButton";
 import { WeekDaySelector } from "./WeekDaySelector";
-import { defer } from "react-router-dom";
 
 /**
- * .
- * @component|function
+ * @component Displays various information from the passed in recipe object. The information is accessed based on certain properties and deconstruction is used to obtain these values.
  * @param {object} recipe - Recipe object containing all of the recipe's information that will be displayed.
  * @param {string} viewLocation - String variable that denotes where the recipe is being displayed, values can be either planner, searched, or stored.
  * @param {function} update - State setter that updates a boolean to show if the localStorage array was altered.

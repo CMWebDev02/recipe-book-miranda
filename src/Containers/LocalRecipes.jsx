@@ -3,7 +3,6 @@ import { SavedRecipes } from "../JavaScript/localStorage";
 import { DisplayRecipe } from "../Components/DisplayRecipe";
 
 /**
- * LocalRecipes
  * @component Displays locally saved recipes, 10 recipes are displayed per page, and provides various buttons to remove recipes or add them to a meal planner.
  * @param {number} currentPage - Number value that denotes the current page of the displayed recipes.
  * @param {function} disableNextPage - Setter used to update a boolean value that controls if the next page button is disabled.

@@ -3,19 +3,17 @@ import { MealPlan, SavedRecipes } from "../JavaScript/localStorage";
 import { useNavigate } from "react-router-dom";
 
 /**
- * InteractButton
  * @component Displays various buttons depending on the viewLocation argument, these buttons can save, remove, or display nutritional info.
  * @param {object} recipe - Recipe object containing all of the recipe's information.
  * @param {string} viewLocation - String variable that denotes where the recipe is being displayed, values can be either planner, searched, or stored.
  * @param {function} update - State setter that updates a boolean to show if the localStorage array was altered.
  */
 export function InteractButton({ recipe, viewLocation, update }) {
-    // Initializes a navigate function that will be used when displaying nutritional info for a recipe.
     const navigate = useNavigate();
 
     /**
-     * storedActionsHandler
-     * @function Triggers the appropriate response based on the action argument passed in for the recipe book's saved recipes.
+     * @function Triggers the appropriate response based on the action argument passed in for the recipe book's saved recipes, 
+     * either the recipe is removed from the recipe book's localStorage or included in the meal planner's localStorage array.
      * @param {string} action - Denotes which code block to execute.
      */
     function storedActionsHandler(action) {
@@ -30,8 +28,8 @@ export function InteractButton({ recipe, viewLocation, update }) {
     }
 
     /**
-     * plannerActionsHandler
-     * @function Triggers the appropriate response based on the action argument passed in for the meal planner's saved recipes.
+     * @function Triggers the appropriate response based on the action argument passed in for the meal planner's saved recipes,
+     * either the recipe is removed the meal planner's localStorage or the recipe's id is injected into the url to display its nutritional info.
      * @param {string} action - Denotes which code block to execute.
      */
     function plannerActionsHandler(action) {
@@ -46,7 +44,6 @@ export function InteractButton({ recipe, viewLocation, update }) {
     }
 
     /**
-     * handleClick
      * @function Triggers the appropriate action depending on the button clicked by the user and the action argument passed in.
      * @param {string} action - Denotes which action will be triggered by the actionHandler function.
      */

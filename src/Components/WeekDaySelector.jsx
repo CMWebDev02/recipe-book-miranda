@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { MealPlan } from "../JavaScript/localStorage";
 
 /**
- * WeekDaySelector
  * @component Displays a selector element and button that will set the passed in recipe's weekday property.
  * @param {object} recipe - Recipe object containing all of the recipe's information that will be displayed.
  * @param {object} update - State setter that updates a boolean to show if the localStorage array was altered.
@@ -13,8 +12,7 @@ export function WeekDaySelector({ recipe, update }) {
     const [ selectedDay, setSelectedDay ] = useState('Sunday');
 
     /**
-     * setWeekDay
-     * @function Updates the recipe in localStorage with the new weekday value.
+     * @function Updates the recipe in localStorage with the new weekday value selected by the user, and alerts the grandparent component to rerender the recipe list.
      * @param {string} action - Denotes how to update the recipe's weekday property, either removing it or setting it.
      */
     function setWeekDay(action) {

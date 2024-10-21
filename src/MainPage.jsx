@@ -32,41 +32,29 @@ import { config } from "./JavaScript/private-config.js";
 // // - A function that is using promises and interacting with promises
 // //- A function that uses the fetch() API
 
-
 /**
- * MainPage
- * @component Main Container for all web page components.
+ * @component 
+ * Main Container for all web page components. The NavBar and Footer are constantly displayed other components are injected in the page depending on the user's path or url.
  */
 export function MainPage() {
-  // Declares state variables to store the two api keys.
+  // Declares state variables to store the two api keys needed to provide credentials to the API calls made in the various child and grandchild components.
   const [RecipesAPIKey, setRecipesAPIKey ] = useState(config.recipeAPIKey || '');
   const [NutritionalAPIKey, setNutritionalAPIKey] = useState(config.nutritionalAPIKey || '');
 
   return (
-    // Main Div Class
     <div className="main-container defaultColors">
-      {/* Initializes a browser router to change the component based on the current url. */}
       <BrowserRouter>
-      {/* Initializes the NavBar to always be at the top of the page to provide access to it across all route components.*/}
         <NavBar RecipesAPI={[RecipesAPIKey, setRecipesAPIKey]}
           NutritionalAPI={[NutritionalAPIKey, setNutritionalAPIKey]} />
         <hr />
-        {/* Initializes the various routes for each component. */}
         <Routes>
-          {/* Displays the Home Component if the url points to the root path. */}
           <Route path="/" element={<Home />} />
-          {/* Displays the Discover Component and passes in the RecipesAPIKey if the url points to the discover path. */}
           <Route path="/discover" element={<Discover APIKey={RecipesAPIKey} />} />
-          {/* Displays the RecipeList Component and passes in the RecipesAPIKey and false boolean if the url points to the recipelist path. */}
           <Route path="/recipelist" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={false} />} />
-          {/* Displays the RecipeList Component and passes in the RecipesAPIKey and true boolean if the url points to the booklet path. */}
           <Route path="/booklet" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={true} />} />
-          {/* Displays the MealPlanner Component and passes in the NutritionalAPIKey if the url points to the planner path along with any url query parameter passed with it. */}
           <Route path="/planner/*" element={<MealPlanner NutritionalAPIKey={NutritionalAPIKey} />} />
-          {/* Displays the Error Component if any invalid url or path is entered by the user. */}
           <Route path="/*" element={<Error />} />
         </Routes>
-        {/* Initializes the Footer to appear at the bottom of the page to provide access to it across all route components. */}
         <Footer />
       </BrowserRouter>
     </div>
