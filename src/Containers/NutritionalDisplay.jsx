@@ -45,6 +45,7 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
     // the nutrients.
     useEffect(() => {
         if (nutritionWorker) {
+            setIsListGenerated(false);
             nutritionWorker.postMessage({command: 'collectNutrients', nutrientsArray: nutritionalInfo});
         }
     }, [nutritionalInfo])

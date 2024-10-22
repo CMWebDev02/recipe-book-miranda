@@ -12,8 +12,6 @@ export class NutritionalDB {
         this._dbIngredientStore = 'Ingredients';
         this._dbIngredientKeyPath = 'ingredientQuery';
         this._dbIngredientMainIndex = 'Ingredient Queries';
-        this._dbIngredientSecondaryIndexName = 'FDC ID';
-        this._dbIngredientSecondaryIndex = 'fdcId';
 
         this._dbNutritionStore = 'Nutrients';
         this._dbNutrientsKeyPath = 'fdcId';
@@ -95,15 +93,19 @@ export class NutritionalDB {
     }
 
     /**
-     * @method 
-     * @param {type} variable - description .
+     * @method Pulls the fdcId associated with the passed in ingredientQuery from the database.
+     * The fdcId will be used to gather the nutritional info associated with it from the other objectStore in the database.
+     * The method returns a promise that resolves with an object, this object has an 'ok' property that denotes if the database has a valid entry for the indexKey.
+     * If any errors occurs when pulling the info the promise rejects with an error message and
+     * an additional check is made at the start to ensure that an open database connection was made before attempting to pull info from the database. 
+     * @param {string} ingredientQuery - Index key that will be used to pull the associated fdcId.
      */
-    getIngredientQuery(ingredient) {
+    getIngredientQuery(ingredientQuery) {
         return new Promise((resolve, reject) => {
             if (!this._dbConnection) reject('DataBase Not Connected');
             let objectStorage = this._newTransaction(this._dbIngredientStore, 'readonly');
 
-            let storedIngredient = objectStorage.get(ingredient);
+            let storedIngredient = objectStorage.get(ingredientQuery);
 
             storedIngredient.onerror = () => {
                 reject('Failed To Get Specific Recipe');
@@ -119,15 +121,21 @@ export class NutritionalDB {
         })
     }
 
-    addIngredientQuery(ingredient, fdcId) {
+    /**
+     * @method Adds an entry to the ingredient objectStore within the database. The entry will contain the ingredientQuery and the associated fdcId value that resulted from the API fetch call.
+     * A promise is returned by this method and it resolves with an object containing the 'ok' property to denote that the entry was added successfully.
+     * If any errors occurs when pulling the info the promise rejects with an error message only if the error is not a constraint error.
+     * An additional check is made at the start to ensure that an open database connection was made before attempting to add info to the database. 
+     * @param {type} variable - description .
+     */
+    addIngredientQuery(ingredientQuery, fdcId) {
         return new Promise((resolve, reject) => {
             if (!this._dbConnection) reject('DataBase Not Connected');
             let objectStorage = this._newTransaction(this._dbIngredientStore, 'readwrite');
 
-            let newItem = objectStorage.add({ingredientQuery: ingredient, fdcId});
+            let newItem = objectStorage.add({ingredientQuery, fdcId});
 
-            newItem.onerror = ({target}) => {
-                if (target.error.name == 'ConstraintError') return;
+            newItem.onerror = () => {
                 reject('Failed To Add Ingredient Query')
             }
 
@@ -137,6 +145,13 @@ export class NutritionalDB {
         })
     }
 
+    /**
+     * @method Opens a connection to the indexDB and checks if the database is already initialized. If not, the database and its associated objectStores are created.
+     * Once a connection is successfully made the private connection attribute stores the IDBOpenDBRequest for use in other methods. 
+     * The promise is resolved with a value of true to denote that the connection was successfully made and in instances where an error
+     * occurs the promise rejects with an error message.
+     * @param {type} variable - description .
+     */
     openDataBaseConnection() {
         return new Promise((resolve, reject) => {
             let request = indexedDB.open(this._dbName);
@@ -152,7 +167,6 @@ export class NutritionalDB {
                     let ingredientStorage = db.createObjectStore(this._dbIngredientStore, {keyPath: this._dbIngredientKeyPath})
     
                     ingredientStorage.createIndex(this._dbIngredientMainIndex, this._dbIngredientKeyPath, {unique: true});
-                    ingredientStorage.createIndex(this._dbIngredientSecondaryIndexName, this._dbIngredientSecondaryIndex, {unique: true});
                 }
 
                 if (!db.objectStoreNames.contains(this._dbNutritionStore) ) {
@@ -169,11 +183,18 @@ export class NutritionalDB {
         })
     }
 
+    /**
+     * @method Deletes the Nutritional API database from the user's browser.
+     * This is needed in cases where the database become desynchronized between the two objectStores due to a failure to save nutritional info for an fdcId.
+     * If this occurs any ingredientQuery associated with the fdcId would fail to gather nutrient info so to solve this the cached data is cleared for the user.
+     * An open connection does not need to be initialized before calling this method.
+     * A promise is returned and is resolved with true to signal that the deletion has occurred so that the window may be reloaded to properly delete the database.
+     */
     clearDataBase() {
         return new Promise((resolve) => {
             indexedDB.deleteDatabase(this._dbName);
 
-            resolve({ok: true});
+            resolve(true);
         })
     }
 }
