@@ -40,7 +40,7 @@ import { config } from "./JavaScript/private-config.js";
 
 /**
  * @component 
- * Main Container for all web page components. The NavBar and Footer are constantly displayed other components are injected in the page depending on the user's path or url.
+ * Main Container for all web page components. The NavBar and Footer are constantly displayed and other components are injected in the page depending on the user's path or url.
  */
 export function MainPage() {
   // Declares state variables to store the two api keys needed to provide credentials to the API calls made in the various child and grandchild components.
