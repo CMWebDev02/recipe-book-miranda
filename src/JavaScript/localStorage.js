@@ -3,12 +3,14 @@
  * @param {type} variable - description .
  */
 class localStorageAccess {
-    // This class contains the methods utilized to access both the meal planner and recipe list array housed within localStorage.
-    // The class attribute of itemKey is used to specify the key needed to access the necessary array in localStorage.
+    // This class contains the methods utilized to access both the meal planner and recipe list arrays housed within localStorage.
+    // The class attribute of itemKey is used to specify the key needed to access the associated array in localStorage.
 
     /**
-     * @function 
-     * @param {type} variable - description .
+     * @method Crosschecks the passed in recipe object against all other recipes currently saved in localStorage. If any of the recipes are flagged as being equal then false is returned to denote
+     * that the recipe is already saved, else true is returned. All recipe elements from localStorage are temporarily altered to remove their id property and key before being stringified and compared
+     * to the passed in stringified recipe.
+     * @param {object} recipe - Recipe object that is being compared against all other recipes in the array to see if it is unique.
      */
     static checkIfSaved(recipe) {
         let newRecipeString = JSON.stringify(recipe);
@@ -27,6 +29,11 @@ class localStorageAccess {
         return true;
     }
 
+    /**
+     * @method Saves the passed in recipe object to the associated localStorage array under the condition that the recipe is not already present on the list. This also provides the recipeObj
+     * with a id property and an unique value for it that is calculated using a number randomizer and the current date.
+     * @param {object} newRecipe - The new recipe that will be added to the localStorage array.
+     */
     static storeRecipe(newRecipe) {
         let newID = 'id-' + (Math.random() * Date.now()).toString(16).substring(0, 16);
 
@@ -39,13 +46,10 @@ class localStorageAccess {
             // The recipe book is again pulled from store to preserve the id for each recipe, since the above method removes the ones last pulled from storage.
             let currentRecipeBook = this.getList();
             // A shallow copy of the passed in newRecipe object is declared in a new variable.
-            // The passed in object is persistent through the whole project, by adding the id property the object will contain it until the page reloads, so when attempting to add it again,
-            // the id property was remaining and allowing the item to be added multiple times. Shallow copying allows the id property to be added to a recipeObj without having it persist
-            // through the passed in object.
-            // From here on note that passing objects or other variables through different files still maintains the object or variables same place in memory, so any altering made in another file
-            // will still apply even when returning to the original file, so in my case the object on the recipe list page would have the id property added to the recipe object until the page reloaded
-            // which is why the item could be added continuously since the comparison requires comparing the recipes' stringified components to see if they are identical, and if it had the unaccounted for
-            // id property then it would allow it to be added repeatedly.
+            //* The passed in object is persistent through the whole project, by adding the id property the object will contain it until the page reloads, so when attempting to add it again,
+            //* the id property was remaining and allowing the item to be added multiple times. Shallow copying allows the id property to be added to a recipeObj without having it persist
+            //* through the passed in object.
+            
             let recipeToAdd = {...newRecipe};
             // Add a new id property with a randomized id value to the recipeToAdd Object.
             recipeToAdd.id = newID;
@@ -60,6 +64,12 @@ class localStorageAccess {
         }        
     }
 
+    /**
+     * @method Removes the recipe associated with the passed in ID value from the localStorage array. A loop iterates through comparing all recipe IDs to the passed in argument and once the associated
+     * recipe is found, the splice method is used to mutate the array and another class method is used to save the mutated array. If for any reason the recipe was not found within the localStorage array,
+     * an alert is made to the user.
+     * @param {string} recipeID - Recipe ID associated with the recipe object element that will be removed from the localStorage array.
+     */
     static removeRecipe(recipeID) {
         let currentRecipeBook = this.getList();
 
@@ -75,10 +85,17 @@ class localStorageAccess {
         alert('Recipe Removal Failed...')
     }
 
+    /**
+     * @method Returns the array associated with the class's itemKey attribute or if no array exists in localStorage, an empty array is returned.
+     */
     static getList() {
         return JSON.parse(localStorage.getItem(this.itemKey)) || [];
     }
 
+    /**
+     * @method Stores the passed in array in localStorage and associates it with the class's itemKey attribute.
+     * @param {array} allRecipes - Array of recipe objects that will be saved and accessed via the class's itemKey attribute.
+     */
     static setList(allRecipes) {
         localStorage.setItem(this.itemKey, JSON.stringify(allRecipes))
     }
@@ -100,7 +117,7 @@ export class MealPlan extends localStorageAccess {
     static itemKey = 'meal-plan';
 
     /**
-     * @function Stores a recipe into the localStorage array. Duplicate recipes can be saved in case a user wants to have it on multiple days of the week. 
+     * @method Stores a recipe into the localStorage array. Duplicate recipes can be saved in case a user wants to have it on multiple days of the week. 
      * @param {object} newRecipe - Recipe object that will be saved in localStorage.
      */
     static storeRecipe(newRecipe) {
@@ -115,7 +132,7 @@ export class MealPlan extends localStorageAccess {
     }
 
     /**
-     * @function Either removes or adds a weekday property to the recipe specified by the passed in recipeID. If no recipe is found the function halts execution.
+     * @method Either removes or adds a weekday property to the recipe specified by the passed in recipeID. If no recipe is found the function halts execution.
      * @param {string} action - Denotes what code block will execute.
      * @param {string} weekday - Specifies the value of the weekday property for the recipe.
      * @param {string} recipeID - Specifies the recipe that will be altered within localStorage.
@@ -143,7 +160,7 @@ export class MealPlan extends localStorageAccess {
     }
 
     /**
-     * @function Iterates through the array in localStorage and returns the recipe that contains the same matching recipeID argument. If no matching recipe is found then a null value is returned.
+     * @method Iterates through the array in localStorage and returns the recipe that contains the same matching recipeID argument. If no matching recipe is found then a null value is returned.
      * @param {string} recipeID - Identification value that signifies which recipe to obtain from localStorage.
      */
     static findRecipe(recipeID) {
