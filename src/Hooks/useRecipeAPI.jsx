@@ -14,26 +14,33 @@ export function UseRecipeAPI({recipeParam, pageParam, APIKey}) {
     const [ allRecipes, setAllRecipes ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(true);
 
-    // Reruns every time the 
+    // Reruns every time the recipeParam, pageParam, or APIKey changes.
+    // 
     useEffect(() => {
       const controller = new AbortController;
       const signal = controller.signal;
 
-      const uriHeaders = new Headers({
-        'x-api-key': APIKey
-      });
-      let search = uriAPI + recipeParam + '&offset=' + (pageParam * 10);
-
-      const request = new Request(search, {
-        method: 'GET',
-        headers: uriHeaders,
-        signal
-      })
-
+      // A check is made to see if the user attempted to enter a valid APIKey to avoid making any unnecessary fetch call.
       if (APIKey == '') {
         setErrorOccurred('API Key not valid... Request Canceled');
         setIsLoading(false);
       } else {
+        // The APIKey is passed through within a new Headers object.
+        const uriHeaders = new Headers({
+          'x-api-key': APIKey
+        });
+        // The recipeParam and the page offset is appended to the end of the api's initial url.
+        let search = uriAPI + recipeParam + '&offset=' + (pageParam * 10);
+
+        // A new Request object is initialized before being passed to the fetch call, in this new Request object the previously initialized header object is added, 'GET' is specified as the method,
+        // and the AbortController's signal is included as an object literal.
+        const request = new Request(search, {
+          method: 'GET',
+          headers: uriHeaders,
+          signal
+        })
+
+        // The request object is used to make the fetch call to the API and method chaining is used to handle error catching and to handle the response returned by the recipe API.
         fetch(request)
         .then(response => {
               if (!response.ok) throw new Error(`Fetch request failed with a status code of ${response.status}`);
