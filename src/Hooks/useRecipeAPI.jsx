@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-
-
+/**
+ * @hook Fetches an array of recipes based on the recipeParameter passed in. After the search is completed via making the fetchAPI call, the array of 10 items is returned.
+ * The pageParam is used to offset the number of recipes returned in cases where more than ten recipes are available from the recipe API.
+ * @param {string} recipeParam - Recipe query that will be passed to the fetch call to provide the user with results matching their search term.
+ * @param {number} pageParam - Page query that will offset the number of recipes returned in cases where more than 10 recipes are available.
+ * @param {string} APIKey - API key used to provide credentials when making the fetch call to the recipe API.
+ */
 export function UseRecipeAPI({recipeParam, pageParam, APIKey}) {
+    // This is the base url for the fetch call to make it easier to add the user's search term and the page offset.
     const uriAPI = 'https://api.api-ninjas.com/v1/recipe?query=';
     const [ errorOccurred, setErrorOccurred ] = useState('');
     const [ allRecipes, setAllRecipes ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(true);
 
-    // Add Abort Controller and include it in the effect's return statement.
-    
+    // Reruns every time the 
     useEffect(() => {
       const controller = new AbortController;
       const signal = controller.signal;
