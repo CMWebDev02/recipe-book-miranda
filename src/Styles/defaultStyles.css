@@ -1,9 +1,9 @@
 :root {
     --main-background-color: #C5EFCB;
     --main-text-color: #020402;
-    --secondary-background-color: #A9C5A0;
-    --secondary-text-color: #C6DEC6;
-    --outline-color: #758173;
+    --secondary-background-color: #aedbae;
+    --secondary-text-color: #758173;
+    --outline-color: #a0c295;
 
     /* Around 16px */
     --base-font-size: 1rem;
@@ -19,3 +19,38 @@ html {
     color: var(--main-text-color);
 }
 
+a {
+    color: var(--secondary-text-color);
+    text-decoration: none;
+    font-weight: 300;
+}
+
+a:hover {
+    color: var(--outline-color);
+    transform: translate3d(0, -0.25rem, 0);
+    text-shadow: var(--outline-color) 0px 0.15rem 3px;
+}
+
+button {
+    background-color: var(--secondary-background-color);
+    border: transparent;
+    border-radius: 5px;
+    color: var(--main-text-color);
+}
+
+button:hover {
+    background-color: var(--outline-color);
+    color: var(--secondary-text-color);
+}
+
+input {
+    background-color: var(--secondary-background-color);
+    color: var(--main-text-color);
+    border: var(--outline-color) solid 1px;
+}
+
+input:focus {
+    background-color: var(--main-background-color);
+    color: var(--main-text-color);
+    outline: var(--secondary-background-color) solid 1px;
+}

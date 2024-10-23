@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import styles from '../Styles/NavBar.module.css'
 
 /**
  * @component Displays a textbox and a input button to update the current state for the passed in API key string and provides a link to the webpage to obtain an APIkey.
@@ -25,11 +26,11 @@ export function APIKeyTextBox({ api: [apiKey, setAPIKey], title, APISource }) {
     }
 
     return (
-        <>
+        <div className={styles.APIKeyDiv}>
             <h2><a href={APISource}>{title}</a></h2>
             <button onClick={updateKey}>Update</button>
             <input type="password" placeholder={`Enter ${title} Key...`} value={userKey} 
                     onChange={(e) => setUserKey(e.target.value)} />
-        </>
+        </div>
     )
 }

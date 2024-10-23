@@ -1,0 +1,42 @@
+:root {
+    --nav-bar-height: 3rem;
+}
+
+.mainDiv {
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-height: var(--nav-bar-height);
+    
+}
+
+.apisDiv {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+
+}
+
+.APIKeyDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 1.75rem;
+}
+
+.APIKeyDiv * {
+    margin-left: 2px;
+}
+
+.APIKeyDiv h2 {
+    font-size: 1.15rem;
+}
+
+.APIKeyDiv button{
+    height: 1.5rem;
+}
+
+.APIKeyDiv input {
+    height: 1.25rem;
+}

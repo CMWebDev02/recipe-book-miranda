@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NutritionalDB } from "../JavaScript/NutrientDataBase";
 import { APIAttributions } from "../Components/APIAttribution";
+import styles from '../Styles/Footer.module.css'
 
 /**
  * @component Displays a footer at the bottom of the page containing the API Attributions and a button to clear all caches.
@@ -27,7 +28,7 @@ export function Footer() {
     }
 
     return (
-        <footer>
+        <footer className={styles.footerContainer}>
             <APIAttributions />
             <button onClick={clearDataBase}>Clear Cache</button>
         </footer>
