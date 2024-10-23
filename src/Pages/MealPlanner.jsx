@@ -20,7 +20,6 @@ export function MealPlanner({ NutritionalAPIKey }) {
     const [ updateOccurred, setUpdateOccurred ] = useState(false);
     const weekdays = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-
     // Rerenders when the updateOccurred variable changes state. Similar to the first rerender.
     // This again pulls the meal planner array from localStorage and separates all recipes saved within it.
     useEffect(() => {

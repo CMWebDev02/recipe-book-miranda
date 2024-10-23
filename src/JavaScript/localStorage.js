@@ -141,18 +141,18 @@ export class MealPlan extends localStorageAccess {
         // Gets the list of recipes from localStorage and initializes a variable to store the recipe matching the recipeID that is passed in.
         let currentRecipeBook = this.getList();
 
-        let foundRecipe = this.findRecipe(recipeID)
-        if (!foundRecipe) return;
+        let foundIndex = this.findRecipe(recipeID, currentRecipeBook)
+        if (!foundIndex) return;
 
         if (action == 'add') {
-            foundRecipe['weekday'] = weekday;
+            currentRecipeBook[foundIndex]['weekday'] = weekday;
             this.setList(currentRecipeBook)
             alert(`Recipe Added to ${weekday}`)
             return;
         } else if (action == 'remove') {
             // Removes both the weekday property value and the property key.
-            delete foundRecipe.weekday;
-            delete foundRecipe['weekday'];
+            delete currentRecipeBook[foundIndex].weekday;
+            delete currentRecipeBook[foundIndex]['weekday'];
             this.setList(currentRecipeBook)
             alert('Recipe Moved Back')
             return;
@@ -160,15 +160,16 @@ export class MealPlan extends localStorageAccess {
     }
 
     /**
-     * @method Iterates through the array in localStorage and returns the recipe that contains the same matching recipeID argument. If no matching recipe is found then a null value is returned.
+     * @method Iterates through the array in localStorage and returns the index location of the recipe that contains the same matching recipeID argument. If no matching recipe is found then a null value is returned.
      * @param {string} recipeID - Identification value that signifies which recipe to obtain from localStorage.
+     * @param {array} currentRecipeBook - Array of recipe objects that will be iterated through until a recipe with a matching recipeID property is found.
      */
-    static findRecipe(recipeID) {
-        let currentRecipeBook = this.getList();
+    static findRecipe(recipeID, currentRecipeBook) {
 
-        for (const recipe of currentRecipeBook) {
-            if (recipe.id == recipeID) {
-                return recipe;
+        for (const index in currentRecipeBook) {
+            console.log(currentRecipeBook[index])
+            if (currentRecipeBook[index].id == recipeID) {
+                return index;
             }
         }
 

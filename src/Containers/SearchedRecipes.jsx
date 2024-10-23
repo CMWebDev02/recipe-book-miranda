@@ -27,10 +27,14 @@ export function SearchedRecipes({ recipeParam, pageParam, APIKey, newSearch, dis
         <>
             <div className={styles.informationDiv}>
                 <h1>Showing Results for {recipeParam}</h1>
-                <h3>Find Other Recipes:</h3>
-                <SearchBox updateSearch={newSearch} />
                 {errorOccurred && <h1>{errorOccurred}</h1>}
                 {isLoading && <h1>Loading...</h1>}
+                
+                <div>
+                    <h3>Find Other Recipes:</h3>
+                    <SearchBox updateSearch={newSearch} />
+
+                </div>
             </div>
         
             <div className={styles.recipesDisplayDiv}>

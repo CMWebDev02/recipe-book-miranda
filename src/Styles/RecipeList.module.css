@@ -1,13 +1,29 @@
 .mainDisplayDiv {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    gap: 10px; */
-    height: 100%;
+    gap: 5px;
+
     padding: var(--base-padding);
+    height: 100%;
 }
 
 .informationDiv {
     height: 3rem;
+    padding: var(--base-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.informationDiv > div:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 100%;
+}
+
+.informationDiv input, .informationDiv button {
+    height: 60%;
 }
 
 .recipesDisplayDiv {
@@ -15,7 +31,6 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px 1%;
-    height: min-content;
 }
 
 .pageButtonsDiv {
@@ -23,8 +38,18 @@
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+    padding: var(--base-padding);
     
-    height: 3rem;
+    height: 2rem;
+}
+
+.pageButtonsDiv button {
+    height: 2rem;
+}
+
+.pageButtonsDiv button:disabled{
+    background-color: grey;
+    color: black;
 }
 
 /* Positioning and Sizing for recipe cards */
@@ -33,7 +58,7 @@
     border-radius: 10px;
     padding: var(--base-padding);
 
-    height: 100%;
+    height: 40vh;
     width: 49%;
     box-sizing: border-box;
 
@@ -43,7 +68,10 @@
 /* CSS for Inner Content of Recipe Cards */
 .recipeCardDiv > h2 {
     font-weight: bold;
-    color: var(--secondary-text-color)
+    color: var(--secondary-text-color);
+    height: 10%;
+    margin: 0;
+
 }
 
 /* Selects the first div in the recipe card.
@@ -51,24 +79,40 @@
      and the other houses the instructions. */
 .recipeCardDiv > div:nth-of-type(1) {
     display: flex;
-    height: 75%;
-    overflow-y: auto;
-
+    /* Height for the ingredient and instruction div is based on 80% of the parent container's height minus the top and bottom padding. */
+    height: calc(80% - (2 * var(--base-padding)));
+    
     border-top: var(--main-background-color) solid 2px;
     border-bottom: var(--main-background-color) solid 2px;
+    padding: var(--base-padding) 0px var(--base-padding);
 }
 
+/* Selects the ingredients and servings display div and the instruction display div. */
 .recipeCardDiv > div:nth-of-type(1) div {
     width: 50%;
+    padding: var(--base-padding);
+    overflow-y: auto;
 }
 
+/* Selects the ingredient list display div in the recipeCard */
+.recipeCardDiv > div:nth-of-type(1) div:first-of-type ul{
+    margin: 0;
+}
+
+/* Selects the interaction button div */
 .recipeCardDiv > div:nth-of-type(2) {
-    height: 25%
+    height: 10%;
+    
+    display: flex;
+    align-items: center;
+    gap: 0px 10px;
 }
 
+/* Styles the buttons contained in the interaction button div */
 .recipeCardDiv > div:nth-of-type(2) button {
     background-color: var(--main-background-color);
     color: var(--secondary-text-color);
+    height: 70%;
 }
 
 .recipeCardDiv > div:nth-of-type(2) button:hover {

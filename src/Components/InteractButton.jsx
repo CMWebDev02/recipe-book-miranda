@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MealPlan, SavedRecipes } from "../JavaScript/localStorage";
+import { MealPlan, SavedRecipes } from "../JavaScript/localStorage.js";
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -56,13 +56,12 @@ export function InteractButton({ recipe, viewLocation, update }) {
         } else if (viewLocation == 'stored') {
             storedActionsHandler(action)
         } else if (viewLocation == 'planner') {
-
             plannerActionsHandler(action)
         }
     }
     
     return (
-        <div className="interaction-buttons">
+        <>
             {/* Depending on the viewLocation, the user is displayed the appropriate buttons,
                 if viewing from the meal planner component the remove and nutritional info buttons are displayed,
                 if viewing from the searched component only the save button is displayed,
@@ -70,6 +69,6 @@ export function InteractButton({ recipe, viewLocation, update }) {
             {viewLocation != 'planner' && <button onClick={() => handleClick('include')}>Save Recipe</button>}
             {viewLocation != 'searched' && <button onClick={() => handleClick('remove')}>Remove Recipe</button>}
             {viewLocation == 'planner' && <button onClick={() => handleClick('nutrition')}>Nutritional Info</button>}
-        </div>
+        </>
     )
 }
