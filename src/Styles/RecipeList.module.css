@@ -1,11 +1,13 @@
 .mainDisplayDiv {
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* gap: 10px; */
+    /* display: flex;
+    flex-direction: column;
+    gap: 10px; */
+    height: 100%;
+    padding: var(--base-padding);
 }
 
 .informationDiv {
-
+    height: 3rem;
 }
 
 .recipesDisplayDiv {
@@ -13,6 +15,16 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px 1%;
+    height: min-content;
+}
+
+.pageButtonsDiv {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    
+    height: 3rem;
 }
 
 /* Positioning and Sizing for recipe cards */
@@ -21,26 +33,45 @@
     border-radius: 10px;
     padding: var(--base-padding);
 
+    height: 100%;
     width: 49%;
     box-sizing: border-box;
+
+    background-color: var(--secondary-background-color);
 }
 
 /* CSS for Inner Content of Recipe Cards */
-.recipeCardDiv h2 {
+.recipeCardDiv > h2 {
     font-weight: bold;
+    color: var(--secondary-text-color)
 }
 
-/* Selects the first div in the recipe card */
+/* Selects the first div in the recipe card.
+    Which contains two divs, one that houses the ingredients
+     and the other houses the instructions. */
 .recipeCardDiv > div:nth-of-type(1) {
-    color: white;
+    display: flex;
+    height: 75%;
+    overflow-y: auto;
+
+    border-top: var(--main-background-color) solid 2px;
+    border-bottom: var(--main-background-color) solid 2px;
 }
 
-/* Selects the second div in the recipe card */
+.recipeCardDiv > div:nth-of-type(1) div {
+    width: 50%;
+}
+
 .recipeCardDiv > div:nth-of-type(2) {
-    color: blue;
+    height: 25%
 }
 
-/* Selects the third div in the recipe card */
-.recipeCardDiv > div:nth-of-type(3) {
-    color: red;
+.recipeCardDiv > div:nth-of-type(2) button {
+    background-color: var(--main-background-color);
+    color: var(--secondary-text-color);
+}
+
+.recipeCardDiv > div:nth-of-type(2) button:hover {
+    background-color: var(--outline-color);
+    color: var(--main-text-color);
 }

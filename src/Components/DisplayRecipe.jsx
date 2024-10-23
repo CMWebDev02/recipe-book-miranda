@@ -17,14 +17,16 @@ export function DisplayRecipe({ recipe, viewLocation, update }) {
         <div className={styles.recipeCardDiv}>
             <h2>{title}</h2>
             <div>
-                <ul>
-                    {ingredients.split('|').map(ingredient => <li key={"ingredient-" + Math.random()}>{ingredient}</li>)}
-                </ul>
-                <h5>Makes {servings}.</h5>
-            </div>
-            <div>
-                <h3>Instructions:</h3>
-                <p>{instructions}</p>
+                <div>
+                    <ul>
+                        {ingredients.split('|').map(ingredient => <li key={"ingredient-" + Math.random()}>{ingredient}</li>)}
+                    </ul>
+                    <h3>Makes {servings}.</h3>
+                </div>
+                <div>
+                    <h3>Instructions:</h3>
+                    <p>{instructions}</p>
+                </div>
             </div>
             <div>
                 <InteractButton recipe={recipe} viewLocation={viewLocation} update={update} />

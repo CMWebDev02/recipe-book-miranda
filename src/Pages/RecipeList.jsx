@@ -96,8 +96,10 @@ export function RecipeList({ APIKey, displayLocal }) {
                                     recipeParam={recipeQuery} pageParam={pageQuery.pageNum} APIKey={APIKey} newSearch={newSearch} />}
 
             {/* Updates the current pageQuery value depending on the button pressed. */}
-            <button disabled={pageQuery.pageNum == 1 ? true : false} onClick={() => changePage('previousPage')}>Previous Page</button>
-            <button disabled={isButtonDisabled} onClick={() => changePage('nextPage')}>Next Page</button>
+            <div className={styles.pageButtonsDiv}>
+                <button disabled={pageQuery.pageNum == 1 ? true : false} onClick={() => changePage('previousPage')}>Previous Page</button>
+                <button disabled={isButtonDisabled} onClick={() => changePage('nextPage')}>Next Page</button>
+            </div>
         </div>
     )
 }
