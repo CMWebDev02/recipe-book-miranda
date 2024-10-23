@@ -6,6 +6,8 @@ import styles from '../Styles/RecipeList.module.css'
 
 /**
  * @component Renders a list of recipes, either the recipes resulting from the API fetch call or the recipes saved locally. 10 Recipes are displayed per page.
+ * Searched Recipes and Local recipes share this same base component to allow for reusing the page features present to make navigation similar between the two and so that a recipe whether saved locally or search is displayed
+ * in the same manner.
  * @param {string} APIKey - String variable of the user's APIKey to provide credentials when making a fetch call.
  * @param {boolean} displayLocal - Boolean value to represent if the user should be displaying the LocalRecipes Component or the SearchedRecipes Component.
  */
@@ -83,7 +85,7 @@ export function RecipeList({ APIKey, displayLocal }) {
     }, [displayLocal])
 
     return (
-        <>
+        <div className={styles.mainDisplayDiv}>
             {/* Displays all locallySaved recipes via the LocalRecipes Component and passes the state setter for the isButtonDisabled boolean and the value of the pageQuery variable. */}
             {displayLocal && <LocalRecipes key={pageQuery.pageNum + Math.random()} currentPage={pageQuery.pageNum} disableNextPage={setIsButtonDisabled} />}
 
@@ -96,6 +98,6 @@ export function RecipeList({ APIKey, displayLocal }) {
             {/* Updates the current pageQuery value depending on the button pressed. */}
             <button disabled={pageQuery.pageNum == 1 ? true : false} onClick={() => changePage('previousPage')}>Previous Page</button>
             <button disabled={isButtonDisabled} onClick={() => changePage('nextPage')}>Next Page</button>
-        </>
+        </div>
     )
 }

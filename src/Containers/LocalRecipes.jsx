@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SavedRecipes } from "../JavaScript/localStorage";
 import { DisplayRecipe } from "../Components/DisplayRecipe";
+import styles from '../Styles/RecipeList.module.css'
 
 /**
  * @component Displays locally saved recipes, 10 recipes are displayed per page, and provides various buttons to remove recipes or add them to a meal planner.
@@ -31,10 +32,15 @@ export function LocalRecipes({ currentPage, disableNextPage }) {
 
     return (
         <>
-            {!containsRecipes && <h1>{currentPage == 1 ? 'No Recipes Saved To Recipe Book' : 'No More Recipes To Display'}</h1>}
-            {allRecipes.map(recipe => <DisplayRecipe key={"local-recipe-" + Math.random()}
-                                        recipe={recipe} viewLocation={'stored'} 
-                                        update={setUpdateOccurred} />)}
+            <div className={styles.informationDiv}>
+                {!containsRecipes && <h1>{currentPage == 1 ? 'No Recipes Saved To Recipe Book' : 'No More Recipes To Display'}</h1>}
+            </div>
+
+            <div className={styles.recipesDisplayDiv}>
+                {allRecipes.map(recipe => <DisplayRecipe key={"local-recipe-" + Math.random()}
+                                            recipe={recipe} viewLocation={'stored'} 
+                                            update={setUpdateOccurred} />)}
+            </div>
         </>
     )
 }
