@@ -1,3 +1,65 @@
-.mainContainer {
+/* Navigation Bar CSS */
+.navBarDiv {
+    padding: var(--base-padding);
+    height: var(--nav-bar-height);
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--outline-color) solid var(--line-divider-size);
+}
 
+.apisDiv {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+
+}
+
+.APIKeyDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 1.75rem;
+    gap: 2px 5px;
+}
+
+.APIKeyDiv h2 {
+    font-size: 1.15rem;
+}
+
+.APIKeyDiv button{
+    height: 1.5rem;
+}
+
+.APIKeyDiv input {
+    height: 1.25rem;
+}
+
+
+/* Main Page Container CSS */
+.mainPageContainer {
+    /* Height of the container is calculated by subtracting the height of the navbar and footer
+        along with the top and bottom padding for all three containers */
+    height: calc(100% - var(--nav-bar-height) - var(--footer-height) - (6 * var(--base-padding)) - (2 * var(--line-divider-size)));
+    padding: var(--base-padding);    
+
+    overflow-y: auto;
+    scrollbar-color: var(--secondary-background-color) var(--main-background-color);
+}
+
+/* Footer CSS */
+.footerContainer {
+    padding: var(--base-padding);
+    height: var(--footer-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.15rem;
+
+    border-top: var(--outline-color) solid var(--line-divider-size);
+}
+
+.footerContainer button {
+    height: 1.25rem;
 }

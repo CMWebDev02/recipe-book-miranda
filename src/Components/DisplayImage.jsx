@@ -46,8 +46,9 @@ export function DisplayImage({ recipeObject }) {
         const worker = new Worker(new URL('../JavaScript/WebWorker.js', import.meta.url));
 
         worker.addEventListener('message', ({data}) => {
-            if (data.command == 'convertToTitle')
-            setRecipeTitle(data.imageTitle);
+            if (data.command == 'convertToTitle') {
+                setRecipeTitle(data.imageTitle);
+            }
         })
 
         setTitleWorker(worker)
@@ -60,7 +61,7 @@ export function DisplayImage({ recipeObject }) {
     return (
         <>
             <h2>{recipeTitle}</h2>
-            <Link to={`/recipelist?recipe=${recipeTitle}&page=1`}><img src={recipeSRC} alt={recipeTitle} /></Link>
+            <Link to={recipeTitle != '' && recipeTitle != 'Idly' ? `/recipelist?recipe=${recipeTitle}&page=1` : '/discover'}><img src={recipeSRC} alt={recipeTitle} /></Link>
             
         </>
     )

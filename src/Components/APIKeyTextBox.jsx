@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import styles from '../Styles/NavBar.module.css'
+import styles from '../Styles/MainPage.module.css'
 
 /**
  * @component Displays a textbox and a input button to update the current state for the passed in API key string and provides a link to the webpage to obtain an APIkey.

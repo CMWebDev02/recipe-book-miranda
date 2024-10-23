@@ -24,7 +24,7 @@ addEventListener('message', ({data}) => {
         // Miscellaneous  
         case 'convertToTitle': {
             let imageTitle = convertToTitle(data.imageString, data.srcBool)
-            postMessage({command: 'convertTitle', imageTitle});
+            postMessage({command: 'convertToTitle', imageTitle});
             break;
         }
     }
@@ -168,9 +168,10 @@ function convertFromSRC(src) {
     // A substring is generated of the last full word within the src, all characters between the last '/' and last '.' are used.
     let describingWord = src.substring(src.lastIndexOf('/') + 1, src.lastIndexOf('.'))
     // From here any character that are not a digit are matched are saved into a new variable.
-    let [ titleString ] = describingWord.match(/[\D|-]+/gi)
+    let [ titleString ] = describingWord.match(/[\D|-]+/gi);
     // Finally, all '-'s are found and replaced with spaces before being returned.
-    return titleString.replace(/[-]/gi, ' ')
+    titleString = titleString.replace(/[-]/gi, ' ');
+    return titleString;
 }
 
 /**

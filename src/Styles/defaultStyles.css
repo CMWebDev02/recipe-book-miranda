@@ -7,11 +7,23 @@
 
     /* Around 16px */
     --base-font-size: 1rem;
+
+    --nav-bar-height: 3rem;
+    --footer-height: 1.5rem;
+    --line-divider-size: 2px;
+
+    --base-padding: 0.5rem;
+
 }
 
-html {
+html, body, #root {
     background-color: var(--main-background-color);
     color: var(--main-text-color);
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100vw;
+    overflow: hidden;
 }
 
 .defaultColors {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { APIKeyTextBox } from "../Components/APIKeyTextBox";
 import { PageLinks } from "../Components/PageLinks";
-import style from '../Styles/NavBar.module.css';
+import style from '../Styles/MainPage.module.css';
 
 /**
  * @component Navigation Bar For the Web Page. It displays the various links to access the different pages in the project and provides two textboxes for the user to enter their API keys.
@@ -11,7 +11,7 @@ import style from '../Styles/NavBar.module.css';
 export function NavBar({RecipesAPI, NutritionalAPI}) {
 
     return (
-        <div className={style.mainDiv}>            
+        <div className={style.navBarDiv}>            
             <h1>Recipe Book Project</h1>
             <PageLinks />
             <div className={style.apisDiv}>

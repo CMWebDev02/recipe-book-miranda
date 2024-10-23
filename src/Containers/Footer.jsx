@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NutritionalDB } from "../JavaScript/NutrientDataBase";
 import { APIAttributions } from "../Components/APIAttribution";
-import styles from '../Styles/Footer.module.css'
+import styles from '../Styles/MainPage.module.css'
 
 /**
  * @component Displays a footer at the bottom of the page containing the API Attributions and a button to clear all caches.

@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useSearchParams } from "react-router-dom"
 import { SearchedRecipes } from "../Containers/SearchedRecipes";
 import { LocalRecipes } from "../Containers/LocalRecipes";
+import styles from '../Styles/RecipeList.module.css'
 
 /**
  * @component Renders a list of recipes, either the recipes resulting from the API fetch call or the recipes saved locally. 10 Recipes are displayed per page.

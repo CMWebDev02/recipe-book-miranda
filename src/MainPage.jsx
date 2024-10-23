@@ -20,6 +20,9 @@ import { config } from "./JavaScript/private-config.js";
 // - Double check that all workers trigger appropriate updates.
 // - Style the project
 
+
+// Add a check to the random meal inspiration, if no value comes back for the meal title, instead just
+// have the image link to the discover page.
 // Change all occurrences of FoodData Center to FoodData Central
 // Fix the nutritional Display not displaying the generating list and the total nutritional info before the background calculation is finished being made.
 // For find recipe of the MealPlanner class, have it return an undefined object if no recipe can be found that matches the recipeID passed in and use the undefined value to 
@@ -50,22 +53,20 @@ export function MainPage() {
   const [NutritionalAPIKey, setNutritionalAPIKey] = useState(config.nutritionalAPIKey || '');
 
   return (
-    <div className='defaultColors'>
       <BrowserRouter>
         <NavBar RecipesAPI={[RecipesAPIKey, setRecipesAPIKey]}
           NutritionalAPI={[NutritionalAPIKey, setNutritionalAPIKey]} />
-        <hr />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/discover" element={<Discover APIKey={RecipesAPIKey} />} />
-          <Route path="/recipelist" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={false} />} />
-          <Route path="/booklet" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={true} />} />
-          <Route path="/planner/*" element={<MealPlanner NutritionalAPIKey={NutritionalAPIKey} />} />
-          <Route path="/*" element={<Error />} />
-        </Routes>
-        <hr />
+        <div className={styles.mainPageContainer}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/discover" element={<Discover APIKey={RecipesAPIKey} />} />
+            <Route path="/recipelist" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={false} />} />
+            <Route path="/booklet" element={<RecipeList APIKey={RecipesAPIKey} displayLocal={true} />} />
+            <Route path="/planner/*" element={<MealPlanner NutritionalAPIKey={NutritionalAPIKey} />} />
+            <Route path="/*" element={<Error />} />
+          </Routes>
+        </div>
         <Footer />
       </BrowserRouter>
-    </div>
   )
 }
