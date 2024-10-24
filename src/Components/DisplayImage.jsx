@@ -60,8 +60,8 @@ export function DisplayImage({ recipeObject }) {
 
     return (
         <>
-            <h2>{recipeTitle}</h2>
-            <Link to={recipeTitle != '' && recipeTitle != 'Idly' ? `/recipelist?recipe=${recipeTitle}&page=1` : '/discover'}><img src={recipeSRC} alt={recipeTitle} /></Link>
+            {recipeTitle != '' && recipeTitle != 'Idly' ? <h2>Maybe Try... {recipeTitle}</h2> : <h2>Search For Any Recipe You Can Think Of!!!</h2>}
+            {recipeSRC && <Link to={recipeTitle != '' && recipeTitle != 'Idly' ? `/recipelist?recipe=${recipeTitle}&page=1` : '/discover'}><img src={recipeSRC} alt={recipeTitle} /></Link>}
             
         </>
     )

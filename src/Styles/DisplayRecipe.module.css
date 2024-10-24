@@ -70,3 +70,22 @@
     background-color: var(--outline-color);
     color: var(--main-text-color);
 }
+
+/* Styling for the weekday select element */
+.recipeCardDiv > div:nth-of-type(2) select {
+    background-color: var(--main-background-color);
+}
+/* Darkens the select background color when the user is selecting a weekday */
+.recipeCardDiv > div:nth-of-type(2) select:focus-within {
+    background-color: var(--outline-color);
+}
+
+/* Styles the default look of each option within the select element */
+.recipeCardDiv > div:nth-of-type(2) option {
+    background-color: var(--secondary-background-color);
+}
+
+/* Darkens the currently selected option within the select element */
+.recipeCardDiv > div:nth-of-type(2) select option:checked {
+    background-color: var(--outline-color);
+}

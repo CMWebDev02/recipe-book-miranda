@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { UseRandomRecipe } from "../Hooks/UseRandomRecipe";
 import { DisplayImage } from "../Components/DisplayImage";
 
-
 /**
  * @component Displays a random meal to the user and provides a link to search for said meal within the web project. Also, displays if the fetch call is still loading or any error that occurred with the fetch call.
  */
@@ -19,10 +18,10 @@ export function MealInspiration() {
     }, [firstResponse, isLoading, errorsOccurred])
 
     return (
-        <>
-            {errorsOccurred && <h1>{errorsOccurred}</h1>}
-            {isLoading && <h1>Loading...</h1>}
+        <div>
+            {errorsOccurred && <h2>{errorsOccurred}</h2>}
+            {isLoading && <h2>Loading...</h2>}
             {recipeObject && <DisplayImage recipeObject={recipeObject} />} 
-        </>
+        </div>
     )
 }

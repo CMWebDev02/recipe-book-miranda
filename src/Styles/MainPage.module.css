@@ -40,7 +40,7 @@
 /* Main Page Container CSS */
 .mainPageContainer {
     /* Height of the container is calculated by subtracting the height of the navbar and footer
-        along with the top and bottom padding for all three containers */
+        along with the top and bottom padding for all three containers, and the size of the two line dividers. */
     height: calc(100% - var(--nav-bar-height) - var(--footer-height) - (6 * var(--base-padding)) - (2 * var(--line-divider-size)));
     padding: var(--base-padding);    
 
