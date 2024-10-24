@@ -15,6 +15,7 @@ export function NutritionalInfo({ NutritionalAPIKey }) {
     const [ recipeIngredients, setRecipeIngredients ] = useState([]);
     const [ ingredientQueries, setIngredientQueries ] = useState([]);
     const [ ingredientWorker, setIngredientWorker ] = useState();
+    const [ errorOccurred, setErrorOccurred ] = useState(false)
     const navigate = useNavigate();
 
     // Upon first rendering of the component, a worker is initialized and stored in the components state.
@@ -36,15 +37,22 @@ export function NutritionalInfo({ NutritionalAPIKey }) {
 
     // Rerenders every time the recipeID injected into the url changes.
     // The findRecipe method from the MealPlan class is used with the recipeID as an argument to change selected the appropriate recipe from localStorage.
+    // If no associated recipe is found, an empty recipe is set as the selectedRecipe
     useEffect(() => {
-        //! Add a check to ensure that the recipe is saved in localStorage
-        setSelectedRecipe({...MealPlan.findRecipe(recipeID)})
+        let mealPlannerArray = MealPlan.getList();
+        let selectedRecipeIndex = MealPlan.findRecipe(recipeID, mealPlannerArray);
+        if (!selectedRecipeIndex) {
+            setSelectedRecipe({})
+            setErrorOccurred(true);
+        };
+        let selectedRecipe = mealPlannerArray[selectedRecipeIndex];
+        setSelectedRecipe({...selectedRecipe});
     }, [recipeID])
 
     // Rerenders every time the selectedRecipe variable changes state.
     // If the ingredientWorker is initialized, send a message to the worker to generate the ingredients array by passing in the ingredient string.
     useEffect(() => {
-        if (ingredientWorker) {
+        if (ingredientWorker && !errorOccurred) {
             ingredientWorker.postMessage({command: 'splitIngredientString', ingredientsString: selectedRecipe.ingredients})
         }
     }, [selectedRecipe])
@@ -59,7 +67,8 @@ export function NutritionalInfo({ NutritionalAPIKey }) {
     return (
         <div className={styles.nutritionalDialog}>
             <h2>All Ingredients</h2>
-            <NutritionalDisplay nutritionalAPIKey={NutritionalAPIKey} ingredients={recipeIngredients} ingredientQueries={ingredientQueries} />
+            {errorOccurred && <h2 className={styles.errorMessage}>Invalid Recipe, nutritional info not available</h2>}
+            {!errorOccurred && <NutritionalDisplay nutritionalAPIKey={NutritionalAPIKey} ingredients={recipeIngredients} ingredientQueries={ingredientQueries} />}
             <button onClick={returnToPlanner} className={styles.closeNutrition}>Close</button>
         </div>
     )

@@ -18,8 +18,6 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
     const [ nutrients, setNutrients ] = useState([]);
     const [ totalNutrients, setTotalNutrients ] = useState([]);
     const [ nutritionWorker, setNutritionalWorker ] = useState('');
-    // A boolean is initialized to denote if the worker has finished converting the list of nutrients from the API call and totaling them. 
-    const [ isListGenerated, setIsListGenerated ] = useState(false);
 
     // Upon first render of the component, a worker is initialized and stored in the components state.
     // This worker will convert the nutritionalInfo acquired by the API into a more manageable format and tally up the total macro and micro nutrients specified.
@@ -30,7 +28,6 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
             if (data.command == 'collectNutrients') {
                 setNutrients(data.ingredientNutrients);
                 setTotalNutrients(data.totalNutritionalInfo);
-                setIsListGenerated(true);
             }
         });
 
@@ -46,7 +43,6 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
     // the nutrients.
     useEffect(() => {
         if (nutritionWorker) {
-            setIsListGenerated(false);
             nutritionWorker.postMessage({command: 'collectNutrients', nutrientsArray: nutritionalInfo});
         }
     }, [nutritionalInfo])
@@ -54,11 +50,11 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
     return (
         <div className={styles.nutritionalInfoDiv}>
             {/* Various elements are conditionally displayed if any error had occurred or if the information is still loading. */}
-            {isLoading && <h1>Loading</h1>}
+            {isLoading && <h1>Fetching Nutritional Data...</h1>}
             {errorOccurred && <h1>{errorOccurred}</h1>}
-            {(!isListGenerated && !errorOccurred && !isLoading) && <h1>Generating List</h1>}
-            {isListGenerated && nutrients.map(({searchQuery, nutritionalInfo}) => <FoodNutrients key={'nutritional-info-' + Math.random()} foodNutrients={nutritionalInfo} foodTitle={searchQuery} />)}
-            {isListGenerated && <FoodNutrients key={'total-nutritional-info-' + Math.random()} foodNutrients={totalNutrients} foodTitle={'Total Nutrients:'}/>}
+            {(nutrients.length == 0 && !errorOccurred && !isLoading) && <h1>Generating List</h1>}
+            {nutrients.length > 0 && nutrients.map(({searchQuery, nutritionalInfo}) => <FoodNutrients key={'nutritional-info-' + Math.random()} foodNutrients={nutritionalInfo} foodTitle={searchQuery} />)}
+            {nutrients.length > 0 && <FoodNutrients key={'total-nutritional-info-' + Math.random()} foodNutrients={totalNutrients} foodTitle={'Total Nutrients:'}/>}
         </div>
     )
 }

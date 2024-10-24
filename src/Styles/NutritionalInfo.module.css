@@ -25,6 +25,17 @@
     overflow-y: auto;
 }
 
+.errorMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: black 1px 1px 5px;
+
+    color: red;
+    height: calc(50% - 4rem);
+    vertical-align: middle;
+}
+
 .closeNutrition {
     width: 30%;
     align-self: center;

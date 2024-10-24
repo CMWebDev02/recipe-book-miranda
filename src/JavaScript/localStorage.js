@@ -167,7 +167,6 @@ export class MealPlan extends localStorageAccess {
     static findRecipe(recipeID, currentRecipeBook) {
 
         for (const index in currentRecipeBook) {
-            console.log(currentRecipeBook[index])
             if (currentRecipeBook[index].id == recipeID) {
                 return index;
             }

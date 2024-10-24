@@ -24,9 +24,6 @@ import { config } from "./JavaScript/private-config.js";
 // Add a check to the random meal inspiration, if no value comes back for the meal title, instead just
 // have the image link to the discover page.
 // Change all occurrences of FoodData Center to FoodData Central
-// Fix the nutritional Display not displaying the generating list and the total nutritional info before the background calculation is finished being made.
-// For find recipe of the MealPlanner class, have it return an undefined object if no recipe can be found that matches the recipeID passed in and use the undefined value to 
-// display an error or message alerting the user the recipe does not exist.
 // Condense down on the amount of components I use or use them in more places, display ingredients can be used in the display recipe component
 // Also, rather than generating the meal title for the shopping list in the worker, move that to the ShoppingListDisplayContainer
 
