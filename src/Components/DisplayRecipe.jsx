@@ -1,7 +1,7 @@
 import React from "react";
 import { InteractButton } from "./InteractButton";
 import { WeekDaySelector } from "./WeekDaySelector";
-import styles from '../Styles/RecipeList.module.css'
+import styles from '../Styles/DisplayRecipe.module.css'
 
 /**
  * @component Displays various information from the passed in recipe object. The information is accessed based on certain properties and deconstruction is used to obtain these values.
@@ -15,16 +15,16 @@ export function DisplayRecipe({ recipe, viewLocation, update }) {
 
     return (
         <div className={styles.recipeCardDiv}>
-            <h2>{title}</h2>
+            <h3>{title}</h3>
             <div>
                 <div>
                     <ul>
                         {ingredients.split('|').map(ingredient => <li key={"ingredient-" + Math.random()}>{ingredient}</li>)}
                     </ul>
-                    <h3>Makes {servings}.</h3>
+                    <h4>Makes {servings}.</h4>
                 </div>
                 <div>
-                    <h3>Instructions:</h3>
+                    <h4>Instructions:</h4>
                     <p>{instructions}</p>
                 </div>
             </div>

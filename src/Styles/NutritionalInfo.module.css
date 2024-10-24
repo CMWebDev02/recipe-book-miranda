@@ -1,23 +1,33 @@
 .nutritionalDialog {
     position: fixed;
-    top: 10%;
-    left: 10vw;
+    overflow-y: auto;
 
-    overflow-y: scroll;
-    background-color: black;
-    color: wheat;
-    width: 75%;
-    height: 50%;
+    background-color: var(--secondary-background-color);
+    color: var(--main-text-color);
+    width: 50%;
+    height: 65%;
     display: flex;
     flex-direction: column;
 
-    border: red solid 5px;
+    border: var(--outline-color) solid 5px;
     border-radius: 20px;
-    padding: 50px; 
+    padding: var(--base-padding); 
+}
+
+.nutritionalDialog h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+}
+
+.nutritionalInfoDiv {
+    height: calc(100% - 4rem);
+    overflow-y: auto;
 }
 
 .closeNutrition {
-    margin-top: 50px;
     width: 30%;
     align-self: center;
+    background-color: var(--main-background-color);
+    height: 2rem;
 }

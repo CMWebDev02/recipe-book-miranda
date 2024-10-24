@@ -58,7 +58,7 @@ export function NutritionalInfo({ NutritionalAPIKey }) {
 
     return (
         <div className={styles.nutritionalDialog}>
-            <h1>All Ingredients</h1>
+            <h2>All Ingredients</h2>
             <NutritionalDisplay nutritionalAPIKey={NutritionalAPIKey} ingredients={recipeIngredients} ingredientQueries={ingredientQueries} />
             <button onClick={returnToPlanner} className={styles.closeNutrition}>Close</button>
         </div>

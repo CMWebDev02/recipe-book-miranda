@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import styles from '../Styles/MealPlanner.module.css'
 
 export function GenerateButton({ containsMeals }) {
     const navigate = useNavigate()
@@ -13,6 +14,6 @@ export function GenerateButton({ containsMeals }) {
     }
 
     return (
-        <button onClick={handleClick}>Generate Shopping List</button>
+        <button onClick={handleClick} className={styles.shoppingListButton}>Generate Shopping List</button>
     )
 }

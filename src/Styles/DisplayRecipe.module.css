@@ -1,0 +1,72 @@
+/* Positioning and Sizing for recipe cards */
+.recipeCardDiv {
+    border: var(--outline-color) solid 5px;
+    border-radius: 10px;
+    padding: var(--base-padding);
+
+    height: 40vh;
+    width: 49%;
+    box-sizing: border-box;
+
+    background-color: var(--secondary-background-color);
+}
+
+/* CSS for Inner Content of Recipe Cards */
+.recipeCardDiv > h3 {
+    font-weight: bold;
+    color: var(--secondary-text-color);
+    height: 10%;
+    margin: 0;
+    font-size: 2rem;
+
+}
+
+/* Selects the first div in the recipe card.
+    Which contains two divs, one that houses the ingredients
+     and the other houses the instructions. */
+.recipeCardDiv > div:nth-of-type(1) {
+    display: flex;
+    /* Height for the ingredient and instruction div is based on 80% of the parent container's height minus the top and bottom padding. */
+    height: calc(80% - (2 * var(--base-padding)));
+    
+    border-top: var(--main-background-color) solid 2px;
+    border-bottom: var(--main-background-color) solid 2px;
+    padding: var(--base-padding) 0px var(--base-padding);
+}
+
+/* Selects the ingredients and servings display div and the instruction display div. */
+.recipeCardDiv > div:nth-of-type(1) div {
+    width: 50%;
+    padding: var(--base-padding);
+    overflow-y: auto;
+}
+
+/* Selects the ingredient list display div in the recipeCard */
+.recipeCardDiv > div:nth-of-type(1) div:first-of-type ul{
+    margin: 0;
+}
+
+.recipeCardDiv > div:nth-of-type(1) div:last-of-type h4{
+    margin: 0;
+}
+
+/* Selects the interaction button div */
+.recipeCardDiv > div:nth-of-type(2) {
+    height: 10%;
+    
+    display: flex;
+    align-items: center;
+    gap: 0px 10px;
+}
+
+/* Styles the buttons contained in the interaction button div */
+.recipeCardDiv > div:nth-of-type(2) button {
+    background-color: var(--main-background-color);
+    color: var(--secondary-text-color);
+    height: 70%;
+}
+
+.recipeCardDiv > div:nth-of-type(2) button:hover {
+    background-color: var(--outline-color);
+    color: var(--main-text-color);
+}

@@ -5,6 +5,7 @@ import { DisplayRecipe } from "../Components/DisplayRecipe";
 import { NutritionalInfo } from "./NutritionalInfo";
 import { GenerateButton } from '../Components/GenerateButton.jsx'
 import { ShoppingList } from "./ShoppingList.jsx";
+import styles from '../Styles/MealPlanner.module.css'
 
 /**
  * @component Displays a weekly planner to assign meals to on certain days. All recipes will be displayed in a separate list with the option to add them to specific weekdays.
@@ -29,19 +30,18 @@ export function MealPlanner({ NutritionalAPIKey }) {
     }, [updateOccurred])
     
     return (
-        <div className="meal-planner">
-            <div className="planned-meals">
+        <div className={styles.mainPageDiv}>
+            <div className={styles.plannedMealsDiv}>
+                <GenerateButton containsMeals={plannedMeals.length > 0 ? true : false} />
                 {/* Displays meals that have the weekday property and shows the meal under their appropriate day. */}
-                {weekdays.map(day => <div key={"day-" + Math.random()}>
-                                    <h1 >{day}</h1>
-                                    {plannedMeals.filter(meal => meal.weekday == day).map(meal => <DisplayRecipe key={'weekday-meal-' + Math.random()} recipe={meal} viewLocation={'planner'} update={setUpdateOccurred} /> )}
-                                    <hr />
+                {weekdays.map(day => <div key={"day-" + Math.random()} className={styles.weekDayMealDiv} >
+                                        <h2>{day}</h2>
+                                        {plannedMeals.filter(meal => meal.weekday == day).map(meal => <DisplayRecipe key={'weekday-meal-' + Math.random()} recipe={meal} viewLocation={'planner'} update={setUpdateOccurred} /> )}
                                     </div>)}
                 
             </div>
-            <GenerateButton containsMeals={plannedMeals.length > 0 ? true : false} />
-            <hr />
-            <div className="unplanned-meals">
+            <div className={styles.unPlannedMealsDiv}>
+                <h2>Unplanned Meals:</h2>
                 {/* Displays all meals that do not have the weekday property */}
                 {unPlannedMeals.map(meal => <DisplayRecipe key={'weekday-meal-' + Math.random()} recipe={meal} viewLocation={'planner'} update={setUpdateOccurred} />)}
             </div>

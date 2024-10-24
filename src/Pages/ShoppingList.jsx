@@ -48,7 +48,7 @@ export function ShoppingList({ meals }) {
 
     return (
         <div className={styles.shoppingList}>
-            <h1>Shopping List</h1>
+            <h2>Shopping List</h2>
             <ShoppingListDisplay list={shoppingList} />
             <button onClick={returnToPlanner} className={styles.closeList}>Close</button>
         </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { UseNutritionAPI } from "../Hooks/UseNutritionAPI.jsx";
 import { FoodNutrients } from "../Components/FoodNutrients";
+import styles from '../Styles/NutritionalInfo.module.css'
 
 /**
  * @component Displays the nutritional information gather from the FoodData Center API to the user based on the passed in ingredientQueries array.
@@ -51,13 +52,13 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
     }, [nutritionalInfo])
 
     return (
-        <>
+        <div className={styles.nutritionalInfoDiv}>
             {/* Various elements are conditionally displayed if any error had occurred or if the information is still loading. */}
             {isLoading && <h1>Loading</h1>}
             {errorOccurred && <h1>{errorOccurred}</h1>}
             {(!isListGenerated && !errorOccurred && !isLoading) && <h1>Generating List</h1>}
             {isListGenerated && nutrients.map(({searchQuery, nutritionalInfo}) => <FoodNutrients key={'nutritional-info-' + Math.random()} foodNutrients={nutritionalInfo} foodTitle={searchQuery} />)}
             {isListGenerated && <FoodNutrients key={'total-nutritional-info-' + Math.random()} foodNutrients={totalNutrients} foodTitle={'Total Nutrients:'}/>}
-        </>
+        </div>
     )
 }

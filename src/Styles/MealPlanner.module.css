@@ -1,0 +1,62 @@
+.mainPageDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 99%;
+}
+
+.plannedMealsDiv {
+    width: calc(70% - (2 * var(--base-padding)));
+    padding: var(--base-padding);
+    overflow-y: auto;
+    /* Take entire height of the parent container */
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.plannedMealsDiv h2, .unPlannedMealsDiv h2 {
+    width: 100%;
+    height: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+    padding: var(--base-padding) 0px var(--base-padding);
+}
+
+.weekDayMealDiv {
+    /* Requires each div to be at least 50% of its parent container, even if a div
+        goes off screen, this is fine since overflow will allow it to still be visable
+            to the user. */
+    min-height: 55%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 10px;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.unPlannedMealsDiv {
+    width: calc(30% - (2 * var(--base-padding)));
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--base-padding);
+    overflow-y: auto;
+}
+
+.unPlannedMealsDiv div{
+    width: 100%;
+}
+
+.shoppingListButton {
+    height: 2rem;
+    align-self: flex-start;
+    padding: var(--base-padding);
+}
