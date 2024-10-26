@@ -17,7 +17,6 @@ import { config } from "./JavaScript/private-config.js";
 
 // TODO: 
 // - Add a check to see if any excess recipes are available then prevent the user from changing to the next page by alerting them that no excess pages are available.
-// - Double check that all workers trigger appropriate updates.
 // - Style the project
 
 

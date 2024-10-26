@@ -38,9 +38,7 @@ a {
 }
 
 a:hover {
-    color: var(--outline-color);
-    transform: translate3d(0, -0.25rem, 0);
-    text-shadow: var(--outline-color) 0px 0.15rem 3px;
+    animation: 0.15s linear 0.025s 1 forwards hoverText;
 }
 
 button {
@@ -65,4 +63,14 @@ input:focus {
     background-color: var(--main-background-color);
     color: var(--main-text-color);
     outline: var(--secondary-background-color) solid 1px;
+}
+
+@keyframes hoverText {
+    to {
+        color: var(--outline-color);
+
+        text-shadow: var(--main-text-color) 0px 0.15rem 3px;
+
+        transform: translate3d(0, -00.25rem, 0);
+    }
 }
