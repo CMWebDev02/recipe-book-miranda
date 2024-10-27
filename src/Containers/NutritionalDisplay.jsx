@@ -4,9 +4,9 @@ import { FoodNutrients } from "../Components/FoodNutrients";
 import styles from '../Styles/NutritionalInfo.module.css'
 
 /**
- * @component Displays the nutritional information gather from the FoodData Center API to the user based on the passed in ingredientQueries array.
+ * @component Displays the nutritional information gather from the FoodData Central API to the user based on the passed in ingredientQueries array.
  * @param {array} ingredientQueries - All ingredients that the API will return nutritional information for and then display to the user if a valid response occurs.
- * @param {string} nutritionalAPIKey - API key used to provide credentials to the FoodData Center API.
+ * @param {string} nutritionalAPIKey - API key used to provide credentials to the FoodData Central API.
  */
 export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
     // The UseNutritionAPI hook is called and the array of ingredient queries is passed in and what is received in turn in an array of the various nutritional information

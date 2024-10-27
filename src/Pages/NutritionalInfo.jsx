@@ -6,7 +6,7 @@ import { NutritionalDisplay } from "../Containers/NutritionalDisplay";
 
 /**
  * @component Displays the nutritional info of a recipe. The selected recipe is pulled from localStorage and is found by using the recipe id that is injected into the url.
- * @param {string} NutritionalAPIKey - API key used to provide credentials to the FoodData Center API.
+ * @param {string} NutritionalAPIKey - API key used to provide credentials to the FoodData Central API.
  */
 export function NutritionalInfo({ NutritionalAPIKey }) {
     // The id of the recipe is injected into the url and this id is used to determine what nutritional info to display.

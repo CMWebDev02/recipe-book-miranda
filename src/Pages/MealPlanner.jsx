@@ -10,7 +10,7 @@ import styles from '../Styles/MealPlanner.module.css'
 /**
  * @component Displays a weekly planner to assign meals to on certain days. All recipes will be displayed in a separate list with the option to add them to specific weekdays.
  * User will also be able to remove these recipes from localStorage and view their nutritional info.
- * @param {string} NutritionalAPIKey - API key used to provide credentials to the FoodData Center API.
+ * @param {string} NutritionalAPIKey - API key used to provide credentials to the FoodData Central API.
  */
 export function MealPlanner({ NutritionalAPIKey }) {
     // Pulls the meal planner array from localStorage and separates all recipes saved within it.

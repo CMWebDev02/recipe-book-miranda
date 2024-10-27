@@ -1,5 +1,5 @@
 /**
- * @class Provides access to the needed attributes and methods for accessing the indexDB used to store all nutritional information gathered from the FoodData Center API. This 
+ * @class Provides access to the needed attributes and methods for accessing the indexDB used to store all nutritional information gathered from the FoodData Central API. This 
  * handles the initialization of the database in the user's browser, opening the connection to the database, and handling the data passed to and from the database. All public methods return promises 
  * to allow the database to be interacted with asynchronously.
  */

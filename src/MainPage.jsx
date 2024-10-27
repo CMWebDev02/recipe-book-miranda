@@ -17,29 +17,10 @@ import { config } from "./JavaScript/private-config.js";
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
 
-// TODO: 
-// - Add a check to see if any excess recipes are available then prevent the user from changing to the next page by alerting them that no excess pages are available.
-// - Style the project
-
-
-// Add a check to the random meal inspiration, if no value comes back for the meal title, instead just
-// have the image link to the discover page.
-// Change all occurrences of FoodData Center to FoodData Central
-// Condense down on the amount of components I use or use them in more places, display ingredients can be used in the display recipe component
-// Also, rather than generating the meal title for the shopping list in the worker, move that to the ShoppingListDisplayContainer
-
-// Requirements
-//? All Requirements Completed!!!
-
-// Please write functions that contain the following syntax that you learned in the MDN Asynchronous JavaScript Tutorial assignments, note you can have a function that contains multiple syntaxes that are required
-// // - A function that uses web-workers
-// // - Use of async and await keywords
-// // - Use of Promise.any()
-// // - Use of Promise.all() 
-// // - Use of the .json() method
-// // - Use of .then() method
-// // - A function that is using promises and interacting with promises
-// //- A function that uses the fetch() API
+// TODO:
+// Future Changes 
+  // Condense down on the amount of components I use or use them in more places, display ingredients can be used in the display recipe component
+  // Rather than generating the meal title for the shopping list in the worker, move that to the ShoppingListDisplayContainer
 
 /**
  * @component 

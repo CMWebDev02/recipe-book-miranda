@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { NutritionalDB } from '../JavaScript/NutrientDataBase.js';
 
 /**
- * @hook Makes multiple fetch calls to the FoodData Center API to obtain the nutritional info for each of the elements contained within the ingredientsArray. All elements in the ingredients array
+ * @hook Makes multiple fetch calls to the FoodData Central API to obtain the nutritional info for each of the elements contained within the ingredientsArray. All elements in the ingredients array
  * need to be valid url parameters meaning that certain characters must be encoded instead of typed. 
  * @param {string} ingredientsArray - All ingredients that a fetch call will be generated for and passed to the API.
- * @param {string} apiKey - API key used to provide credentials to the FoodData Center API.
+ * @param {string} apiKey - API key used to provide credentials to the FoodData Central API.
  */
 export function UseNutritionAPI(ingredientsArray, apiKey) {
     const [ nutritionalInfo, setNutritionalInfo ] = useState([]);
@@ -73,7 +73,7 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
 
             /**
              * @function Attempts to obtain nutritional information for the passed in ingredientQuery from the database but if the data is not present, the fetch call is made to obtain
-             * the nutritional information from the FoodData Center API. The response is then passed to the addToDataBases function. 
+             * the nutritional information from the FoodData Central API. The response is then passed to the addToDataBases function. 
              * Either way the information is obtained, a promise is returned from this function.
              * @param {string} ingredientQuery - Ingredient query that will be used to make the fetch call to obtain the information for the ingredient.
              */
@@ -93,7 +93,7 @@ export function UseNutritionAPI(ingredientsArray, apiKey) {
 
             /**
              * @function Obtains and collects all nutritional data for each element within the ingredientQueriesArray. This information is obtained by either accessing it from the database
-             * or by obtaining it from the FoodData Center API.
+             * or by obtaining it from the FoodData Central API.
              * Promise.all() is used to handle all promises returned by the fetchNutritionalInfo call so that the information as a whole will be handled at once.
              * @param {array} ingredientQueriesArray - Contains all ingredientQueries that will be used to gather their respective ingredient's nutritional info.
              */
