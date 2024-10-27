@@ -45,12 +45,14 @@ button {
     background-color: var(--secondary-background-color);
     border: transparent;
     border-radius: 5px;
-    color: var(--main-text-color);
+    box-sizing: border-box;
+    color: var(--secondary-text-color);
+    border: var(--outline-color) solid 1px;
 }
 
 button:hover {
-    background-color: var(--outline-color);
-    color: var(--secondary-text-color);
+    animation: 0.15s linear 0.025s 1 forwards hoverButton;
+
     cursor: pointer;
 }
 
@@ -68,10 +70,17 @@ input:focus {
 
 @keyframes hoverText {
     to {
-        color: var(--outline-color);
+        color: var(--main-text-color);
 
-        text-shadow: var(--main-text-color) 0px 0.15rem 3px;
+        text-shadow: var(--secondary-text-color) 0px 0.15rem 3px;
 
         transform: translate3d(0, -00.25rem, 0);
+    }
+}
+
+@keyframes hoverButton {
+    to {
+        background-color: var(--main-background-color);
+        color: var(--main-text-color);
     }
 }

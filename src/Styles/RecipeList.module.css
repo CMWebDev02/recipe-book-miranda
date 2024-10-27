@@ -54,7 +54,8 @@
     height: 2rem;
 }
 
-.pageButtonsDiv button:disabled{
-    background-color: grey;
-    color: black;
+.pageButtonsDiv button:disabled {
+    background-color: grey !important;
+    color: black !important;
+    cursor: default !important;
 }

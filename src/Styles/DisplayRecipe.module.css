@@ -39,6 +39,7 @@
     width: 50%;
     padding: var(--base-padding);
     overflow-y: auto;
+    scrollbar-color: var(--outline-color) var(--secondary-background-color);
 }
 
 /* Selects the ingredient list display div in the recipeCard */
@@ -62,13 +63,11 @@
 /* Styles the buttons contained in the interaction button div */
 .recipeCardDiv > div:nth-of-type(2) button {
     background-color: var(--main-background-color);
-    color: var(--secondary-text-color);
     height: 70%;
 }
 
 .recipeCardDiv > div:nth-of-type(2) button:hover {
-    background-color: var(--outline-color);
-    color: var(--main-text-color);
+    animation: 0.15s linear 0.025s 1 forwards hoverInteractButton;
 }
 
 /* Styling for the weekday select element */
@@ -88,4 +87,12 @@
 /* Darkens the currently selected option within the select element */
 .recipeCardDiv > div:nth-of-type(2) select option:checked {
     background-color: var(--outline-color);
+}
+
+@keyframes hoverInteractButton {
+    to {
+        background-color: var(--outline-color);
+        color: var(--main-text-color);
+        border: var(--main-background-color) solid 1px;
+    }
 }
