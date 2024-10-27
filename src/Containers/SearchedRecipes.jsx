@@ -20,8 +20,8 @@ export function SearchedRecipes({ recipeParam, pageParam, APIKey, newSearch, dis
     //! See if this is necessary or even works
     // Checks if an error occurs instantly upon first loading the component and disables the next page button if so.
     useEffect(() => {
-        if (errorOccurred == `No Recipes Found!`) disableNextPage(true);
-    }, [])
+        if (errorOccurred == 'No Recipes Found!') disableNextPage(true)
+    }, [errorOccurred])
 
     return (
         <>

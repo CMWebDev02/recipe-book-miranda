@@ -60,12 +60,14 @@ export function RecipeList({ APIKey, displayLocal }) {
     }
 
     /**
-     * @function Alters the page based on the passed in argument and scrolls to the top of the page.    
+     * @function Alters the page based on the passed in argument and scrolls to the top of the page.
+     * Also, resets the boolean controlling if the next page button is disabled regardless of its previous states before the function call.
      * @param {string} action - String value that will denote which action will occur to the pageQuery variable.
      */
     function changePage(action) {
         window.scrollTo({top: 100});
         setPageQuery({type: action});
+        setIsButtonDisabled(false)
     }
 
     // Rerenders each time the recipeQuery or pageQuery state changes.

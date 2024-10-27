@@ -31,3 +31,15 @@
     background-color: var(--main-background-color);
     height: 2rem;
 }
+
+.closeList:hover {
+    animation: 0.15s linear 0.025s 1 forwards hoverInteractButton;
+}
+
+@keyframes hoverInteractButton {
+    to {
+        background-color: var(--outline-color);
+        color: var(--main-text-color);
+        border: var(--main-background-color) solid 1px;
+    }
+}
