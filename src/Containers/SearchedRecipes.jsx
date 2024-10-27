@@ -33,7 +33,6 @@ export function SearchedRecipes({ recipeParam, pageParam, APIKey, newSearch, dis
                 <div>
                     <h3>Find Other Recipes:</h3>
                     <SearchBox updateSearch={newSearch} />
-
                 </div>
             </div>
         

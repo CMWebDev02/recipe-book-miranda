@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { PageLinks } from "../Components/PageLinks";
 import { MealInspiration } from "../Containers/MealInspiration";
 import styles from '../Styles/Home.module.css'
@@ -8,13 +9,12 @@ import styles from '../Styles/Home.module.css'
 export function Home() {
     return (
         <div className={styles.mainPageDiv}>
-            <div>
-                <h1>Welcome!</h1>
+            <div className={styles.heroDiv}>
                 <div>
+                    <h2>Welcome!</h2>
                     <p>
-                        Find any recipe you can think of and save them to your <strong>Recipe Book</strong> and plan out your meals for the week with the build in <strong>Meal Planner</strong>.
+                        <Link to={'/discover'}>Search</Link> for any recipe you can think of and save them to your <strong><Link to={'/booklet'}>Recipe Book</Link></strong> and plan out your meals for the week with the built in <strong><Link to={'/planner'}>Meal Planner</Link></strong>.
                     </p>
-                    <PageLinks />
                 </div>
             </div>
             <MealInspiration />

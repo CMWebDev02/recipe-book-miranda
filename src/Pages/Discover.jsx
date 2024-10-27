@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SearchBox } from "../Components/SearchBox";
 import { useNavigate } from "react-router-dom";
+import styles from '../Styles/Discover.module.css'
 
 /**
  * @component Displays the discovery page which allow the user to enter recipe name to search for. 
@@ -20,10 +21,12 @@ export function Discover({ APIKey }) {
     }, [userSearch])
 
     return (
-        <>
-            <h1>Enter A Recipe Name</h1>
-            <p>Search far and wide for all kinds of recipes.</p>
-            <SearchBox updateSearch={setUserSearch} />
-        </>
+        <div className={styles.mainContainer}>
+            <div>
+                <h1>Enter A Recipe Name</h1>
+                <p>Search far and wide for all kinds of recipes.</p>
+                <SearchBox updateSearch={setUserSearch} />
+            </div>
+        </div>
     )
 }

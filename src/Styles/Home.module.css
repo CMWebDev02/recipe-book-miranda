@@ -6,17 +6,34 @@
     gap: 10px 10px;
 }
 
-.mainPageDiv div:nth-of-type(1) {
-    width: calc(30% - 10px);
-    height: calc(100% - var(--base-padding));
+.heroDiv {
+    /* width is calculated based on removing the padding, gap, and border size amounts from the intended size */
+    width: calc(30% - (2 * var(--base-padding)) - 10px - 4px);
+    height: calc(100% - (2 * var(--base-padding)) - 4px);
     padding: var(--base-padding);
 
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+    border-right: var(--outline-color) solid 4px;
+    border-bottom: var(--outline-color) solid 4px;
+    border-radius: 3%;
+    box-shadow: var(--secondary-background-color) 4px 4px 4px;
 }
 
-.mainPageDiv div:nth-of-type(2) {
+.heroDiv > h2 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.heroDiv > p {
+    font-size: 1.15rem;
+    margin: 0;
+}
+
+/* Selects the meal inspiration div */
+.mainPageDiv > div:nth-of-type(2) {
     width: 70%;
     height: 100%;
 
@@ -27,13 +44,13 @@
     gap: 10px 10px;
 }
 
-.mainPageDiv div:nth-of-type(2) > h2 {
+.mainPageDiv > div:nth-of-type(2) > h2 {
     height: 2rem;
     font-size: 2rem;
     margin: 0;
 }
 
-.mainPageDiv div:nth-of-type(2) a {
+.mealImageLink {
     width: fit-content;
     max-width: 100%;
     
@@ -41,12 +58,11 @@
     max-height: calc((100% - 2rem - 10px));
 }
 
-.mainPageDiv div:nth-of-type(2) a:hover {
-    /* box-shadow: black 0px 0.25rem 4px; */
+.mealImageLink:hover {
     animation: 0.1s linear 0.01s 1 forwards hoverImage;
 }
 
-.mainPageDiv div:nth-of-type(2) img {
+.mainPageDiv > div:nth-of-type(2) img {
     width: 100%;
     height: 100%;
     object-fit: fill;

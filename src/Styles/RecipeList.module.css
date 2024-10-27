@@ -15,6 +15,7 @@
     align-items: center;
 }
 
+/* Selects the search div when necessary */
 .informationDiv > div:first-of-type {
     display: flex;
     align-items: center;
@@ -22,8 +23,14 @@
     height: 100%;
 }
 
-.informationDiv input, .informationDiv button {
-    height: 60%;
+/* Selects the div containing the search input and button */
+.informationDiv > div:first-of-type > div:first-of-type {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
 }
 
 .recipesDisplayDiv {

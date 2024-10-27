@@ -1,0 +1,49 @@
+.mainContainer {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Selects the discover div */
+.mainContainer > div:first-of-type {
+    height: calc(75% - (2 * var(--base-padding)));
+    width: calc(75% - (2 * var(--base-padding)));
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: var(--base-padding);
+
+    border: var(--outline-color) solid 6px;
+    border-radius: 15%;
+    box-shadow: var(--outline-color) 0px 0px 15px inset;
+}
+
+/* Selects the search bar div within the discover div */
+.mainContainer > div:first-of-type > div:first-of-type {
+    height: 25%;
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+/* Selects the search button within the search bar div */
+.mainContainer > div:first-of-type > div:first-of-type > button {
+    height: 25%;
+    width: 10%;
+}
+
+/* Selects the search textbox within the search bar div */
+.mainContainer > div:first-of-type > div:first-of-type > input {
+    height: 25%;
+    width: 85%;
+}

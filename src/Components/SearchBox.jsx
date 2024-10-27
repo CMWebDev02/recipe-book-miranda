@@ -31,9 +31,9 @@ export function SearchBox({updateSearch}) {
     }
 
     return (
-        <>
+        <div>
             <button onClick={searchRecipe}>🔎</button>
             <input onChange={(e) => setCurrentText(e.target.value)} onKeyUp={(e) => checkKey(e.code)} value={currentText} id="user-search-box" placeholder="Enter a recipe name..."/>
-        </>
+        </div>
     )
 }

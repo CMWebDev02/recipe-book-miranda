@@ -1,5 +1,6 @@
 /* Navigation Bar CSS */
 .navBarDiv {
+    width: calc(100% - (2 * var(--base-padding)));
     padding: var(--base-padding);
     height: var(--nav-bar-height);
     font-size: 1.25rem;
@@ -9,11 +10,30 @@
     border-bottom: var(--outline-color) solid var(--line-divider-size);
 }
 
+.navBarDiv > h1 {
+    width: calc(25% - (2 * var(--base-padding)));
+    height: calc(100% - (2 * var(--base-padding)));
+    margin: 0;
+    
+    font-size: clamp(1rem, 2.5vw, 2.25rem);
+    padding: var(--base-padding);
+}
+
+.navBarDiv > div:first-of-type {
+    height: 100%;
+    width: 50%;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
 .apisDiv {
     display: flex;
     flex-direction: column;
     width: 25%;
-
+    height: 100%;
 }
 
 .APIKeyDiv {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import styles from '../Styles/Home.module.css'
 
 /**
  * @component Displays the title and image of the recipeObject passed in. Depending on where the recipe is obtained from, different properties are utilized to store the image src and title so a check is made on the object
@@ -61,7 +62,7 @@ export function DisplayImage({ recipeObject }) {
     return (
         <>
             {recipeTitle != '' && recipeTitle != 'Idly' ? <h2>Maybe Try... {recipeTitle}</h2> : <h2>Search For Any Recipe You Can Think Of!!!</h2>}
-            {recipeSRC && <Link to={recipeTitle != '' && recipeTitle != 'Idly' ? `/recipelist?recipe=${recipeTitle}&page=1` : '/discover'}><img src={recipeSRC} alt={recipeTitle} /></Link>}
+            {recipeSRC && <Link className={styles.mealImageLink} to={recipeTitle != '' && recipeTitle != 'Idly' ? `/recipelist?recipe=${recipeTitle}&page=1` : '/discover'}><img src={recipeSRC} alt={recipeTitle} /></Link>}
             
         </>
     )

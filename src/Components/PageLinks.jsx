@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
  */
 export function PageLinks() {
     return (
-        <>
+        <div>
             <Link to="/">Home</Link>
             <Link to="/discover">Discover</Link>
             <Link to="/booklet">Recipe Book</Link> 
-            <Link to="/planner">Meal Plan</Link> 
-        </>
+            <Link to="/planner">Meal Planner</Link> 
+        </div>
     )
 }
