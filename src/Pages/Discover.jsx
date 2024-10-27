@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { SearchBox } from "../Components/SearchBox";
 import { useNavigate } from "react-router-dom";
+import { SearchBox } from "../Components/SearchBox.jsx";
 import styles from '../Styles/Discover.module.css'
 
 /**

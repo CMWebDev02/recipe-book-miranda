@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MealPlan } from "../JavaScript/localStorage";
+import { MealPlan } from "../JavaScript/localStorage.js";
 
 /**
  * @component Displays a selector element and button that will set the passed in recipe's weekday property.

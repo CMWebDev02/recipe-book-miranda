@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from 'react-router-dom'
-import { MealPlan } from "../JavaScript/localStorage";
-import { DisplayRecipe } from "../Components/DisplayRecipe";
-import { NutritionalInfo } from "./NutritionalInfo";
+import { MealPlan } from "../JavaScript/localStorage.js";
+import { DisplayRecipe } from "../Components/DisplayRecipe.jsx";
+import { NutritionalInfo } from "./NutritionalInfo.jsx";
 import { GenerateButton } from '../Components/GenerateButton.jsx'
 import { ShoppingList } from "./ShoppingList.jsx";
 import styles from '../Styles/MealPlanner.module.css'

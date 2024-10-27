@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { SavedRecipes } from "../JavaScript/localStorage";
-import { DisplayRecipe } from "../Components/DisplayRecipe";
+import { SavedRecipes } from "../JavaScript/localStorage.js";
+import { DisplayRecipe } from "../Components/DisplayRecipe.jsx";
 import styles from '../Styles/RecipeList.module.css'
 
 /**

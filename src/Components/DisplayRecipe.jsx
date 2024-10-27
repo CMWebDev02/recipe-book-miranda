@@ -1,6 +1,6 @@
 import React from "react";
-import { InteractButton } from "./InteractButton";
-import { WeekDaySelector } from "./WeekDaySelector";
+import { InteractButton } from "./InteractButton.jsx";
+import { WeekDaySelector } from "./WeekDaySelector.jsx";
 import styles from '../Styles/DisplayRecipe.module.css'
 
 /**

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { MealPlan } from "../JavaScript/localStorage";
+import { MealPlan } from "../JavaScript/localStorage.js";
+import { NutritionalDisplay } from "../Containers/NutritionalDisplay.jsx";
 import styles from '../Styles/NutritionalInfo.module.css'
-import { NutritionalDisplay } from "../Containers/NutritionalDisplay";
 
 /**
  * @component Displays the nutritional info of a recipe. The selected recipe is pulled from localStorage and is found by using the recipe id that is injected into the url.

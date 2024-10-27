@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { UseRandomRecipe } from "../Hooks/UseRandomRecipe";
-import { DisplayImage } from "../Components/DisplayImage";
+import { UseRandomRecipe } from "../Hooks/UseRandomRecipe.jsx";
+import { DisplayImage } from "../Components/DisplayImage.jsx";
 
 /**
  * @component Displays a random meal to the user and provides a link to search for said meal within the web project. Also, displays if the fetch call is still loading or any error that occurred with the fetch call.

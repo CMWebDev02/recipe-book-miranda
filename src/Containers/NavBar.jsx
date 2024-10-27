@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { APIKeyTextBox } from "../Components/APIKeyTextBox";
-import { PageLinks } from "../Components/PageLinks";
+import { APIKeyTextBox } from "../Components/APIKeyTextBox.jsx";
+import { PageLinks } from "../Components/PageLinks.jsx";
 import style from '../Styles/MainPage.module.css';
 
 /**

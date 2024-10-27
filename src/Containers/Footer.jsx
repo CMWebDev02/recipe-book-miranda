@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { NutritionalDB } from "../JavaScript/NutrientDataBase";
-import { APIAttributions } from "../Components/APIAttribution";
+import { NutritionalDB } from "../JavaScript/NutrientDataBase.js";
+import { APIAttributions } from "../Components/APIAttribution.jsx";
 import styles from '../Styles/MainPage.module.css'
 
 /**

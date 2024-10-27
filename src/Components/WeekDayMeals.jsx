@@ -1,5 +1,5 @@
 import React from "react"
-import { DisplayRecipe } from "./DisplayRecipe"
+import { DisplayRecipe } from "./DisplayRecipe.jsx"
 
 export function WeekDayMeals({ weekDayMeals }) {
 

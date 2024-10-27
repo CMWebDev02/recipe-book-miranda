@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { NavBar } from "./Containers/NavBar";
-import { Home } from "./Pages/Home";
-import { Discover } from "./Pages/Discover";
-import { RecipeList } from "./Pages/RecipeList";
-import { Error } from "./Pages/Error";
-import { MealPlanner } from "./Pages/MealPlanner";
+import { NavBar } from "./Containers/NavBar.jsx";
+import { Home } from "./Pages/Home.jsx";
+import { Discover } from "./Pages/Discover.jsx";
+import { RecipeList } from "./Pages/RecipeList.jsx";
+import { Error } from "./Pages/Error.jsx";
+import { MealPlanner } from "./Pages/MealPlanner.jsx";
 import { Footer } from "./Containers/Footer.jsx";
 
 import styles from './Styles/MainPage.module.css'

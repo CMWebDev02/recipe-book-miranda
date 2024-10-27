@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShoppingListDisplay } from "../Containers/ShoppingListDisplay";
+import { ShoppingListDisplay } from "../Containers/ShoppingListDisplay.jsx";
 import styles from '../Styles/ShoppingList.module.css'
 
 /**

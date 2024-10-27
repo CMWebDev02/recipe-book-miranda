@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { useSearchParams } from "react-router-dom"
-import { SearchedRecipes } from "../Containers/SearchedRecipes";
-import { LocalRecipes } from "../Containers/LocalRecipes";
+import { SearchedRecipes } from "../Containers/SearchedRecipes.jsx";
+import { LocalRecipes } from "../Containers/LocalRecipes.jsx";
 import styles from '../Styles/RecipeList.module.css'
 
 /**

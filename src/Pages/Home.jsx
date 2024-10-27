@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PageLinks } from "../Components/PageLinks";
-import { MealInspiration } from "../Containers/MealInspiration";
+import { MealInspiration } from "../Containers/MealInspiration.jsx";
 import styles from '../Styles/Home.module.css'
 /**
  * @component Home page of the project. Displays the basic description of the project, links to the various pages, and displays a random meal to provide the user with ideas for what to search.
