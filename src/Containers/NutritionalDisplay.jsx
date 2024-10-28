@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { UseNutritionAPI } from "../Hooks/UseNutritionAPI.jsx";
+import { UseNutritionAPI } from "../Hooks/eNutritionAPI.jsx";
 import { FoodNutrients } from "../Components/FoodNutrients.jsx";
 import styles from '../Styles/NutritionalInfo.module.css'
 
