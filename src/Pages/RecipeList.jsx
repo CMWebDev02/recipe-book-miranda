@@ -74,7 +74,7 @@ export function RecipeList({ APIKey, displayLocal }) {
     useEffect(() => {
         // Updates the query parameters injected in the url of the webpage when a state change occurs for the recipeQuery or pageQuery variables.
         setQueryParameters({recipe: recipeQuery, page: pageQuery.pageNum});
-    }, [recipeQuery, pageQuery]);
+    }, [recipeQuery, pageQuery, setQueryParameters]);
 
     // Rerenders if the passed in displayLocalArgument changes.
     useEffect(() => {

@@ -28,7 +28,7 @@ export function LocalRecipes({ currentPage, disableNextPage }) {
         setContainsRecipes(localRecipes.length > 0 ? true : false);
         setAllRecipes(localRecipes);
         setUpdateOccurred(false);
-    }, [updateOccurred, currentPage])
+    }, [updateOccurred, currentPage, disableNextPage])
 
     return (
         <>

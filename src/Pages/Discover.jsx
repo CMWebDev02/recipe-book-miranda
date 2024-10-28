@@ -18,7 +18,7 @@ export function Discover({ APIKey }) {
             // Also, a pageQuery parameter is injected into the url as well to keep track of what page of results the user is currently at, starting with page 1.
             navigate(`/recipelist?recipe=${userSearch}&page=1`);
         }
-    }, [userSearch])
+    }, [userSearch, navigate])
 
     return (
         <div className={styles.mainContainer}>

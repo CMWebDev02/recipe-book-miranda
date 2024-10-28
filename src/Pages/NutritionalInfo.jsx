@@ -55,7 +55,7 @@ export function NutritionalInfo({ NutritionalAPIKey }) {
         if (ingredientWorker && !errorOccurred) {
             ingredientWorker.postMessage({command: 'splitIngredientString', ingredientsString: selectedRecipe.ingredients})
         }
-    }, [selectedRecipe])
+    }, [selectedRecipe, errorOccurred, ingredientWorker])
 
     /**
      * @function Navigates the user back to the meal planner to remove the nutritional info from the page.

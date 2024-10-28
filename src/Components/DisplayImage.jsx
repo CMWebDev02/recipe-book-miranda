@@ -12,34 +12,28 @@ export function DisplayImage({ recipeObject }) {
     const [ recipeTitle, setRecipeTitle ] = useState('');
     const [ recipeSRC, setRecipeSRC ] = useState('')
 
-    /**
-     * @function Handles the current recipeObject variable appropriately based on the API it was received from. The check is made by seeing if the object has a 'image' property.
-     */
-    function handleRecipeObject() {
-        if (recipeObject.image) {
-            // The image property is the src for the recipe but title property for the image is provided,
-            // to obtain a title the src of the image is passed to the web worker, and a boolean is used to denote that an src is being passed, and the worker will take the last describing
-            // word of the image and utilize it as the title.
-            setRecipeSRC(recipeObject.image);
-            titleWorker.postMessage({command: 'convertToTitle', imageString: recipeObject.image, srcBool: true})
-        } else {
-            // Additional information is sent with this recipeObject but in this case all that matters is the recipe's data.
-            let data = recipeObject.data;
-
-            // The src is stored separately in this recipeObject and it provides a title as well, the title is passed in without the srcBool being flagged so that the title is converted
-            // without calling the function to convert from an src to title.
-            setRecipeSRC(data.strMealThumb);
-            titleWorker.postMessage({command: 'convertToTitle', imageString: data.strMeal, srcBool: false})
-        }
-    }
-
     // Rerenders each time the recipeObject changes. 
-    // This calls the handleRecipeObject function only if a titleWorker is initialized in the components state.
+    // This handles the recipe Object if a titleWorker is initialized in the components state and depending on the recipeObject's origin, certain properties are checked to see where it 
+    // originated from, the image and titled are generated in different ways so the check is made to handle the object appropriately.
     useEffect(() => {
         if (titleWorker) {
-            handleRecipeObject()
+            if (recipeObject.image) {
+                // The image property is the src for the recipe but title property for the image is provided,
+                // to obtain a title the src of the image is passed to the web worker, and a boolean is used to denote that an src is being passed, and the worker will take the last describing
+                // word of the image and utilize it as the title.
+                setRecipeSRC(recipeObject.image);
+                titleWorker.postMessage({command: 'convertToTitle', imageString: recipeObject.image, srcBool: true})
+            } else if(recipeObject.data) {
+                // Additional information is sent with this recipeObject but in this case all that matters is the recipe's data.
+                let data = recipeObject.data;
+
+                // The src is stored separately in this recipeObject and it provides a title as well, the title is passed in without the srcBool being flagged so that the title is converted
+                // without calling the function to convert from an src to title.
+                setRecipeSRC(data.strMealThumb);
+                titleWorker.postMessage({command: 'convertToTitle', imageString: data.strMeal, srcBool: false})
+            }
         }
-    }, [recipeObject])
+    }, [recipeObject, titleWorker])
 
     // Initializes a titleWorker to be stored in state each time the component initially loads.
     useEffect(() => {

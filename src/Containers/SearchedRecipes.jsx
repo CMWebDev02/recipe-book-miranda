@@ -17,11 +17,10 @@ export function SearchedRecipes({ recipeParam, pageParam, APIKey, newSearch, dis
     // Deconstructs the results returned after the UseRecipeAPI hook finishes executing.
     const { errorOccurred, allRecipes, isLoading } = UseRecipeAPI({recipeParam, pageParam, APIKey});
 
-    //! See if this is necessary or even works
-    // Checks if an error occurs instantly upon first loading the component and disables the next page button if so.
+    // Checks if an error occurs due to no recipes being returned from the API and disables the next page button if so.
     useEffect(() => {
         if (errorOccurred == 'No Recipes Found!') disableNextPage(true)
-    }, [errorOccurred])
+    }, [errorOccurred, disableNextPage])
 
     return (
         <>

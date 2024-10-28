@@ -45,7 +45,7 @@ export function NutritionalDisplay({ ingredientQueries, nutritionalAPIKey }) {
         if (nutritionWorker) {
             nutritionWorker.postMessage({command: 'collectNutrients', nutrientsArray: nutritionalInfo});
         }
-    }, [nutritionalInfo])
+    }, [nutritionalInfo, nutritionWorker])
 
     return (
         <div className={styles.nutritionalInfoDiv}>
