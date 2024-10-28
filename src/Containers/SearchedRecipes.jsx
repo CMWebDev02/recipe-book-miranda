@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { UseRecipeAPI } from "../Hooks/eRecipeAPI.jsx";
+import { UseRecipeAPI } from "../Hooks/UseRecipeAPI.jsx";
 import { DisplayRecipe } from "../Components/DisplayRecipe.jsx";
 import { SearchBox } from "../Components/SearchBox.jsx";
 import styles from '../Styles/RecipeList.module.css'
