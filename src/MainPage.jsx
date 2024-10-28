@@ -11,6 +11,9 @@ import { Footer } from "./Containers/Footer.jsx";
 
 import styles from './Styles/MainPage.module.css'
 
+// Demo purposes only, not in final product deployment
+import { config } from './JavaScript/private-config.js'
+
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
 
@@ -25,8 +28,8 @@ import styles from './Styles/MainPage.module.css'
  */
 export function MainPage() {
   // Declares state variables to store the two api keys needed to provide credentials to the API calls made in the various child and grandchild components.
-  const [RecipesAPIKey, setRecipesAPIKey ] = useState('');
-  const [NutritionalAPIKey, setNutritionalAPIKey] = useState('');
+  const [RecipesAPIKey, setRecipesAPIKey ] = useState(config.recipeAPIKey || '');
+  const [NutritionalAPIKey, setNutritionalAPIKey] = useState(config.nutritionalAPIKey || '');
 
   return (
       <BrowserRouter>
