@@ -29,7 +29,7 @@
 
 .weekDayMealDiv {
     /* Requires each div to be at least 50% of its parent container, even if a div
-        goes off screen, this is fine since overflow will allow it to still be visable
+        goes off screen, this is fine since overflow will allow it to still be visible
             to the user. */
     min-height: 55%;
     width: 100%;
