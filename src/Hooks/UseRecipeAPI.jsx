@@ -30,7 +30,7 @@ export function UseRecipeAPI({recipeParam, pageParam, APIKey}) {
           'x-api-key': APIKey
         });
         // The recipeParam and the page offset is appended to the end of the api's initial url.
-        let search = uriAPI + recipeParam + '&offset=' + (pageParam * 10);
+        let search = uriAPI + recipeParam;
 
         // A new Request object is initialized before being passed to the fetch call, in this new Request object the previously initialized header object is added, 'GET' is specified as the method,
         // and the AbortController's signal is included as an object literal.
