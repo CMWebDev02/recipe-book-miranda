@@ -11,9 +11,6 @@ import { Footer } from "./Containers/Footer.jsx";
 
 import styles from './Styles/MainPage.module.css'
 
-// Demo purposes only, not in final product deployment
-import { config } from './JavaScript/private-config.js'
-
 // Goal:  Create a applications that can pull recipes from an online API based on the user's input, and provide an option for the user to save certain recipes to their "recipe book",
 // saved in localStorage.
 
