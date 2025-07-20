@@ -28,8 +28,8 @@ import { config } from './JavaScript/private-config.js'
  */
 export function MainPage() {
   // Declares state variables to store the two api keys needed to provide credentials to the API calls made in the various child and grandchild components.
-  const [RecipesAPIKey, setRecipesAPIKey ] = useState(config.recipeAPIKey || '');
-  const [NutritionalAPIKey, setNutritionalAPIKey] = useState(config.nutritionalAPIKey || '');
+  const [RecipesAPIKey, setRecipesAPIKey ] = useState('');
+  const [NutritionalAPIKey, setNutritionalAPIKey] = useState('');
 
   return (
       <BrowserRouter>
